@@ -53,12 +53,13 @@ public class griglia {
 			}
 		
 		}
-		if(c<4 && r<3) {
-				k=0;
+		if(c<3 && r<4) {
+			k=0;
+			int j=1;
 			for(int i=1;i<4;i++) { //controllo obliquo verso dx dal punto di immissione
 		
-			int j=1;
-			if(this.matrice[r+1][c+j]==p) {
+			
+			if(this.matrice[r+i][c+j]==p) {
 				k++;
 			}
 			j++;
@@ -73,7 +74,7 @@ public class griglia {
 			for(int i=1;i<4;i++) { //controllo obliquo verso sx dal punto di immissione
 			
 			int j=1;
-			if(this.matrice[r-1][c-j]==p) {
+			if(this.matrice[r+1][c-j]==p) {
 				k++;
 			}
 			j++;
