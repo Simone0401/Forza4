@@ -3,10 +3,44 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-			griglia grid = new griglia();
+			Grid grid = new Grid();
 			
 			grid.show();
 			System.out.println("----------------------------------------------------");
+			
+			grid.inserisci(6, 1);
+			grid.show();
+			if(grid.checkWin(6, 1)) {
+				System.out.println("hai vinto");
+			}
+			else {
+				System.out.println("non hai ancora vinto");
+			}
+			grid.inserisci(5, 1);
+			grid.show();
+			if(grid.checkWin(5, 1)) {
+				System.out.println("hai vinto");
+			}
+			else {
+				System.out.println("non hai ancora vinto");
+			}
+			grid.inserisci(4, 1);
+			grid.show();
+			if(grid.checkWin(4, 1)) {
+				System.out.println("hai vinto");
+			}
+			else {
+				System.out.println("non hai ancora vinto");
+			}
+			grid.inserisci(3, 1);
+			grid.show();
+			if(grid.checkWin(3, 1)) {
+				System.out.println("hai vinto");
+			}
+			else {
+				System.out.println("non hai ancora vinto");
+			}
+			grid.show();
 			
 		}
 }
