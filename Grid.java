@@ -51,7 +51,19 @@ public class Grid {
 		
 		 // Controllo obliquo verso sx in basso dal punto di immissione
 		if (this.crossDownSxCheck(column, row, player)) {
-			System.out.println("DIAGONALE SOTTO DESTRA");
+			System.out.println("DIAGONALE SOTTO SINISTRA");
+			return true;
+		}
+		
+		// Controllo obliquo verso dx in alto dal punto di immissione
+		if (this.crossUpDxCheck(column, row, player)) {
+			System.out.println("DIAGONALE SOPRA DESTRA");
+			return true;
+		}
+		
+		// Controllo obliquo verso sx in alto dal punto di immissione
+		if (this.crossUpSxCheck(column, row, player)) {
+			System.out.println("DIAGONALE SOPRA SINISTRA");
 			return true;
 		}
 		
@@ -128,7 +140,7 @@ public class Grid {
 	private boolean crossDownDxCheck(int column, int row, int player) {
 		if (column < 3 && row < 4) {
 			for (int i = 1; i < 4; i++) {
-				if (this.matrix[row+i][column+1] != player) {
+				if (this.matrix[row+i][column+i] != player) {
 					return false;
 				}
 			}
@@ -145,7 +157,45 @@ public class Grid {
 	 * @return true se ci sono 4 pedine allineate diagonalmente verso il basso a sinistra, false altrimenti
 	 */
 	private boolean crossDownSxCheck(int column, int row, int player) {
-		if (column>3 && row<3) {
+		if (column > 3 && row < 3) {
+			for (int i = 1; i < 4; i++) {
+				if (this.matrix[row+i][column-i] != player) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso l'alto a destra dal punto di inserimento
+	 * @param column colonna dove è stata inserita la pedina
+	 * @param row riga dove è posizionata la pedina
+	 * @param player giocatore che ha posizionato la pedina
+	 * @return true se ci sono 4 pedine allineate diagonalmente verso l'alto a destra, false altrimenti
+	 */
+	private boolean crossUpDxCheck(int column, int row, int player) {
+		if (column < 4 && row > 2) {
+			for (int i = 1; i < 4; i++) {
+				if (this.matrix[row-i][column+i] != player) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso l'alto a sinistra dal punto di inserimento
+	 * @param column colonna dove è stata inserita la pedina
+	 * @param row riga dove è posizionata la pedina
+	 * @param player giocatore che ha posizionato la pedina
+	 * @return true se ci sono 4 pedine allineate diagonalmente verso l'alto a sinistra, false altrimenti
+	 */
+	private boolean crossUpSxCheck(int column, int row, int player) {
+		if (column > 2 && row > 2) {
 			for (int i = 1; i < 4; i++) {
 				if (this.matrix[row-i][column-i] != player) {
 					return false;
@@ -156,27 +206,46 @@ public class Grid {
 		return false;
 	}
 	
+	/**
+	 * Metodo per inserire una pedina nella colonna selezionata dal giocatore
+	 * La pedina è posizionata alla prima riga libera incontrata nella colonna corrispondente
+	 * @param column colonna dove inserire la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 */
 	public void inserisci(int column,int player) {
 		int row = this.available[column];
 		this.matrix[row][column] = player;
 		this.available[column] = this.available[column]-1;
 	}
 	
+	/**
+	 * Metodo per stampare a video la griglia di gioco e le pedine contenute al suo interno
+	 */
 	public void show() {
 		
 		for (int j=0;j<6;j++) {
-			System.out.print("[");
+			System.out.print(j + " [ ");
 		for(int i=0;i<7;i++) {
-			System.out.print(this.matrix[j][i] +" , ");
+			if (this.matrix[j][i] != 0) {
+				System.out.print(this.matrix[j][i] +" , ");
+			}
+			else if (i != 6) {
+				System.out.print("  , ");
+			}
+			else {
+				System.out.print("  ");
+			}
 		}
 		System.out.print("]");
 		System.out.println();
-		System.out.println();
+		if (j != 5) {
+			System.out.println();
 		}
+		}
+		System.out.println("   ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣");
+		System.out.println("    0   1   2   3   4   5   6\n");
 		
 	}
-	
-	
 
 }
 
