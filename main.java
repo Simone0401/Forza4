@@ -1,46 +1,39 @@
+import java.util.Scanner;
 
-public class main {
+public class Main {
 	
 	public static void main(String[] args) {
 		
 			Grid grid = new Grid();
+			@SuppressWarnings("resource")
+			Scanner in = new Scanner(System.in);
+			int scelta = 0;
+			boolean result = false;
+			int player = 1;
 			
 			grid.show();
 			System.out.println("----------------------------------------------------");
 			
-			grid.inserisci(6, 1);
-			grid.show();
-			if(grid.checkWin(6, 1)) {
-				System.out.println("hai vinto");
-			}
-			else {
-				System.out.println("non hai ancora vinto");
-			}
-			grid.inserisci(5, 1);
-			grid.show();
-			if(grid.checkWin(5, 1)) {
-				System.out.println("hai vinto");
-			}
-			else {
-				System.out.println("non hai ancora vinto");
-			}
-			grid.inserisci(4, 1);
-			grid.show();
-			if(grid.checkWin(4, 1)) {
-				System.out.println("hai vinto");
-			}
-			else {
-				System.out.println("non hai ancora vinto");
-			}
-			grid.inserisci(3, 1);
-			grid.show();
-			if(grid.checkWin(3, 1)) {
-				System.out.println("hai vinto");
-			}
-			else {
-				System.out.println("non hai ancora vinto");
-			}
-			grid.show();
 			
+			do {
+				System.out.print("In quale colonna vuoi inserire la pedina player " + player + ": ");
+				// Lettura della colonna
+				if (in.hasNextInt()) {
+					scelta = in.nextInt();
+				}
+				
+				grid.inserisci(scelta, player);
+				grid.show();
+				result = grid.checkWin(scelta, player);
+				if (player == 1) {
+					player = 2;
+				}
+				else {
+					player = 1;
+				}
+				
+			}while(!result);
+			
+			System.out.println("Hai vinto!");
 		}
 }
