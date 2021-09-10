@@ -10,21 +10,24 @@ public class Main {
 			int scelta = 0;
 			boolean result = false;
 			int player = 1;
-			
+			boolean binsert;
 			grid.show();
 			System.out.println("----------------------------------------------------");
 			
 			
 			do {
-				System.out.print("In quale colonna vuoi inserire la pedina player " + player + ": ");
-				// Lettura della colonna
-				if (in.hasNextInt()) {
-					scelta = in.nextInt();
-				}
 				
-				grid.inserisci(scelta, player);
+				do {
+					System.out.print("In quale colonna vuoi inserire la pedina player " + player + ": ");
+					// Lettura della colonna
+					if (in.hasNextInt()) {
+						scelta = in.nextInt();
+					}
+					binsert = grid.insert(scelta, player);
+				}while(!binsert);
+				
 				grid.show();
-				result = grid.checkWin(scelta, player);
+				result = grid.checkGrid(scelta, player);
 				if (player == 1) {
 					player = 2;
 				}
