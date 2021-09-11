@@ -6,13 +6,39 @@
  */
 public class Grid {
 	
-	// Matrix per rappresentare la griglia
-	private int [][] matrix= new int[6][7];
+	private int [][] matrix;
+	private int [] available;
 	
-	// Array per rappresentare quante sono le celle libere per ogni colonna
-	// All'inizio la griglia è vuota e ogni colonna ha 6 celle libere (dalla cella 0 alla 5)
-	private int [] available = {5,5,5,5,5,5,5};
+	/**
+	 * Costruttore della griglia di gioco
+	 */
+	public Grid() {
+		// Matrix per rappresentare la griglia
+		this.matrix = new int[6][7];
+		
+		// Array per rappresentare quante sono le celle libere per ogni colonna
+		// All'inizio la griglia è vuota e ogni colonna ha 6 celle libere (dalla cella 0 alla 5)
+		this.available = new int[7];
+		this.setAvailable();
+	}
 	
+	/**
+	 * Metodo per settare il numero di righe vuote per ogni colonna all'inizio della partita
+	 */
+	private void setAvailable() {
+		for (int i = 0; i < 7; i++) {
+			this.available[i] = 5;
+		}
+	}
+	
+	/**
+	 * Metodo per indicare che alla colonna è stata aggiunta una nuova pedina
+	 * @param column colonna dove è stata aggiunta la pedina
+	 */
+	private void setAvailable(int column) {
+		this.available[column] = this.available[column] - 1;
+	}
+
 	/**
 	 * Metodo per controllare se l'ultimo giocatore che ha inserito la pedina ha vinto
 	 * @param colonna rappresenta la colonna dove il giocatore vuole inserire la pedina
@@ -240,7 +266,7 @@ public class Grid {
 			return false;
 		}
 		this.matrix[row][column] = player;
-		this.available[column] = this.available[column]-1;
+		this.setAvailable(column);
 		return true;
 	}
 	
