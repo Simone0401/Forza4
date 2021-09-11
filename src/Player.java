@@ -97,6 +97,14 @@ public class Player {
 		this.lost = lost;
 	}
 	
-	
+	/**
+	 * Metodo per ottenere il numero totale di partite giocate
+	 * @return numero di partite disputate
+	 */
+	public int getMatchesNumber() {
+		int matches;
+		matches = this.getWon() + this.getTied() + this.getLost();
+		return matches;
+	}
 	
 }
