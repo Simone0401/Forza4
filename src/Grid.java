@@ -32,8 +32,18 @@ public class Grid {
 	}
 	
 	/**
+	 * Metodo per ritornare la riga nella quale è stata posizionata la pedina
+	 * @param column colonna dove è stata aggiunta la pedina
+	 * @return numero che identifica la riga dove é stata posizionata la pedina
+	 */
+	
+	public int getrow(int column) {
+		return this.available[column] + 1;
+	}
+	
+	/**
 	 * Metodo per indicare che alla colonna Ã¨ stata aggiunta una nuova pedina
-	 * @param column colonna dove Ã¨ stata aggiunta la pedina
+	 * @param column colonna dove è stata aggiunta la pedina
 	 */
 	private void setAvailable(int column) {
 		this.available[column] = this.available[column] - 1;
