@@ -1,0 +1,17 @@
+{
+    "players" : [
+        {
+            "username" : "Simone",
+            "won" : 0,
+            "tied" : 0,
+            "lost" : 0
+            },
+
+        {
+            "username" : "Francesco",
+            "won" : 0,
+            "tied" : 0,
+            "lost" : 0
+        }
+]
+} 

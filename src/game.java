@@ -42,7 +42,7 @@ public class game {
 	 * Create the application.
 	 */
 	public game() {
-		initialize();
+		this.initialize();
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class game {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Desktop\\forza4\\icon.png"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/icon.png"));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +61,7 @@ public class game {
 		frame.getContentPane().add(layeredPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Administrator\\eclipse-workspace\\forza 4\\src\\match_background.png"));
+		lblNewLabel.setIcon(new ImageIcon("src/match_background.png"));
 		lblNewLabel.setBounds(0, 0, 1280, 720);
 		layeredPane.add(lblNewLabel);
 		
@@ -90,6 +90,8 @@ public class game {
 		layeredPane.setLayer(btnColumn0, 1);
 		btnColumn0.setBounds(366, 135, 67, 471);
 		layeredPane.add(btnColumn0);
+		
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		
 		
 		
