@@ -1,5 +1,9 @@
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,6 +29,21 @@ public class JSONHandler {
 	 * @return vera se l'username è già stato usato, false altrimenti
 	 */
 	public static boolean checkPlayer(String playerUsername) {
+		Map<String, Object> giocatori = getPlayers();
+		
+		if (giocatori.get(playerUsername) != null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Metodo per ottenere un dizionario di tutti gli username inseriti.
+	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto JSON
+	 */
+	private static Map<String, Object> getPlayers(){
+		Map<String, Object> giocatori = new HashMap<String, Object>();
 		JSONParser parser = new JSONParser();
 		Object object = null;
 		
@@ -40,12 +59,58 @@ public class JSONHandler {
 		
 		for (Object o: players) {
 			JSONObject player = (JSONObject) o;
-			String username = (String) player.get("username");
-			if (username == playerUsername) {
-				return true;
+			giocatori.put((String) player.get("username"), player);	
+		}
+		return giocatori;
+	}
+	
+	/**
+	 * Metodo per salvare il giocatore sul file JSON
+	 * @param player giocatore del quale salvare i dati
+	 */
+	public static void write(Player player) {
+		JSONObject obj = new JSONObject();
+		JSONArray players = new JSONArray();
+		
+		JSONObject inserimento = new JSONObject();
+		inserimento.put("username", player.getUsername());
+		inserimento.put("won", player.getWon());
+		inserimento.put("tied", player.getTied());
+		inserimento.put("lost", player.getLost());
+		
+		Map<String, Object> giocatori = getPlayers();
+		
+		// Se il giocatore è presente si aggiornano le sue statistiche
+		if (!checkPlayer(player.getUsername())) {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				players.add(element.getValue());
+			}
+			players.add(inserimento);
+		}
+		else {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				if (element.getKey() == player.getUsername()) {
+					players.add(inserimento);
+				}
+				else {
+					players.add(element.getValue());
+				}
+				
 			}
 			
 		}
-		return false;
+		
+		obj.put("players", players);
+		
+		try {
+		      FileWriter myWriter = new FileWriter(playersFile);
+		      myWriter.write(obj.toJSONString());
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		    } 
+		catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
 	}
 }

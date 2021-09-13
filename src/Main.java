@@ -22,35 +22,46 @@ public class Main {
 			boolean result = false;
 			int player = 1;
 			boolean binsert;
+			Player giocatore;
 			grid.show();
 			System.out.println("----------------------------------------------------");
 			
-			/*
-			Prova di lettura file JSON
-			*/
+			String username = "";
+			System.out.println("Inserisci nome utente: ");
+			username = in.nextLine();
 			
-			// JSONHandler.checkPlayer(String player);
+			// Prova costruzione player dati i dati sulle sue statistiche
+			System.out.println("Vuoi inserire le statistiche? [y/n] ");
+			String risp = "";
 			
-			//JSON parser object to parse read file
-			System.out.println("Working Directory = " + System.getProperty("user.dir"));
-		    JSONParser parser = new JSONParser();
-		    
-			Object object = null;
-			try {
-				object = parser.parse(new FileReader("src/Player.json"));
-			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			risp = in.next().strip();
+			
+			
+			if (risp.equals("y")) {
+				int vittorie;
+				int pareggi;
+				int sconfitte;
+				
+				System.out.println("Inserisci numero vittorie: ");
+				vittorie = in.nextInt();
+				System.out.println("Inserisci numero pareggi: ");
+				pareggi = in.nextInt();
+				System.out.println("Inserisci numero sconfitte: ");
+				sconfitte = in.nextInt();
+				
+				
+				giocatore = new Player(username, vittorie, pareggi, sconfitte);
 			}
-			JSONObject jasonObject = (JSONObject) object;
-			JSONArray giocatori = (JSONArray) jasonObject.get("players");
-			for (Object o: giocatori) {
-				JSONObject giocatore = (JSONObject) o;
-				String nome = (String) giocatore.get("username");
-				System.out.println(nome);
-				int vittorie = (int) (long) giocatore.get("won");
-				System.out.println("Vittorie:" + vittorie);
+			
+			else {
+				giocatore = new Player(username);
 			}
+			
+			JSONHandler.write(giocatore);
+			
+			
+			System.out.println(JSONHandler.checkPlayer(username));
+			
 
 			do {
 				
