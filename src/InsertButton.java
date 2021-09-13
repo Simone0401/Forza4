@@ -7,8 +7,8 @@ import java.awt.event.*;
 
 
 public class InsertButton implements ActionListener {
-	private end e;
-	private Turno t;
+	private WinMessage w;
+	private Match m;
 	private Color transyellow=new Color(1f,1f,0f,.5f );
 	private JButton btnColumn0 = new JButton("");
 	private  Grid grid;
@@ -16,13 +16,14 @@ public class InsertButton implements ActionListener {
 	private JLabel [][] holes;
 	private JLayeredPane layeredPane;
 	
-	public InsertButton(Grid grid,Turno t, int column,JLabel [][] holes,JLayeredPane layeredPane,end e) {
+	public InsertButton(Grid grid,Match m, int column,JLabel [][] holes,JLayeredPane layeredPane,WinMessage w) {
 		this.grid = grid;
 		this.column = column;
 		this.holes = holes;
-		this.t = t;
+		this.m = m;
 		this.layeredPane = layeredPane;
-		this.e = e;
+		this.w = w;
+		
 	}
 	
 	public void init() {
@@ -62,20 +63,12 @@ public class InsertButton implements ActionListener {
 		boolean bwin;
 		if (result) {
 			insertDisc(p,disc);
-			t.changep();
-			grid.show();
+			m.changep();
 			System.out.println(row);
 			bwin = grid.checkGrid(column, p);
 			if(bwin) {
-				JLabel win = new JLabel("HAI VINTO");
-				win.setHorizontalAlignment(SwingConstants.CENTER);
-				win.setFont(new Font("Kid Games", Font.PLAIN, 28));
-				layeredPane.setLayer(win, 4);
-				win.setBounds(662, 395, 224, 36);
-				Color purple = new Color(108,0,255);
-				win.setForeground(purple);
-				layeredPane.add(win);
-				this.e.ended();
+				w.show(p);
+				this.m.ended();
 			}
 		}
 		else {
@@ -104,8 +97,8 @@ public class InsertButton implements ActionListener {
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if(!this.e.isended()) {
-			this.insert(this.t.getValue());
+		if(!this.m.isended()) {
+			this.insert(this.m.getValue());
 		}
 
 }

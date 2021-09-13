@@ -54,19 +54,16 @@ public class game {
 	}
 	
 
-	
-	
-	
-	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		end e = new end();
+		Player p1 = new Player("Ferrix",0,0,0);
+		Player p2 = new Player("Simone041",0,0,0);
+		Match m = new Match();
 		Grid grid = new Grid();
 		boolean result = false;
-		Turno t = new Turno();
 		System.out.println(System.getProperty("user.dir"));
 		
 		//---------------------------------------------------------------------------------------------------------------------
@@ -81,29 +78,33 @@ public class game {
 		layeredPane.setBounds(0, 0, 1274, 694);
 		frame.getContentPane().add(layeredPane);
 		
+		WinMessage w = new WinMessage(p1,p2,layeredPane);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("Images/match_background.png"));
 		lblNewLabel.setBounds(0, 0, 1274, 694);
 		layeredPane.add(lblNewLabel);
 		
-		JLabel lblp1 = new JLabel("FRANCESCO");
+		JLabel lblp1 = new JLabel(p1.getUsername().toUpperCase());
 		lblp1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblp1.setFont(new Font("Kid Games", Font.PLAIN, 28));
+		lblp1.setFont(new Font("Kid Games", Font.PLAIN, 20));
 		layeredPane.setLayer(lblp1, 1);
 		lblp1.setBounds(41, 121, 224, 36);
 		Color purple = new Color(108,0,255);
 		lblp1.setForeground(purple);
 		layeredPane.add(lblp1);
 		
-		JLabel lblp2 = new JLabel("SIMONE");
+		JLabel lblp2 = new JLabel(p2.getUsername().toUpperCase());
 		lblp2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblp2.setFont(new Font("Kid Games", Font.PLAIN, 28));
+		lblp2.setFont(new Font("Kid Games", Font.PLAIN, 20));
 		layeredPane.setLayer(lblp2, 1);
 		lblp2.setBounds(1013, 590, 224, 36);
 		Color myellow = new Color(255,204,0);
 		lblp2.setForeground(myellow);
 		layeredPane.add(lblp2);
+		
+		
 		
 		
 		JLabel [][] holes = new JLabel [6] [7];
@@ -126,7 +127,7 @@ public class game {
 		//--------------------------------------------------------------------BOTTONI------------------------------------------------------
 		InsertButton btnColumn[] = new InsertButton[7];
 		for(int i = 0; i < 7; i++) {
-			btnColumn[i] = new InsertButton(grid,t,i,holes,layeredPane,e);
+			btnColumn[i] = new InsertButton(grid,m,i,holes,layeredPane,w);
 			btnColumn[i].init();
 			
 		}

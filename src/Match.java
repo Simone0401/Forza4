@@ -1,9 +1,13 @@
 
-public class Turno{
-	private int t;
+public class Match{
 	
-	public Turno() {
+
+	private int t;
+	private boolean e;
+	
+	public Match() {
 		this.t = 1;
+		this.e = false;
 	}
 	
 	public int getValue() {
@@ -18,4 +22,13 @@ public class Turno{
 			this.t = 1;
 		}
 	}
+	public void ended() {
+		this.e = true;
+	}
+	
+	public boolean isended() {
+		return this.e;
+	}
+	
+	
 }
