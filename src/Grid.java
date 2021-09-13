@@ -32,18 +32,17 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per ritornare la riga nella quale è stata posizionata la pedina
-	 * @param column colonna dove è stata aggiunta la pedina
-	 * @return numero che identifica la riga dove é stata posizionata la pedina
+	 * Metodo per ritornare la riga nella quale ï¿½ stata posizionata la pedina
+	 * @param column colonna dove ï¿½ stata aggiunta la pedina
+	 * @return numero che identifica la riga dove ï¿½ stata posizionata la pedina
 	 */
-	
 	public int getrow(int column) {
-		return this.available[column] + 1;
+		return this.available[column] ;
 	}
 	
 	/**
 	 * Metodo per indicare che alla colonna Ã¨ stata aggiunta una nuova pedina
-	 * @param column colonna dove è stata aggiunta la pedina
+	 * @param column colonna dove ï¿½ stata aggiunta la pedina
 	 */
 	private void setAvailable(int column) {
 		this.available[column] = this.available[column] - 1;
@@ -197,7 +196,7 @@ public class Grid {
 	 * @return true se ci sono 4 pedine allineate diagonalmente verso il basso a sinistra, false altrimenti
 	 */
 	private boolean crossDownSxCheck(int column, int row, int player) {
-		if (column > 3 && row < 3) {
+		if (column > 2 && row < 3) {
 			for (int i = 1; i < 4; i++) {
 				if (this.matrix[row+i][column-i] != player) {
 					return false;
