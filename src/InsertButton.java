@@ -4,26 +4,30 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 
 public class InsertButton implements ActionListener {
-	private WinMessage w;
 	private Match m;
 	private Color transyellow=new Color(1f,1f,0f,.5f );
 	private JButton btnColumn0 = new JButton("");
-	private  Grid grid;
+	private Grid grid;
 	private int column;
 	private JLabel [][] holes;
 	private JLayeredPane layeredPane;
+	private Player p1;
+	private Player p2;
+	private game g;
 	
-	public InsertButton(Grid grid,Match m, int column,JLabel [][] holes,JLayeredPane layeredPane,WinMessage w) {
+	public InsertButton(Grid grid, Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, Player p1, Player p2, game g) {
 		this.grid = grid;
 		this.column = column;
 		this.holes = holes;
 		this.m = m;
 		this.layeredPane = layeredPane;
-		this.w = w;
-		
+		this.p1 = p1;
+		this.p2 = p2;
+		this.g = g;
 	}
 	
 	public void init() {
@@ -56,7 +60,8 @@ public class InsertButton implements ActionListener {
 	
 	
 	
-	private boolean insert(int p) {
+	private boolean insert(int p) throws FontFormatException, IOException {
+		String wnr;
 		int row = grid.getrow(column);
 		JLabel disc = holes[5-row][column];
 		boolean result = grid.insert(column, p);
@@ -67,7 +72,13 @@ public class InsertButton implements ActionListener {
 			System.out.println(row);
 			bwin = grid.checkGrid(column, p);
 			if(bwin) {
-				w.show(p);
+				if (p==1) {
+					wnr = p1.getUsername().toUpperCase();
+				}
+				else {
+					wnr = p2.getUsername().toUpperCase();
+				}
+				Winned w = new Winned(g,wnr);
 				this.m.ended();
 			}
 		}
@@ -98,7 +109,12 @@ public class InsertButton implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if(!this.m.isended()) {
-			this.insert(this.m.getValue());
+			try {
+				this.insert(this.m.getValue());
+			} catch (FontFormatException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 }

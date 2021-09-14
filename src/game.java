@@ -16,18 +16,22 @@ import java.awt.Toolkit;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
+
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.awt.event.ActionListener;
 
 public class game {
 
 	private JFrame frame;
-	private  Action Insertion ;
 
 	/**
 	 * Launch the application.
@@ -48,23 +52,37 @@ public class game {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public game() {
+	public game() throws FontFormatException, IOException {
 		initialize();
 	}
 	
+	public void restart() throws FontFormatException, IOException {
+		this.frame.dispose();
+		this.main(null);
+	}
 
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize()   throws FontFormatException, IOException {
+		
 		Player p1 = new Player("Ferrix",0,0,0);
 		Player p2 = new Player("Simone041",0,0,0);
 		Match m = new Match();
 		Grid grid = new Grid();
 		boolean result = false;
 		System.out.println(System.getProperty("user.dir"));
+		
+		File font_file = new File("Font/Kid_Games.ttf");
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+		
+		
 		
 		//---------------------------------------------------------------------------------------------------------------------
 		frame = new JFrame();
@@ -88,7 +106,7 @@ public class game {
 		
 		JLabel lblp1 = new JLabel(p1.getUsername().toUpperCase());
 		lblp1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblp1.setFont(new Font("Kid Games", Font.PLAIN, 20));
+		lblp1.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp1, 1);
 		lblp1.setBounds(41, 121, 224, 36);
 		Color purple = new Color(108,0,255);
@@ -97,7 +115,7 @@ public class game {
 		
 		JLabel lblp2 = new JLabel(p2.getUsername().toUpperCase());
 		lblp2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblp2.setFont(new Font("Kid Games", Font.PLAIN, 20));
+		lblp2.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp2, 1);
 		lblp2.setBounds(1013, 590, 224, 36);
 		Color myellow = new Color(255,204,0);
@@ -127,7 +145,7 @@ public class game {
 		//--------------------------------------------------------------------BOTTONI------------------------------------------------------
 		InsertButton btnColumn[] = new InsertButton[7];
 		for(int i = 0; i < 7; i++) {
-			btnColumn[i] = new InsertButton(grid,m,i,holes,layeredPane,w);
+			btnColumn[i] = new InsertButton(grid,m,i,holes,layeredPane,p1,p2,this);
 			btnColumn[i].init();
 			
 		}
