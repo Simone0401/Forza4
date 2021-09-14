@@ -57,7 +57,7 @@ public class Main {
 				giocatore = new Player(username);
 			}
 			
-			JSONHandler.write(giocatore);
+			JSONHandler.save(giocatore);
 			
 			
 			System.out.println(JSONHandler.checkPlayer(username));

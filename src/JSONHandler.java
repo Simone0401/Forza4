@@ -13,7 +13,7 @@ import org.json.simple.parser.ParseException;
 /**
  * Classe per la gestione dei file JSON per il salvataggio e il recupero delle partite e dei giocatori
  * @version 1.00 12 Sept 2021
- * @author simone
+ * @author Argento Simone
  *
  */
 public class JSONHandler {
@@ -44,15 +44,8 @@ public class JSONHandler {
 	 */
 	private static Map<String, Object> getPlayers(){
 		Map<String, Object> giocatori = new HashMap<String, Object>();
-		JSONParser parser = new JSONParser();
-		Object object = null;
 		
-		try {
-			object = parser.parse(new FileReader(playersFile));
-		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Object object = readPlayers();
 		
 		JSONObject jasonObject = (JSONObject) object;
 		JSONArray players = (JSONArray) jasonObject.get("players");
@@ -68,7 +61,8 @@ public class JSONHandler {
 	 * Metodo per salvare il giocatore sul file JSON
 	 * @param player giocatore del quale salvare i dati
 	 */
-	public static void write(Player player) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void save(Player player) {
 		JSONObject obj = new JSONObject();
 		JSONArray players = new JSONArray();
 		
@@ -101,16 +95,155 @@ public class JSONHandler {
 		}
 		
 		obj.put("players", players);
+		writePlayers(obj);
 		
+	}
+	
+	/**
+	 * Metodo per scrivere i giocatori sul file JSON
+	 * @param object lista di giocatori da scrivere sotto forma di JSONObject
+	 */
+	private static void writePlayers(JSONObject object) {
 		try {
 		      FileWriter myWriter = new FileWriter(playersFile);
-		      myWriter.write(obj.toJSONString());
+		      myWriter.write(object.toJSONString());
 		      myWriter.close();
 		      System.out.println("Successfully wrote to the file.");
-		    } 
-		catch (IOException e) {
+		      
+		    } catch (IOException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
 	}
+
+	/**
+	 * Metodo per ottenere l'intera lista dei giocatori
+	 * @return lista dei giocatori come oggetto JAVA
+	 */
+	private static Object readPlayers() {
+		JSONParser parser = new JSONParser();
+		Object object = null;
+		try {
+			object = parser.parse(new FileReader(playersFile));
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return object;
+	}
+	
+	/**
+	 * Metodo per controllare se esiste già una partita salvata tra due giocatori
+	 * @param matchName il nome della partita da controllare (è costituito dai due username dei giocatori)
+	 * @return true se la partita è presente, false altrimenti
+	 */
+	public static boolean checkMatch(String matchName) {
+		Map<String, Object> matches = getPlayers();
+		
+		if (matches.get(matchName) != null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Metodo per ottenere un dizionario di tutte le partite salvate.
+	 * @return il dizionario di tutte le partite. Come chiave si ha il nome della partita (username1 + username2), come valore si ha l'oggetto JSON
+	 */
+	private static Map<String, Object> getMatches(){
+		Map<String, Object> partite = new HashMap<String, Object>();
+		
+		Object object = readMatches();
+		
+		JSONObject jsonObject = (JSONObject) object;
+		JSONArray matches = (JSONArray) jsonObject.get("matches");
+		
+		for (Object o: matches) {
+			JSONObject match = (JSONObject) o;
+			partite.put((String) partite.get("matchName"), match);	
+		}
+		return partite;
+	}
+	
+	/**
+	 * Metodo per ottenere l'intera lista delle partite
+	 * @return lista delle partite come oggetto JAVA
+	 */
+	private static Object readMatches() {
+		JSONParser parser = new JSONParser();
+		Object object = null;
+		try {
+			object = parser.parse(new FileReader(matchesFile));
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return object;
+	}
+	
+	/**
+	 * Metodo per salvare la partita sul file JSON
+	 * @param player giocatore del quale salvare i dati
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void save(/* inserire oggetto match */) {
+		
+		/**
+		 * Sostituire Player con oggetto Match
+		 */
+		
+		JSONObject obj = new JSONObject();
+		JSONArray players = new JSONArray();
+		
+		JSONObject inserimento = new JSONObject();
+		inserimento.put("username", player.getUsername());
+		inserimento.put("won", player.getWon());
+		inserimento.put("tied", player.getTied());
+		inserimento.put("lost", player.getLost());
+		
+		Map<String, Object> giocatori = getPlayers();
+		
+		// Se il giocatore è presente si aggiornano le sue statistiche
+		if (!checkPlayer(player.getUsername())) {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				players.add(element.getValue());
+			}
+			players.add(inserimento);
+		}
+		else {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				if (element.getKey() == player.getUsername()) {
+					players.add(inserimento);
+				}
+				else {
+					players.add(element.getValue());
+				}
+				
+			}
+			
+		}
+		
+		obj.put("matches", players);
+		writeMatches(obj);
+		
+	}
+	
+	/**
+	 * Metodo per scrivere le partite sul file JSON
+	 * @param object lista delle partite da scrivere sotto forma di JSONObject
+	 */
+	private static void writeMatches(JSONObject object) {
+		try {
+		      FileWriter myWriter = new FileWriter(matchesFile);
+		      myWriter.write(object.toJSONString());
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		      
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+	}
+
 }
