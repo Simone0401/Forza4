@@ -27,7 +27,7 @@ public class Main {
 			System.out.println("----------------------------------------------------");
 			
 			String username = "";
-			System.out.println("Inserisci nome utente: ");
+			System.out.println("Inserisci nome utente da eliminare: ");
 			username = in.nextLine();
 			
 			// Prova costruzione player dati i dati sulle sue statistiche
@@ -57,7 +57,7 @@ public class Main {
 				giocatore = new Player(username);
 			}
 			
-			JSONHandler.save(giocatore);
+			JSONHandler.remove(giocatore);
 			
 			
 			System.out.println(JSONHandler.checkPlayer(username));

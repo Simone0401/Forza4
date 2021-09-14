@@ -83,7 +83,7 @@ public class JSONHandler {
 		}
 		else {
 			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				if (element.getKey() == player.getUsername()) {
+				if (element.getKey().toString().compareTo(player.getUsername()) != 0) {
 					players.add(inserimento);
 				}
 				else {
@@ -96,7 +96,35 @@ public class JSONHandler {
 		
 		obj.put("players", players);
 		writePlayers(obj);
+	}
+	
+	/**
+	 * Metodo per cancellare il giocatore sul file JSON
+	 * @param player giocatore da eliminare
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void remove(Player player) {
+		JSONObject obj = new JSONObject();
+		JSONArray players = new JSONArray();
 		
+		
+		Map<String, Object> giocatori = getPlayers();
+		
+		// Se il giocatore è presente lo si elimina
+		if (checkPlayer(player.getUsername())) {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				System.out.println(element.getKey() + "-->" + player.getUsername());
+				if (element.getKey().toString().compareTo(player.getUsername()) != 0) {
+					players.add(element.getValue());
+				}
+			}
+			System.out.println("Player eliminato correttamente!");
+			obj.put("players", players);
+			writePlayers(obj);
+		}
+		else {
+			System.out.println("L'utente non esiste!");
+		}
 	}
 	
 	/**
@@ -186,12 +214,13 @@ public class JSONHandler {
 	 * Metodo per salvare la partita sul file JSON
 	 * @param player giocatore del quale salvare i dati
 	 */
+	/*
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void save(/* inserire oggetto match */) {
+	public static void save( inserire oggetto match ) {
 		
 		/**
 		 * Sostituire Player con oggetto Match
-		 */
+		 
 		
 		JSONObject obj = new JSONObject();
 		JSONArray players = new JSONArray();
@@ -227,7 +256,7 @@ public class JSONHandler {
 		obj.put("matches", players);
 		writeMatches(obj);
 		
-	}
+	}*/
 	
 	/**
 	 * Metodo per scrivere le partite sul file JSON
