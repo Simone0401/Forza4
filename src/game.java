@@ -96,7 +96,7 @@ public class game {
 		layeredPane.setBounds(0, 0, 1274, 694);
 		frame.getContentPane().add(layeredPane);
 		
-		WinMessage w = new WinMessage(p1,p2,layeredPane);
+		frame.setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

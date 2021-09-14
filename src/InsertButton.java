@@ -66,11 +66,13 @@ public class InsertButton implements ActionListener {
 		JLabel disc = holes[5-row][column];
 		boolean result = grid.insert(column, p);
 		boolean bwin;
+		boolean btie;
 		if (result) {
 			insertDisc(p,disc);
 			m.changep();
 			System.out.println(row);
 			bwin = grid.checkGrid(column, p);
+			btie =  grid.tieCheck();
 			if(bwin) {
 				if (p==1) {
 					wnr = p1.getUsername().toUpperCase();
@@ -80,6 +82,11 @@ public class InsertButton implements ActionListener {
 				}
 				Winned w = new Winned(g,wnr);
 				this.m.ended();
+			}
+			else {
+				if(btie) {
+					Tied t = new Tied(g);
+				}
 			}
 		}
 		else {

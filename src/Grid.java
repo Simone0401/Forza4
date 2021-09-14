@@ -101,10 +101,7 @@ public class Grid {
 			return true;
 		}
 		
-		// Controllo pareggio
-		if (this.tieCheck()) {
-			System.out.println("PAREGGIO");
-		}
+
 		
 		return false;
 	}
@@ -250,7 +247,7 @@ public class Grid {
 	 
 	 * @return true se la griglia è piena e non ci sono pedine allineate verticalmente, orizzontalmente o diagonalmente, false altrimenti
 	 */
-	private boolean tieCheck() {
+	public boolean tieCheck() {
 		int somma = 0; 
 		for (int i = 0; i < 7; i++) {
 			somma += this.available[i];

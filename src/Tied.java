@@ -1,24 +1,22 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.FontFormatException;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
 
-public class Winned  {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JRootPane;
+import javax.swing.SwingConstants;
+
+public class Tied {
+
 	private JFrame frame;
 	private game g;
 	File font_file = new File("Font/Kid_Games.ttf");
@@ -32,7 +30,7 @@ public class Winned  {
 		this.frame.dispose();
 	}
 	
-	public Winned(game g, String usr)throws FontFormatException, IOException {
+	public Tied(game g)throws FontFormatException, IOException {
 		
 		
 		
@@ -54,11 +52,11 @@ public class Winned  {
 		layeredPane.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0,720 , 380);
 		layeredPane.add(lblNewLabel);
-		JLabel win = new JLabel("HAI VINTO " + usr);
+		JLabel win = new JLabel("PAREGGIO");
 		win.setHorizontalAlignment(SwingConstants.CENTER);
-		win.setFont(new Font("Kid Games", Font.PLAIN, 28));
+		win.setFont(new Font("Kid Games", Font.PLAIN, 31));
 		layeredPane.setLayer(win, 2);
-		win.setBounds(139, 100, 484, 63);
+		win.setBounds(139, 100, 455, 63);
 		Color purple = new Color(108,0,255);
 		win.setForeground(purple);
 		layeredPane.add(win);
@@ -69,7 +67,7 @@ public class Winned  {
 		btnExit.setFont(new Font("Kid Games", Font.PLAIN, 11));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Winned.this.close();
+				Tied.this.close();
 			}
 		});
 		layeredPane.setLayer(btnExit, 3);
@@ -84,7 +82,7 @@ public class Winned  {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					g.restart();
-					Winned.this.close();
+					Tied.this.close();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
