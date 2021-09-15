@@ -59,91 +59,84 @@ public class Grid {
 		int row = this.available[column] + 1;
 		System.out.println("colonna " + column + "   riga " + row);
 		
-		// Controllo orizzontale a dx dal punto di immissione
-		if (this.horizontalDxCheck(column, row, player)) {
-			System.out.println("ORIZZONTALE DESTRA");
-			return true;
-		}
-		
-		// Controllo orizzontale a sx dal punto di immissione
-		if (this.horizontalSxCheck(column, row, player)) {
-			System.out.println("ORIZZONTALE SINISTRA");
+		// Controllo orizzontale dal punto di immissione
+		if (this.horizontalCheck(column, row, player)) {
+			System.out.println("ORIZZONTALE");
 			return true;
 		}
 		
 		// Controllo verticale verso il basso dal punto di immissione
-		if (this.verticalDownCheck(column, row, player)) {
+		if (this.verticalCheck(column, row, player)) {
 			System.out.println("VERTICALE SOTTO");
 			return true;
 		}
 		
-		// Controllo obliquo verso dx in basso dal punto di immissione
-		if (this.crossDownDxCheck(column, row, player)) {
-			System.out.println("DIAGONALE SOTTO DESTRA");
+		// Controllo obliquo dal punto di immissione
+		if (this.crossCheck(column, row, player)) {
 			return true;
 		}
 		
-		// Controllo obliquo verso sx in basso dal punto di immissione
-		if (this.crossDownSxCheck(column, row, player)) {
-			System.out.println("DIAGONALE SOTTO SINISTRA");
-			return true;
-		}
-		
-		// Controllo obliquo verso dx in alto dal punto di immissione
-		if (this.crossUpDxCheck(column, row, player)) {
-			System.out.println("DIAGONALE SOPRA DESTRA");
-			return true;
-		}
-		
-		// Controllo obliquo verso sx in alto dal punto di immissione
-		if (this.crossUpSxCheck(column, row, player)) {
-			System.out.println("DIAGONALE SOPRA SINISTRA");
-			return true;
-		}
-		
-
-		
+		// La partita non ha ancora un vincitore
 		return false;
 	}
 	
+
 	/**
-	 * Metodo per controllare se ci sono 4 pedine orizzontali verso destra dal punto di inserimento
+	 * Metodo per controllare se ci sono 4 pedine allineate in orizzontale dal punto di inserimento
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è posizionata la pedina
 	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate orizzontalemente a destra, false altrimenti
+	 * @return true se ci sono 4 pedine allineate orizzontalemente, false altrimenti
 	 */
-	private boolean horizontalDxCheck(int column, int row, int player) {
-		// Ottimizzazione nel caso in cui si incontrasse subito una cella diversa
-		if(column < 4) {
-			for(int i = 1; i < 4; i++) {
-				if(this.matrix[row][column+i] != player) {
-					return false;
-				}
-			}
+	private boolean horizontalCheck(int column, int row, int player) {
+		
+		int circle  = this.horizontalDxCountCircle(column, row, player) 
+					+ this.horizontalSxCountCircle(column, row, player) 
+					+ 1;	// Si aggiunge al conteggio anche la pedina appena inserita
+		
+		if (circle >= 4) {
 			return true;
 		}
+		
 		return false;
 	}
 	
 	/**
-	 * Metodo per controllare se ci sono 4 pedine orizzontali verso sinistra dal punto di inserimento
-	 * @param column colonna dove � stata inserita la pedina
-	 * @param row riga dove � posizionata la pedina
-	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate orizzontalemente a sinistra, false altrimenti
+	 * Metodo per contare quante pedine sono allineate verso destra rispetto a quella appena inserita nella colonna
+	 * @param column colonna dove è stata inserita la pedina
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate verso destra
 	 */
-	private boolean horizontalSxCheck(int column, int row, int player) {
-		// Ottimizzazione nel caso in cui si incontrasse subito una cella diversa
-		if (column > 2) {
-			for(int i = 1; i < 4; i++) {
-				if(this.matrix[row][column-i] != player) {
-					return false;
-				}
-			}
-			return true;
+	private int horizontalDxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column > 0 && this.matrix[row][column - 1] == player) {
+			circle += 1;
+			column -= 1;
 		}
-		return false;
+		
+		return circle;
+	}
+	
+	/**
+	 * Metodo per contare quante pedine sono allineate verso sinistra rispetto a quella appena inserita nella colonna
+	 * @param column colonna dove è stata inserita la pedina
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate verso destra
+	 */
+	private int horizontalSxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column < 6 && this.matrix[row][column + 1] == player) {
+			circle += 1;
+			column += 1;
+		}
+		
+		return circle;
 	}
 	
 	/**
@@ -153,7 +146,7 @@ public class Grid {
 	 * @param player giocatore che ha posizionato la pedina
 	 * @return true se ci sono 4 pedine allineate verticalmente verso il basso, false altrimenti
 	 */
-	private boolean verticalDownCheck(int column, int row, int player) {
+	private boolean verticalCheck(int column, int row, int player) {
 		// Ottimizzazione nel caso in cui si incontrasse subito una cella diversa
 		if(row < 3) {
 			for(int i = 1; i < 4; i++) {
@@ -167,84 +160,108 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso il basso a destra dal punto di inserimento
+	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale dal punto di inserimento
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è posizionata la pedina
 	 * @param player giocatore che ha posizionato la pedina
 	 * @return true se ci sono 4 pedine allineate diagonalmente verso il basso a destra, false altrimenti
 	 */
-	private boolean crossDownDxCheck(int column, int row, int player) {
-		if (column < 3 && row < 3) {
-			for (int i = 1; i < 4; i++) {
-				if (this.matrix[row+i][column+i] != player) {
-					return false;
-				}
-			}
+	private boolean crossCheck(int column, int row, int player) {
+		int circle  = this.crossUpDxCountCircle(column, row, player)
+					+ this.crossDownDxCountCircle(column, row, player)
+					+ this.crossUpSxCountCircle(column, row, player)
+					+ this.crossDownSxCountCircle(column, row, player)
+					+ 1;	// Si aggiunge al conteggio anche la pedina appena inserita
+		
+		if (circle >= 4) {
 			return true;
 		}
+		
 		return false;
 	}
 	
 	/**
-	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso il basso a sinistra dal punto di inserimento
+	 * Metodo per contare quante pedine sono allineate diagoanalmente verso destra in alto rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
-	 * @param row riga dove è posizionata la pedina
-	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate diagonalmente verso il basso a sinistra, false altrimenti
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in alto
 	 */
-	private boolean crossDownSxCheck(int column, int row, int player) {
-		if (column > 2 && row < 3) {
-			for (int i = 1; i < 4; i++) {
-				if (this.matrix[row+i][column-i] != player) {
-					return false;
-				}
-			}
-			return true;
+	private int crossUpDxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column < 6 && row > 0 && this.matrix[row - 1][column + 1] == player) {
+			circle += 1;
+			column += 1;
+			row -= 1;
 		}
-		return false;
+		
+		return circle;
 	}
 	
 	/**
-	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso l'alto a destra dal punto di inserimento
+	 * Metodo per contare quante pedine sono allineate diagoanalmente verso destra in basso rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
-	 * @param row riga dove è posizionata la pedina
-	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate diagonalmente verso l'alto a destra, false altrimenti
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in basso
 	 */
-	private boolean crossUpDxCheck(int column, int row, int player) {
-		if (column < 4 && row > 2) {
-			for (int i = 1; i < 4; i++) {
-				if (this.matrix[row-i][column+i] != player) {
-					return false;
-				}
-			}
-			return true;
+	private int crossDownDxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column < 6 && row < 5 && this.matrix[row + 1][column + 1] == player) {
+			circle += 1;
+			column += 1;
+			row += 1;
 		}
-		return false;
+		
+		return circle;
 	}
 	
 	/**
-	 * Metodo per controllare se ci sono 4 pedine allineate in diagonale verso l'alto a sinistra dal punto di inserimento
+	 * Metodo per contare quante pedine sono allineate diagoanalmente verso sinistra in alto rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
-	 * @param row riga dove è posizionata la pedina
-	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate diagonalmente verso l'alto a sinistra, false altrimenti
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in alto
 	 */
-	private boolean crossUpSxCheck(int column, int row, int player) {
-		if (column > 2 && row > 2) {
-			for (int i = 1; i < 4; i++) {
-				if (this.matrix[row-i][column-i] != player) {
-					return false;
-				}
-			}
-			return true;
+	private int crossUpSxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column > 0 && row > 0 && this.matrix[row - 1][column - 1] == player) {
+			circle += 1;
+			column -= 1;
+			row -= 1;
 		}
-		return false;
+		
+		return circle;
+	}
+	
+	/**
+	 * Metodo per contare quante pedine sono allineate diagoanalmente verso sinistra in basso rispetto a quella appena inserita nella colonna
+	 * @param column colonna dove è stata inserita la pedina
+	 * @param row riga dove è stata posizionata la pedina
+	 * @param player giocatore che ha inserito la pedina
+	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in basso
+	 */
+	private int crossDownSxCountCircle(int column, int row, int player) {
+		
+		int circle = 0;
+		
+		while (column > 0 && row < 5 && this.matrix[row + 1][column - 1] == player) {
+			circle += 1;
+			column -= 1;
+			row += 1;
+		}
+		
+		return circle;
 	}
 	
 	/**
 	 * Metodo per controllare se la partita è finita in pareggio
-	 
 	 * @return true se la griglia è piena e non ci sono pedine allineate verticalmente, orizzontalmente o diagonalmente, false altrimenti
 	 */
 	public boolean tieCheck() {
