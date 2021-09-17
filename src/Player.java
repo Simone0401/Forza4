@@ -22,7 +22,7 @@ public class Player {
 		this.username = username;
 		this.won = won;
 		this.tied = tied;
-		this.lost = lost;
+		this.lost = lost; 
 	}
 	
 	/**
@@ -43,6 +43,18 @@ public class Player {
 	 */
 	public String getUsername() {
 		return username;
+	}
+	
+	public void addWon() {
+		this.won +=1;
+	}
+	
+	public void addLost() {
+		this.lost +=1;
+	}
+	
+	public void addTie() {
+		this.tied +=1;
 	}
 	
 	/**
