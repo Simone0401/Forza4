@@ -58,6 +58,15 @@ public class JSONHandler {
 	}
 	
 	/**
+	 * Metodo per ottenere un giocatore dal file JSON
+	 * @return il giocatore dal file JSON come Object JAVA
+	 */
+	public static JSONObject getPlayer(String username){
+		Map<String, Object> players = getPlayers();
+		return (JSONObject) players.get(username);
+	}
+	
+	/**
 	 * Metodo per salvare il giocatore sul file JSON
 	 * @param player giocatore del quale salvare i dati
 	 */
@@ -261,6 +270,55 @@ public class JSONHandler {
 		giocatore.put("tied", player.getTied());
 		giocatore.put("lost", player.getLost());
 		return giocatore;
+	}
+	
+	/**
+	 * Metodo per salvare la partita sul file JSON
+	 * @param match partita da salvare sul file JSON
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void save(Grid match, String nameMatch) {
+		JSONObject obj = new JSONObject();
+		JSONArray matches = new JSONArray();
+		
+		JSONObject inserimento = getMatchForJSON(match, nameMatch);
+		
+		Map<String, Object> partite = getMatches();
+		
+		// Se la partita è presente si aggiornano le sue statistiche
+		if (!checkMatch(nameMatch)) {
+			for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				matches.add(element.getValue());
+			}
+			matches.add(inserimento);
+		}
+		else {
+			for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				if (element.getKey().toString().compareTo(nameMatch) == 0) {
+					matches.add(inserimento);
+				}
+				else {
+					matches.add(element.getValue());
+				}
+				
+			}
+			
+		}
+		
+		obj.put("players", matches);
+		writePlayers(obj);
+	}
+	
+	/**
+	 * Metodo per creare un oggetto "Match" inseribile all'interno di un file JSON
+	 * @param match partita da prepare per il file JSON
+	 * @return la partita pronta per essere gestita come JSONObject
+	 */
+	private static JSONObject getMatchForJSON(Grid match, String nameMatch) {
+		JSONObject partita = new JSONObject();
+		partita.put("match_name", nameMatch);
+		partita.put("griglia", match);
+		return partita;
 	}
 	
 	/**

@@ -64,7 +64,7 @@ public class game {
 	
 	public void restart() throws FontFormatException, IOException {
 		this.frame.dispose();
-		this.main(null);
+		main(null);
 	}
 
 
