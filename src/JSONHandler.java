@@ -66,11 +66,7 @@ public class JSONHandler {
 		JSONObject obj = new JSONObject();
 		JSONArray players = new JSONArray();
 		
-		JSONObject inserimento = new JSONObject();
-		inserimento.put("username", player.getUsername());
-		inserimento.put("won", player.getWon());
-		inserimento.put("tied", player.getTied());
-		inserimento.put("lost", player.getLost());
+		JSONObject inserimento = getPlayerForJSON(player);
 		
 		Map<String, Object> giocatori = getPlayers();
 		
@@ -83,9 +79,52 @@ public class JSONHandler {
 		}
 		else {
 			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				if (element.getKey().toString().compareTo(player.getUsername()) != 0) {
+				if (element.getKey().toString().compareTo(player.getUsername()) == 0) {
 					players.add(inserimento);
 				}
+				else {
+					players.add(element.getValue());
+				}
+				
+			}
+			
+		}
+		
+		obj.put("players", players);
+		writePlayers(obj);
+	}
+	
+	/**
+	 * Metodo per salvare il giocatore sul file JSON
+	 * @param player giocatore del quale salvare i dati
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void updatePlayer(String username, Player oldPlayer) {
+		JSONObject obj = new JSONObject();
+		JSONArray players = new JSONArray();
+		
+		
+		Map<String, Object> giocatori = getPlayers();
+		
+		// Se il giocatore è presente si aggiorna il suo username
+		if (checkPlayer(username)) {
+			System.out.println("Esiste già un giocatore con l'username scelto");
+		}
+		else {
+			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+				
+				if (element.getKey().toString().compareTo(oldPlayer.getUsername()) == 0) {
+					
+					Player updatablePlayer = new Player(username, 
+														oldPlayer.getWon(), 
+														oldPlayer.getTied(), 
+														oldPlayer.getLost());
+					
+					JSONObject inserimento = getPlayerForJSON(updatablePlayer);
+					
+					players.add(inserimento);
+				}
+				
 				else {
 					players.add(element.getValue());
 				}
@@ -208,6 +247,20 @@ public class JSONHandler {
 			e.printStackTrace();
 		}
 		return object;
+	}
+	
+	/**
+	 * Metodo per creare un oggetto "Player" inseribile all'interno di un file JSON
+	 * @param player giocatore da prepare per il file JSON
+	 * @return il giocatore pronto per essere gestito come JSONObject
+	 */
+	private static JSONObject getPlayerForJSON(Player player) {
+		JSONObject giocatore = new JSONObject();
+		giocatore.put("username", player.getUsername());
+		giocatore.put("won", player.getWon());
+		giocatore.put("tied", player.getTied());
+		giocatore.put("lost", player.getLost());
+		return giocatore;
 	}
 	
 	/**

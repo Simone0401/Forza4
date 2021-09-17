@@ -27,8 +27,11 @@ public class Main {
 			System.out.println("----------------------------------------------------");
 			
 			String username = "";
-			System.out.println("Inserisci nome utente da eliminare: ");
+			System.out.println("Inserisci nome utente da modificare: ");
 			username = in.nextLine();
+			
+			System.out.println("Inserisci nome utente nuovo: ");
+			String newUsername = in.nextLine();
 			
 			// Prova costruzione player dati i dati sulle sue statistiche
 			System.out.println("Vuoi inserire le statistiche? [y/n] ");
@@ -57,7 +60,7 @@ public class Main {
 				giocatore = new Player(username);
 			}
 			
-			JSONHandler.remove(giocatore);
+			JSONHandler.save(giocatore);
 			
 			
 			System.out.println(JSONHandler.checkPlayer(username));
