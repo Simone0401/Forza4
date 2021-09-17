@@ -26,6 +26,18 @@ public class Player {
 	}
 	
 	/**
+	 * Costruttore per il giocatore che non è mai stato creato
+	 * @param username nome del giocatore
+	 * 
+	 */
+	public Player(String username) {
+		this.username = username;
+		this.won = 0;
+		this.tied = 0;
+		this.lost = 0;
+	}
+	
+	/**
 	 * Metodo per ottenere l'username del giocatore
 	 * @return l'username del giocatore
 	 */

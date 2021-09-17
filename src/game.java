@@ -147,6 +147,8 @@ public class game {
 		layeredPane.add(lblp2);
 		
 		
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		
 		
 		
 		JLabel [][] holes = new JLabel [6] [7];

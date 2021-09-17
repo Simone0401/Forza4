@@ -1,4 +1,15 @@
+import java.io.InputStream;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 public class Main {
 	
@@ -11,10 +22,50 @@ public class Main {
 			boolean result = false;
 			int player = 1;
 			boolean binsert;
+			Player giocatore;
 			grid.show();
 			System.out.println("----------------------------------------------------");
 			
+			String username = "";
+			System.out.println("Inserisci nome utente da modificare: ");
+			username = in.nextLine();
 			
+			System.out.println("Inserisci nome utente nuovo: ");
+			String newUsername = in.nextLine();
+			
+			// Prova costruzione player dati i dati sulle sue statistiche
+			System.out.println("Vuoi inserire le statistiche? [y/n] ");
+			String risp = "";
+			
+			risp = in.next().strip();
+			
+			
+			if (risp.equals("y")) {
+				int vittorie;
+				int pareggi;
+				int sconfitte;
+				
+				System.out.println("Inserisci numero vittorie: ");
+				vittorie = in.nextInt();
+				System.out.println("Inserisci numero pareggi: ");
+				pareggi = in.nextInt();
+				System.out.println("Inserisci numero sconfitte: ");
+				sconfitte = in.nextInt();
+				
+				
+				giocatore = new Player(username, vittorie, pareggi, sconfitte);
+			}
+			
+			else {
+				giocatore = new Player(username);
+			}
+			
+			JSONHandler.save(giocatore);
+			
+			
+			System.out.println(JSONHandler.checkPlayer(username));
+			
+
 			do {
 				
 				do {
@@ -39,4 +90,4 @@ public class Main {
 			
 			System.out.println("Hai vinto!");
 		}
-}
+	}
