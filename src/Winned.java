@@ -64,12 +64,23 @@ public class Winned  {
 		layeredPane.add(win);
 		
 		JButton btnExit = new JButton("");
+		btnExit.setBorderPainted(false); 
+		btnExit.setContentAreaFilled(false); 
+		btnExit.setFocusPainted(false); 
+		btnExit.setOpaque(false);
 		btnExit.setIcon(new ImageIcon("Images/exitButton.png"));
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setFont(new Font("Kid Games", Font.PLAIN, 11));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Winned.this.close();
+				Menu m = new Menu();
+				try {
+					m.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		layeredPane.setLayer(btnExit, 3);
@@ -77,6 +88,10 @@ public class Winned  {
 		layeredPane.add(btnExit);
 		
 		JButton btnAgain = new JButton("");
+		btnAgain.setBorderPainted(false); 
+		btnAgain.setContentAreaFilled(false); 
+		btnAgain.setFocusPainted(false); 
+		btnAgain.setOpaque(false);
 		btnAgain.setIcon(new ImageIcon("Images/againButton.png"));
 		btnAgain.setForeground(Color.BLACK);
 		btnAgain.setFont(new Font("Kid Games", Font.PLAIN, 11));

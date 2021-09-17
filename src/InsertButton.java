@@ -63,11 +63,14 @@ public class InsertButton implements ActionListener {
 	private boolean insert(int p) throws FontFormatException, IOException {
 		String wnr;
 		int row = grid.getrow(column);
-		JLabel disc = holes[5-row][column];
 		boolean result = grid.insert(column, p);
 		boolean bwin;
 		boolean btie;
-		if (result) {
+		if (!result) {
+			JOptionPane.showMessageDialog(null, "Non puoi inserire la pedina qui!", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			JLabel disc = holes[5-row][column];
 			insertDisc(p,disc);
 			m.changep();
 			System.out.println(row);
@@ -88,10 +91,8 @@ public class InsertButton implements ActionListener {
 					Tied t = new Tied(g);
 				}
 			}
-		}
-		else {
-			//error message
-		}
+			
+			}
 		return result;
 	}
 
@@ -103,11 +104,11 @@ public class InsertButton implements ActionListener {
 	private static void insertDisc(int p,JLabel disc) {
 		String path;
 		if(p == 1 ) {
-			 path = "Images/yellow.png" ;
+			 path = "Images/purple.png" ;
 			
 		}
 		else {
-			path = "Images/purple.png" ;
+			path = "Images/yellow.png" ;
 		}
 		spawnDiscs(path,disc);
 		

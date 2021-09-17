@@ -285,12 +285,16 @@ public class Grid {
 	public boolean insert(int column, int player) {
 		int row = this.available[column];
 		if (this.fullCheck(row)) {
-			System.out.println("COLONNA PIENA, SCEGLIERE UN ALTRA COLONNA");
 			return false;
+			//System.out.println("COLONNA PIENA, SCEGLIERE UN ALTRA COLONNA");
+			
 		}
-		this.matrix[row][column] = player;
-		this.setAvailable(column);
-		return true;
+		else {
+			this.matrix[row][column] = player;
+			this.setAvailable(column);
+			return true;
+		}
+		
 	}
 	
 	/**

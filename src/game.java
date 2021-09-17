@@ -11,6 +11,7 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JInternalFrame;
 import java.awt.Toolkit;
 import java.awt.CardLayout;
@@ -24,6 +25,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -89,7 +92,28 @@ public class game {
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1280, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+	            //I skipped unused callbacks for readability
+
+	            @Override
+	            public void windowClosing(WindowEvent e) {
+	                if(JOptionPane.showConfirmDialog(frame, "Sicuri di voler abbandonare la partita?") == JOptionPane.OK_OPTION){
+	                	if(JOptionPane.showConfirmDialog(frame, "Salvare la partita in corso?") == JOptionPane.OK_OPTION){
+	                		//salva partita
+	                	}
+	                    frame.setVisible(false);
+	                    Menu m = new Menu();
+	                    try {
+							m.restart();
+						} catch (FontFormatException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	                    frame.dispose();
+	                }
+	            }
+	        });
 		frame.getContentPane().setLayout(null);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
