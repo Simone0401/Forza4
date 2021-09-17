@@ -32,9 +32,9 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per ritornare la riga nella quale � stata posizionata la pedina
-	 * @param column colonna dove � stata aggiunta la pedina
-	 * @return numero che identifica la riga dove � stata posizionata la pedina
+	 * Metodo per ritornare la riga nella quale è stata posizionata la pedina
+	 * @param column colonna dove è stata aggiunta la pedina
+	 * @return numero che identifica la riga dove è stata posizionata la pedina
 	 */
 	public int getrow(int column) {
 		return this.available[column] ;
@@ -42,7 +42,7 @@ public class Grid {
 	
 	/**
 	 * Metodo per indicare che alla colonna è stata aggiunta una nuova pedina
-	 * @param column colonna dove � stata aggiunta la pedina
+	 * @param column colonna dove è stata aggiunta la pedina
 	 */
 	private void setAvailable(int column) {
 		this.available[column] = this.available[column] - 1;
@@ -90,11 +90,11 @@ public class Grid {
 	 */
 	private boolean horizontalCheck(int column, int row, int player) {
 		
-		int circle  = this.horizontalDxCountCircle(column, row, player) 
-					+ this.horizontalSxCountCircle(column, row, player) 
+		int disc  = this.horizontalDxCountDisc(column, row, player) 
+					+ this.horizontalSxCountDisc(column, row, player) 
 					+ 1;	// Si aggiunge al conteggio anche la pedina appena inserita
 		
-		if (circle >= 4) {
+		if (disc >= 4) {
 			return true;
 		}
 		
@@ -108,16 +108,16 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate verso destra
 	 */
-	private int horizontalDxCountCircle(int column, int row, int player) {
+	private int horizontalDxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column > 0 && this.matrix[row][column - 1] == player) {
-			circle += 1;
+			disc += 1;
 			column -= 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
@@ -127,16 +127,16 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate verso destra
 	 */
-	private int horizontalSxCountCircle(int column, int row, int player) {
+	private int horizontalSxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column < 6 && this.matrix[row][column + 1] == player) {
-			circle += 1;
+			disc += 1;
 			column += 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
@@ -167,13 +167,13 @@ public class Grid {
 	 * @return true se ci sono 4 pedine allineate diagonalmente verso il basso a destra, false altrimenti
 	 */
 	private boolean crossCheck(int column, int row, int player) {
-		int circle  = this.crossUpDxCountCircle(column, row, player)
-					+ this.crossDownDxCountCircle(column, row, player)
-					+ this.crossUpSxCountCircle(column, row, player)
-					+ this.crossDownSxCountCircle(column, row, player)
+		int disc  = this.crossUpDxCountDisc(column, row, player)
+					+ this.crossDownDxCountDisc(column, row, player)
+					+ this.crossUpSxCountDisc(column, row, player)
+					+ this.crossDownSxCountDisc(column, row, player)
 					+ 1;	// Si aggiunge al conteggio anche la pedina appena inserita
 		
-		if (circle >= 4) {
+		if (disc >= 4) {
 			return true;
 		}
 		
@@ -187,17 +187,17 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in alto
 	 */
-	private int crossUpDxCountCircle(int column, int row, int player) {
+	private int crossUpDxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column < 6 && row > 0 && this.matrix[row - 1][column + 1] == player) {
-			circle += 1;
+			disc += 1;
 			column += 1;
 			row -= 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
@@ -207,17 +207,17 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in basso
 	 */
-	private int crossDownDxCountCircle(int column, int row, int player) {
+	private int crossDownDxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column < 6 && row < 5 && this.matrix[row + 1][column + 1] == player) {
-			circle += 1;
+			disc += 1;
 			column += 1;
 			row += 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
@@ -227,17 +227,17 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in alto
 	 */
-	private int crossUpSxCountCircle(int column, int row, int player) {
+	private int crossUpSxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column > 0 && row > 0 && this.matrix[row - 1][column - 1] == player) {
-			circle += 1;
+			disc += 1;
 			column -= 1;
 			row -= 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
@@ -247,17 +247,17 @@ public class Grid {
 	 * @param player giocatore che ha inserito la pedina
 	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in basso
 	 */
-	private int crossDownSxCountCircle(int column, int row, int player) {
+	private int crossDownSxCountDisc(int column, int row, int player) {
 		
-		int circle = 0;
+		int disc = 0;
 		
 		while (column > 0 && row < 5 && this.matrix[row + 1][column - 1] == player) {
-			circle += 1;
+			disc += 1;
 			column -= 1;
 			row += 1;
 		}
 		
-		return circle;
+		return disc;
 	}
 	
 	/**
