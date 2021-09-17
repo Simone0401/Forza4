@@ -214,7 +214,7 @@ public class JSONHandler {
 	 * @return true se la partita è presente, false altrimenti
 	 */
 	public static boolean checkMatch(String matchName) {
-		Map<String, Object> matches = getPlayers();
+		Map<String, Object> matches = getMatches();
 		
 		if (matches.get(matchName) != null) {
 			return true;
@@ -306,7 +306,24 @@ public class JSONHandler {
 		}
 		
 		obj.put("players", matches);
-		writePlayers(obj);
+		writeMatches(obj);
+	}
+	
+	/**
+	 * Metodo per scrivere i matches sul file JSON
+	 * @param object lista delle partite da scrivere sotto forma di JSONObject
+	 */
+	private static void writeMatches(JSONObject object) {
+		try {
+		      FileWriter myWriter = new FileWriter(matchesFile);
+		      myWriter.write(object.toJSONString());
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		      
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
 	}
 	
 	/**
@@ -317,7 +334,7 @@ public class JSONHandler {
 	private static JSONObject getMatchForJSON(Grid match, String nameMatch) {
 		JSONObject partita = new JSONObject();
 		partita.put("match_name", nameMatch);
-		partita.put("griglia", match);
+		partita.put("griglia", match.getMatrix());
 		return partita;
 	}
 	
@@ -368,22 +385,5 @@ public class JSONHandler {
 		writeMatches(obj);
 		
 	}*/
-	
-	/**
-	 * Metodo per scrivere le partite sul file JSON
-	 * @param object lista delle partite da scrivere sotto forma di JSONObject
-	 */
-	private static void writeMatches(JSONObject object) {
-		try {
-		      FileWriter myWriter = new FileWriter(matchesFile);
-		      myWriter.write(object.toJSONString());
-		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
-		      
-		    } catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-	}
 
 }

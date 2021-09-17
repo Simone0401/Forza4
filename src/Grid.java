@@ -36,8 +36,16 @@ public class Grid {
 	 * @param column colonna dove è stata aggiunta la pedina
 	 * @return numero che identifica la riga dove è stata posizionata la pedina
 	 */
-	public int getrow(int column) {
+	public int getRow(int column) {
 		return this.available[column] ;
+	}
+	
+	/**
+	 * Metodo per ritornare lo stato della matrice di gioco
+	 * @return la matrice di gioco
+	 */
+	public int[][] getMatrix() {
+		return this.matrix;
 	}
 	
 	/**

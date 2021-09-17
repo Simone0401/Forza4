@@ -124,17 +124,21 @@ public class SaveMatch {
 					if (in.hasNextInt()) {
 						scelta = in.nextInt();
 					}
-					
+					String matchName = giocatore1.getUsername() + giocatore2.getUsername();
 					if (scelta == 10) {
 						// TODO: salva partita
-						String matchName = giocatore1.getUsername() + giocatore2.getUsername();
 						if (JSONHandler.checkMatch(matchName)) {
 							System.out.print("C'è già una partita salvata tra i due giocatori, vuoi sovrscriverla? [y/n]: ");
 							check = in.nextLine();
 							if (check.compareTo("y") == 0) {
-								
+								JSONHandler.save(grid, matchName);
 							}
 						}
+						// la partita non esiste
+						else {
+							JSONHandler.save(grid, matchName);
+						}
+						break;
 					}
 					
 					// TODO: da modificare quando c'è l'unione con la classe dell'interfaccia Grafica
@@ -142,7 +146,10 @@ public class SaveMatch {
 				}while(!binsert);
 				
 				grid.show();
-				result = grid.checkGrid(scelta, player);
+				if (scelta != 10) {
+					result = grid.checkGrid(scelta, player);
+				}
+				
 				if (player == 1) {
 					player = 2;
 				}
