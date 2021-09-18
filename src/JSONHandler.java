@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,19 +42,31 @@ public class JSONHandler {
 	/**
 	 * Metodo per ottenere un dizionario di tutti gli username inseriti.
 	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto JSON
+	 * @throws FileNotFoundException 
 	 */
-	public static Map<String, Object> getPlayers(){
+	public static Map<String, Object> getPlayers() {
 		Map<String, Object> giocatori = new HashMap<String, Object>();
 		
 		Object object = readPlayers();
 		
-		JSONObject jasonObject = (JSONObject) object;
-		JSONArray players = (JSONArray) jasonObject.get("players");
-		
-		for (Object o: players) {
-			JSONObject player = (JSONObject) o;
-			giocatori.put((String) player.get("username"), player);	
+		JSONObject jsonObject = (JSONObject) object;
+		JSONArray players = null;
+		try {
+			players = (JSONArray) jsonObject.get("players");
+		} catch (NullPointerException fileEx) {
+			createPlayersFile();
+			players = (JSONArray) jsonObject.get("players");
 		}
+		
+		try {
+			for (Object o: players) {
+				JSONObject player = (JSONObject) o;
+				giocatori.put((String) player.get("username"), player);	
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		
 		return giocatori;
 	}
 	
@@ -104,7 +117,7 @@ public class JSONHandler {
 	}
 	
 	/**
-	 * Metodo per salvare il giocatore sul file JSON
+	 * Metodo per modificare l'username di un giocatore precedentemente creato
 	 * @param player giocatore del quale salvare i dati
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -201,11 +214,35 @@ public class JSONHandler {
 		Object object = null;
 		try {
 			object = parser.parse(new FileReader(playersFile));
+		} catch (FileNotFoundException fileEx) {
+			createPlayersFile();
+			try {
+				object = parser.parse(new FileReader(playersFile));
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return object;
+	}
+	
+	/**
+	 * Metodo per creare il file JSON dei giocatori nel caso in cui esso non fosse già presente all'interno della cartella
+	 */
+	private static void createPlayersFile() {
+		String incipit = "{ \"players\": [] }";
+		try {
+			FileWriter myWriter = new FileWriter(playersFile);
+		    myWriter.write(incipit);
+		    myWriter.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -246,6 +283,8 @@ public class JSONHandler {
 		Object object = null;
 		try {
 			object = parser.parse(new FileReader(matchesFile));
+		} catch (FileNotFoundException fileEx) {
+			createMatchesFile();
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,15 +293,30 @@ public class JSONHandler {
 	}
 	
 	/**
+	 * Metodo per creare il file JSON delle partite nel caso in cui esso non fosse già presente all'interno della cartella
+	 */
+	private static void createMatchesFile() {
+		String incipit = "{ \"matches\": [] }";
+		try {
+			FileWriter myWriter = new FileWriter(matchesFile);
+		    myWriter.write(incipit);
+		    myWriter.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Metodo per salvare la partita sul file JSON
 	 * @param match partita da salvare sul file JSON
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void save(Grid match, String nameMatch) {
+	public static void save(Grid match, String nameMatch, Player player1, Player player2) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();
 		
-		JSONObject inserimento = getMatchForJSON(match, nameMatch);
+		JSONObject inserimento = getMatchForJSON(match, nameMatch, player1, player2);
 		
 		Map<String, Object> partite = getMatches();
 		
@@ -312,9 +366,11 @@ public class JSONHandler {
 	 * @param match partita da prepare per il file JSON
 	 * @return la partita pronta per essere gestita come JSONObject
 	 */
-	private static JSONObject getMatchForJSON(Grid match, String nameMatch) {
+	private static JSONObject getMatchForJSON(Grid match, String nameMatch, Player player1, Player player2) {
 		JSONObject partita = new JSONObject();
 		partita.put("match_name", nameMatch);
+		partita.put("player1", player1.getUsername());
+		partita.put("player2", player2.getUsername());
 		partita.put("griglia", match.toString());
 		System.out.println(match.toString());
 		return partita;
@@ -346,6 +402,15 @@ public class JSONHandler {
 	public static int[][] getMatch(String matchName){
 		Map<String, Object> matches = getMatches();
 		return parseMatch((JSONObject) matches.get(matchName));
+	}
+	
+	public String[] getMatchPlayers(String matchName) {
+		String[] players = new String[2];
+		Map<String, Object> matches = getMatches();
+		JSONObject partita = (JSONObject) matches.get(matchName);
+		players[0] = (String) partita.get("player1");
+		players[1] = (String) partita.get("player2");
+		return players;
 	}
 	
 	/**

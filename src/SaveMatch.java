@@ -30,17 +30,17 @@ public class SaveMatch {
 		
 		switch (scelta) {
 		case 1: {
-			String check;
+			String check = null;
 			do {
 				
 				System.out.print("Inserisci username giocatore 1: ");
 				String username = "";
-				in.nextLine(); // Per svuotare il buffer
+				in.nextLine();		// per svuotare il buffer
 				username = in.nextLine();
 				
 				if (JSONHandler.checkPlayer(username)) {
 					System.out.println("Il giocatore già esiste, sicuro di volerlo utilizzare[y/n]: ");
-					 check = in.next();
+					 check = in.nextLine();
 					 if (check.compareTo("y") == 0) {
 						 JSONObject playerJSON = JSONHandler.getPlayer(username);
 						 giocatore1 = new Player((String) playerJSON.get("username"),
@@ -48,7 +48,9 @@ public class SaveMatch {
 								 				 (int) (long) playerJSON.get("tied"),
 								 				 (int) (long) playerJSON.get("lost"));
 					}
+					in.nextLine();
 				}
+				
 				else {
 					giocatore1 = new Player(username);
 					check = "y";
@@ -60,8 +62,6 @@ public class SaveMatch {
 			System.out.println("Vittorie: " + giocatore1.getWon());
 			System.out.println("Pareggi: " + giocatore1.getTied());
 			System.out.println("Sconfitte: " + giocatore1.getLost());
-			
-			in.nextLine();
 			
 			
 			do {
@@ -100,6 +100,8 @@ public class SaveMatch {
 			System.out.println("Sconfitte: " + giocatore2.getLost());
 			
 			System.out.println();
+			JSONHandler.save(giocatore1);
+			JSONHandler.save(giocatore2);
 			
 			// ----------------------------- INIZIO PARTITA -----------------------------------------------------
 			int player = 1;
@@ -131,12 +133,12 @@ public class SaveMatch {
 							System.out.print("C'è già una partita salvata tra i due giocatori, vuoi sovrscriverla? [y/n]: ");
 							check = in.nextLine();
 							if (check.compareTo("y") == 0) {
-								JSONHandler.save(grid, matchName);
+								JSONHandler.save(grid, matchName, giocatore1, giocatore2);
 							}
 						}
 						// la partita non esiste
 						else {
-							JSONHandler.save(grid, matchName);
+							JSONHandler.save(grid, matchName, giocatore1, giocatore2);
 						}
 						break;
 					}
@@ -216,8 +218,9 @@ public class SaveMatch {
 			
 			// ----------------------------- INIZIO PARTITA -----------------------------------------------------
 			String toCheck = giocatore1.getUsername() + giocatore2.getUsername();
+			String toCheck2 = giocatore2.getUsername() + giocatore1.getUsername();
 			Grid grid = null;
-			if (JSONHandler.checkMatch(toCheck)) {
+			if (JSONHandler.checkMatch(toCheck) || JSONHandler.checkMatch(toCheck2)) {
 				int[][] temp = JSONHandler.getMatch(toCheck);
 				grid = new Grid(temp);
 			}
@@ -244,19 +247,20 @@ public class SaveMatch {
 						scelta = in.nextInt();
 					}
 					String matchName = giocatore1.getUsername() + giocatore2.getUsername();
+					String matchName2 = giocatore2.getUsername() + giocatore1.getUsername();
 					if (scelta == 10) {
-						// TODO: salva partita
-						if (JSONHandler.checkMatch(matchName)) {
+						// Non si conosce a priori l'ordine dei giocatori e può non essere sempre lo stesso
+						if (JSONHandler.checkMatch(matchName) || JSONHandler.checkMatch(matchName2)) {
 							System.out.print("C'è già una partita salvata tra i due giocatori, vuoi sovrscriverla? [y/n]: ");
 							in.nextLine();
 							check = in.nextLine();
 							if (check.compareTo("y") == 0) {
-								JSONHandler.save(grid, matchName);
+								JSONHandler.save(grid, matchName, giocatore1, giocatore2);
 							}
 						}
 						// la partita non esiste
 						else {
-							JSONHandler.save(grid, matchName);
+							JSONHandler.save(grid, matchName, giocatore1, giocatore2);
 						}
 						break;
 					}
@@ -286,71 +290,6 @@ public class SaveMatch {
 			throw new IllegalArgumentException("Unexpected value: " + scelta);
 		}
 		
-		/*
-		String username = "";
-		System.out.println("Inserisci nome utente da modificare: ");
-		username = in.nextLine();
-		
-		System.out.println("Inserisci nome utente nuovo: ");
-		String newUsername = in.nextLine();
-		
-		// Prova costruzione player dati i dati sulle sue statistiche
-		System.out.println("Vuoi inserire le statistiche? [y/n] ");
-		String risp = "";
-		
-		risp = in.next().strip();
-		
-		
-		if (risp.equals("y")) {
-			int vittorie;
-			int pareggi;
-			int sconfitte;
-			
-			System.out.println("Inserisci numero vittorie: ");
-			vittorie = in.nextInt();
-			System.out.println("Inserisci numero pareggi: ");
-			pareggi = in.nextInt();
-			System.out.println("Inserisci numero sconfitte: ");
-			sconfitte = in.nextInt();
-			
-			
-			giocatore = new Player(username, vittorie, pareggi, sconfitte);
-		}
-		
-		else {
-			giocatore = new Player(username);
-		}
-		
-		JSONHandler.save(giocatore);
-		
-		
-		System.out.println(JSONHandler.checkPlayer(username));
-		
-
-		do {
-			
-			do {
-				System.out.print("In quale colonna vuoi inserire la pedina player " + player + ": ");
-				// Lettura della colonna
-				if (in.hasNextInt()) {
-					scelta = in.nextInt();
-				}
-				binsert = grid.insert(scelta, player);
-			}while(!binsert);
-			
-			grid.show();
-			result = grid.checkGrid(scelta, player);
-			if (player == 1) {
-				player = 2;
-			}
-			else {
-				player = 1;
-			}
-			
-		}while(!result);
-		
-		System.out.println("Hai vinto!");
-	*/	
 	}
 	
 }
