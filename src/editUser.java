@@ -26,12 +26,13 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
-public class RemoveUser {
+public class editUser {
 
 	private JFrame frame;
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
+
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +40,7 @@ public class RemoveUser {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RemoveUser window = new RemoveUser();
+					editUser window = new editUser();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,9 +50,9 @@ public class RemoveUser {
 	}
 
 	/**
-	 * remove the application.
+	 * Create the application.
 	 */
-	public RemoveUser() {
+	public editUser() {
 		Player p;
 		Map<String, Object> users = JSONHandler.getPlayers();
 		for( String username : users.keySet()) {
@@ -69,15 +70,14 @@ public class RemoveUser {
 	
 	public void restart() throws FontFormatException, IOException {
 		this.frame.dispose();
-		this.initialize();
-		this.frame.setVisible(true);
+		this.main(null);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setBounds(100, 100, 1280, 720);
@@ -119,39 +119,39 @@ public class RemoveUser {
 		splitPane.setRightComponent(null);
 		
 		JLabel lblNewLabel_4_2 = new JLabel("");
-		lblNewLabel_4_2.setIcon(new ImageIcon("Images/whodelete.png"));
+		lblNewLabel_4_2.setIcon(new ImageIcon("Images/whoedit.png"));
 		layeredPane.setLayer(lblNewLabel_4_2, 4);
 		lblNewLabel_4_2.setBounds(479, 184, 295, 60);
 		layeredPane.add(lblNewLabel_4_2);;
 
 		
 		
-		JButton elimina = new JButton("");
-		elimina.setIcon(new ImageIcon("Images/deletebutton.png"));
-		layeredPane.setLayer(elimina, 2);
-		elimina.setBounds(482, 589, 304, 69);
-		elimina.setBorderPainted(false); 
-		elimina.setContentAreaFilled(false); 
-		elimina.setFocusPainted(false); 
-		elimina.setOpaque(false);
+		JButton modifica = new JButton("");
+		modifica.setIcon(new ImageIcon("Images/modifica.png"));
+		layeredPane.setLayer(modifica, 2);
+		modifica.setBounds(482, 589, 304, 69);
+		modifica.setBorderPainted(false); 
+		modifica.setContentAreaFilled(false); 
+		modifica.setFocusPainted(false); 
+		modifica.setOpaque(false);
+		frame.getRootPane().setDefaultButton(modifica);
 		
-		elimina.addActionListener(new ActionListener() {
+		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					JSONHandler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
-					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
-					RemoveUser up = new RemoveUser();
+					
+					UserEdited up = new UserEdited(players.get(usernames[editUser.this.list.getSelectedIndex()]));
 					try {
 						up.restart();
-						RemoveUser.this.frame.dispose();
+						editUser.this.frame.dispose();
 					} catch (FontFormatException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-			}
+			}	
+			
 		});
-		layeredPane.add(elimina);
+		layeredPane.add(modifica);
 		
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
@@ -168,7 +168,7 @@ public class RemoveUser {
 				UsersModifier m = new UsersModifier();
 				try {
 					m.restart();
-					RemoveUser.this.frame.dispose();
+					editUser.this.frame.dispose();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -178,4 +178,3 @@ public class RemoveUser {
 		
 	}
 	}
-

@@ -1,12 +1,16 @@
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class PlayerStatsViewer {
@@ -50,6 +54,8 @@ public class PlayerStatsViewer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
+
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null); 
@@ -136,6 +142,29 @@ public class PlayerStatsViewer {
 		lostlbl.setBounds(604, 412, 48, 36);
 		layeredPane.add(lostlbl);
 		
+		
+		JButton backbutton = new JButton("");
+		layeredPane.setLayer(backbutton, 4);
+		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setBounds(10, 11, 50, 50);
+		layeredPane.add(backbutton);
+		backbutton.setBorderPainted(false); 
+		backbutton.setContentAreaFilled(false); 
+		backbutton.setFocusPainted(false); 
+		backbutton.setOpaque(false);
+		backbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Stats m = new Stats();
+				try {
+					m.restart();
+					PlayerStatsViewer.this.frame.dispose();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 
 }
 }

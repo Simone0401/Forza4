@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -74,7 +75,9 @@ public class Stats {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null); 
@@ -87,7 +90,7 @@ public class Stats {
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		layeredPane.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
@@ -110,12 +113,12 @@ public class Stats {
 		this.list.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
 		renderer.setHorizontalAlignment(JLabel.CENTER);
-		splitPane.setLeftComponent(this.list);
+		splitPane.setLeftComponent(new JScrollPane(this.list));
 		splitPane.setRightComponent(null);
 		
 		
 		JButton visualizza = new JButton("");
-		visualizza.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\view.png"));
+		visualizza.setIcon(new ImageIcon("Images/view.png"));
 		layeredPane.setLayer(visualizza, 2);
 		visualizza.setBounds(482, 589, 304, 69);
 		visualizza.setBorderPainted(false); 
@@ -137,10 +140,33 @@ public class Stats {
 		layeredPane.add(visualizza);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\who.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("Images/who.png"));
 		layeredPane.setLayer(lblNewLabel_1, 3);
 		lblNewLabel_1.setBounds(491, 184, 295, 60);
 		layeredPane.add(lblNewLabel_1);
+		
+		JButton backbutton = new JButton("");
+		layeredPane.setLayer(backbutton, 4);
+		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setBounds(10, 11, 50, 50);
+		layeredPane.add(backbutton);
+		backbutton.setBorderPainted(false); 
+		backbutton.setContentAreaFilled(false); 
+		backbutton.setFocusPainted(false); 
+		backbutton.setOpaque(false);
+		backbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Menu m = new Menu();
+				try {
+					m.restart();
+					Stats.this.frame.dispose();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 			
 		

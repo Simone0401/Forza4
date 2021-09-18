@@ -45,11 +45,14 @@ public class UsersModifier {
 		this.frame.setVisible(true);
 	}
 
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
+		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1280, 720);
@@ -78,10 +81,11 @@ public class UsersModifier {
 		create.setOpaque(false);
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsersModifier.this.frame.dispose();
+				
 				CreateUser cu = new CreateUser();
 				try {
 					cu.restart();
+					UsersModifier.this.frame.dispose();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -90,7 +94,7 @@ public class UsersModifier {
 		});
 		
 		JButton edit = new JButton("");
-		edit.setIcon(new ImageIcon("Images/editUser.png"));
+		edit.setIcon(new ImageIcon("Images/USERMODIFICATORE.png"));
 		layeredPane.setLayer(edit, 2);
 		edit.setBounds(470, 320, 303, 69);
 		layeredPane.add(edit);
@@ -98,6 +102,19 @@ public class UsersModifier {
 		edit.setContentAreaFilled(false); 
 		edit.setFocusPainted(false); 
 		edit.setOpaque(false);
+		edit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				editUser eu = new editUser();
+				try {
+					eu.restart();
+					UsersModifier.this.frame.dispose();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		JButton remove = new JButton("");
 		
@@ -122,6 +139,28 @@ public class UsersModifier {
 			}
 		});
 		
+		
+		JButton backbutton = new JButton("");
+		layeredPane.setLayer(backbutton, 4);
+		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setBounds(10, 11, 50, 50);
+		layeredPane.add(backbutton);
+		backbutton.setBorderPainted(false); 
+		backbutton.setContentAreaFilled(false); 
+		backbutton.setFocusPainted(false); 
+		backbutton.setOpaque(false);
+		backbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UsersModifier.this.frame.dispose();
+				Menu m = new Menu();
+				try {
+					m.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 	}
 

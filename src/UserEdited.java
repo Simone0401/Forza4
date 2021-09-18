@@ -1,12 +1,4 @@
 import java.awt.EventQueue;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Toolkit;
@@ -16,13 +8,21 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
-public class CreateUser {
+public class UserEdited {
 
 	private JFrame frame;
 	private JTextField txtUsername;
 	private JTextField textField;
+	private Player p;
 
 	/**
 	 * Launch the application.
@@ -31,7 +31,7 @@ public class CreateUser {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateUser window = new CreateUser();
+					UserEdited window = new UserEdited(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,15 +41,17 @@ public class CreateUser {
 	}
 
 	/**
-	 * Create the application.
+	 * modifica the application.
 	 */
-	public CreateUser() {
+	public UserEdited(Player p) {
+		this.p = p;
 		initialize();
 	}
 	
-	public void restart() throws FontFormatException, IOException {
+	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
-		this.main(null);
+		this.initialize();
+		this.frame.setVisible(true);
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class CreateUser {
 		layeredPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon("Images/usernamelabel.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("Images/newUsername.png"));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Kid Games", Font.PLAIN, 41));
 		layeredPane.setLayer(lblNewLabel_1, 2);
@@ -112,39 +114,40 @@ public class CreateUser {
 		    }
 		});
 		
-		JButton create = new JButton("New button");
-		create.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			String usr = textField.getText();
-			Player p = new Player(usr);
-			if(JSONHandler.checkPlayer(usr)) {
+		JButton modifica = new JButton("New button");
+		
+			
+		layeredPane.setLayer(modifica, 2);
+		modifica.setIcon(new ImageIcon("Images/modifica.png"));
+		modifica.setBounds(538, 377, 198, 61);
+		layeredPane.add(modifica);
+		modifica.setBorderPainted(false); 
+		modifica.setContentAreaFilled(false); 
+		modifica.setFocusPainted(false); 
+		modifica.setOpaque(false);
+		frame.getRootPane().setDefaultButton(modifica);
+		frame.getRootPane().setDefaultButton(modifica);
+		
+		modifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JSONHandler.checkPlayer(textField.getText())) {
 				JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}else {
-				JSONHandler.save(p);
-				JOptionPane.showMessageDialog(null, "Giocatore creato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-				
-				Menu m = new Menu();
+				}
+				else {
+					JSONHandler.updatePlayer(textField.getText(), UserEdited.this.p);
+				JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				try {
-					m.restart();
-					CreateUser.this.frame.dispose();
+					editUser eu = new editUser();
+					eu.restart();
+					UserEdited.this.frame.dispose();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-			
+				}
+				
 			}
 		});
-			
-		layeredPane.setLayer(create, 2);
-		create.setIcon(new ImageIcon("Images/create.png"));
-		create.setBounds(538, 377, 198, 61);
-		layeredPane.add(create);
-		create.setBorderPainted(false); 
-		create.setContentAreaFilled(false); 
-		create.setFocusPainted(false); 
-		create.setOpaque(false);
-		frame.getRootPane().setDefaultButton(create);
 		
 		
 		JButton backbutton = new JButton("");
@@ -159,10 +162,10 @@ public class CreateUser {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UsersModifier m = new UsersModifier();
+				editUser m = new editUser();
 				try {
 					m.restart();
-					CreateUser.this.frame.dispose();
+					UserEdited.this.frame.dispose();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

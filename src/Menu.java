@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 import java.awt.FontFormatException;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 
 public class Menu {
@@ -47,7 +50,9 @@ public class Menu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null); 
@@ -85,10 +90,11 @@ public class Menu {
 		player.setOpaque(false);
 		player.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu.this.frame.dispose();
+				
 				UsersModifier um = new UsersModifier();
 				try {
 					um.restart();
+					Menu.this.frame.dispose();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -108,10 +114,12 @@ public class Menu {
 		
 		stats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu.this.frame.dispose();
+				
 				Stats s = new Stats();
 				try {
 					s.restart();
+					
+					Menu.this.frame.dispose();
 					} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -123,15 +131,11 @@ public class Menu {
 		JButton newMatch = new JButton("");
 		newMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu.this.frame.dispose();
+				
 				usersPool up = new usersPool();
-				try {
-					up.restart();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+				up.show();
+				
+				Menu.this.frame.setVisible(false);}
 		});
 		layeredPane.setLayer(newMatch, 2);
 		newMatch.setIcon(new ImageIcon("Images/newMatch.png"));
