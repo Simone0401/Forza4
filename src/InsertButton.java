@@ -62,7 +62,7 @@ public class InsertButton implements ActionListener {
 	
 	private boolean insert(int p) throws FontFormatException, IOException {
 		String wnr;
-		int row = grid.getrow(column);
+		int row = grid.getRow(column);
 		boolean result = grid.insert(column, p);
 		boolean bwin;
 		boolean btie;

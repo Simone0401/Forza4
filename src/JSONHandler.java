@@ -59,7 +59,7 @@ public class JSONHandler {
 	
 	/**
 	 * Metodo per ottenere un giocatore dal file JSON
-	 * @return il giocatore dal file JSON come Object JAVA
+	 * @return il giocatore dal file JSON come JSONObject
 	 */
 	public static JSONObject getPlayer(String username){
 		Map<String, Object> players = getPlayers();
@@ -214,7 +214,7 @@ public class JSONHandler {
 	 * @return true se la partita è presente, false altrimenti
 	 */
 	public static boolean checkMatch(String matchName) {
-		Map<String, Object> matches = getPlayers();
+		Map<String, Object> matches = getMatches();
 		
 		if (matches.get(matchName) != null) {
 			return true;
@@ -224,22 +224,17 @@ public class JSONHandler {
 	}
 	
 	/**
-	 * Metodo per ottenere un dizionario di tutte le partite salvate.
-	 * @return il dizionario di tutte le partite. Come chiave si ha il nome della partita (username1 + username2), come valore si ha l'oggetto JSON
+	 * Metodo per creare un oggetto "Player" inseribile all'interno di un file JSON
+	 * @param player giocatore da prepare per il file JSON
+	 * @return il giocatore pronto per essere gestito come JSONObject
 	 */
-	private static Map<String, Object> getMatches(){
-		Map<String, Object> partite = new HashMap<String, Object>();
-		
-		Object object = readMatches();
-		
-		JSONObject jsonObject = (JSONObject) object;
-		JSONArray matches = (JSONArray) jsonObject.get("matches");
-		
-		for (Object o: matches) {
-			JSONObject match = (JSONObject) o;
-			partite.put((String) partite.get("matchName"), match);	
-		}
-		return partite;
+	private static JSONObject getPlayerForJSON(Player player) {
+		JSONObject giocatore = new JSONObject();
+		giocatore.put("username", player.getUsername());
+		giocatore.put("won", player.getWon());
+		giocatore.put("tied", player.getTied());
+		giocatore.put("lost", player.getLost());
+		return giocatore;
 	}
 	
 	/**
@@ -256,20 +251,6 @@ public class JSONHandler {
 			e.printStackTrace();
 		}
 		return object;
-	}
-	
-	/**
-	 * Metodo per creare un oggetto "Player" inseribile all'interno di un file JSON
-	 * @param player giocatore da prepare per il file JSON
-	 * @return il giocatore pronto per essere gestito come JSONObject
-	 */
-	private static JSONObject getPlayerForJSON(Player player) {
-		JSONObject giocatore = new JSONObject();
-		giocatore.put("username", player.getUsername());
-		giocatore.put("won", player.getWon());
-		giocatore.put("tied", player.getTied());
-		giocatore.put("lost", player.getLost());
-		return giocatore;
 	}
 	
 	/**
@@ -305,72 +286,12 @@ public class JSONHandler {
 			
 		}
 		
-		obj.put("players", matches);
-		writePlayers(obj);
-	}
-	
-	/**
-	 * Metodo per creare un oggetto "Match" inseribile all'interno di un file JSON
-	 * @param match partita da prepare per il file JSON
-	 * @return la partita pronta per essere gestita come JSONObject
-	 */
-	private static JSONObject getMatchForJSON(Grid match, String nameMatch) {
-		JSONObject partita = new JSONObject();
-		partita.put("match_name", nameMatch);
-		partita.put("griglia", match);
-		return partita;
-	}
-	
-	/**
-	 * Metodo per salvare la partita sul file JSON
-	 * @param player giocatore del quale salvare i dati
-	 */
-	/*
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void save( inserire oggetto match ) {
-		
-		/**
-		 * Sostituire Player con oggetto Match
-		 
-		
-		JSONObject obj = new JSONObject();
-		JSONArray players = new JSONArray();
-		
-		JSONObject inserimento = new JSONObject();
-		inserimento.put("username", player.getUsername());
-		inserimento.put("won", player.getWon());
-		inserimento.put("tied", player.getTied());
-		inserimento.put("lost", player.getLost());
-		
-		Map<String, Object> giocatori = getPlayers();
-		
-		// Se il giocatore è presente si aggiornano le sue statistiche
-		if (!checkPlayer(player.getUsername())) {
-			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				players.add(element.getValue());
-			}
-			players.add(inserimento);
-		}
-		else {
-			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				if (element.getKey() == player.getUsername()) {
-					players.add(inserimento);
-				}
-				else {
-					players.add(element.getValue());
-				}
-				
-			}
-			
-		}
-		
-		obj.put("matches", players);
+		obj.put("matches", matches);
 		writeMatches(obj);
-		
-	}*/
+	}
 	
 	/**
-	 * Metodo per scrivere le partite sul file JSON
+	 * Metodo per scrivere i matches sul file JSON
 	 * @param object lista delle partite da scrivere sotto forma di JSONObject
 	 */
 	private static void writeMatches(JSONObject object) {
@@ -384,6 +305,68 @@ public class JSONHandler {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
+	}
+	
+	/**
+	 * Metodo per creare un oggetto "Match" inseribile all'interno di un file JSON
+	 * @param match partita da prepare per il file JSON
+	 * @return la partita pronta per essere gestita come JSONObject
+	 */
+	private static JSONObject getMatchForJSON(Grid match, String nameMatch) {
+		JSONObject partita = new JSONObject();
+		partita.put("match_name", nameMatch);
+		partita.put("griglia", match.toString());
+		System.out.println(match.toString());
+		return partita;
+	}
+	
+	/**
+	 * Metodo per ottenere un dizionario di tutte le partite salvate.
+	 * @return il dizionario di tutte le partite. Come chiave si ha il nome della partita (username1 + username2), come valore si ha l'oggetto JSON
+	 */
+	private static Map<String, Object> getMatches(){
+		Map<String, Object> partite = new HashMap<String, Object>();
+		
+		Object object = readMatches();
+		
+		JSONObject jsonObject = (JSONObject) object;
+		JSONArray matches = (JSONArray) jsonObject.get("matches");
+		
+		for (Object o: matches) {
+			JSONObject match = (JSONObject) o;
+			partite.put((String) match.get("match_name"), match);	
+		}
+		return partite;
+	}
+	
+	/**
+	 * Metodo per ottenere una partita dal file JSON
+	 * @return la partita dal file JSON come matrice di gioco
+	 */
+	public static int[][] getMatch(String matchName){
+		Map<String, Object> matches = getMatches();
+		return parseMatch((JSONObject) matches.get(matchName));
+	}
+	
+	/**
+	 * Metodo per ottenere una matrice di gioco di 6 righe e 7 colonne
+	 * @param match partita da parsare
+	 * @return la partita come matrice di gioco
+	 */
+	private static int[][] parseMatch(JSONObject match) {
+		String matrixRead;
+		int start = 1;
+		int[][] matrix = new int[6][7];
+		matrixRead = (String) match.get("griglia");
+		for (int r = 0; r < 6; r++) {
+			for (int c = 0; c < 7; c++) {
+				// TODO: verificare il funzionamento di codePointAt
+				matrix[r][c] = Character.getNumericValue(matrixRead.charAt(start));
+				start += 2;
+			}
+			start += 2;
+		}
+		return matrix;
 	}
 
 }

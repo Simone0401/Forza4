@@ -23,6 +23,19 @@ public class Grid {
 	}
 	
 	/**
+	 * Costruttore della griglia di gioco nel caso è già presente su file JSON
+	 */
+	public Grid(int[][] matrix) {
+		// Matrix per rappresentare la griglia
+		this.matrix = matrix;
+		
+		// Array per rappresentare quante sono le celle libere per ogni colonna
+		// All'inizio la griglia è vuota e ogni colonna ha 6 celle libere (dalla cella 0 alla 5)
+		this.available = new int[7];
+		this.setAvailable(matrix);
+	}
+	
+	/**
 	 * Metodo per settare il numero di righe vuote per ogni colonna all'inizio della partita
 	 */
 	private void setAvailable() {
@@ -32,12 +45,34 @@ public class Grid {
 	}
 	
 	/**
+	 * Metodo per settare il numero di righe vuote per ogni colonna
+	 * @param matrix matrice di gioco salvata in un tempo precedente a quello di gioco attuale
+	 */
+	private void setAvailable(int[][] matrix) {
+		for (int c = 0; c < 7; c++) {
+			int free = -1;
+			for (int r = 0; r < 6 && matrix[r][c] == 0; r++) {
+				free += 1;
+			}
+			this.available[c] = free;
+		}
+	}
+	
+	/**
 	 * Metodo per ritornare la riga nella quale è stata posizionata la pedina
 	 * @param column colonna dove è stata aggiunta la pedina
 	 * @return numero che identifica la riga dove è stata posizionata la pedina
 	 */
-	public int getrow(int column) {
+	public int getRow(int column) {
 		return this.available[column] ;
+	}
+	
+	/**
+	 * Metodo per ritornare lo stato della matrice di gioco
+	 * @return la matrice di gioco
+	 */
+	public int[][] getMatrix() {
+		return this.matrix;
 	}
 	
 	/**
@@ -46,6 +81,30 @@ public class Grid {
 	 */
 	private void setAvailable(int column) {
 		this.available[column] = this.available[column] - 1;
+	}
+	
+	/**
+	 * Metodo per ritornare l'oggetto come una stringa
+	 * @return la matrice
+	 */
+	@Override
+	public String toString() {
+		String stringa = "";
+		for(int r = 0; r < 6; r++) {
+			stringa += "[";
+			for (int c = 0; c < 7; c++) {
+				stringa = stringa + this.matrix[r][c];
+				if (c != 6) {
+					stringa += ",";
+				}
+			}
+			stringa += "]";
+			if (r != 5) {
+				stringa += ",";
+			}
+			
+		}
+		return stringa;
 	}
 
 	/**
