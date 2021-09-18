@@ -38,6 +38,12 @@ public class UsersModifier {
 	public UsersModifier() {
 		initialize();
 	}
+	
+	public void restart() throws FontFormatException, IOException  {
+		this.frame.dispose();
+		this.initialize();
+		this.frame.setVisible(true);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -49,6 +55,7 @@ public class UsersModifier {
 		frame.setBounds(100, 100, 1280, 720);
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 1274, 694);
 		frame.getContentPane().add(layeredPane);
@@ -60,36 +67,61 @@ public class UsersModifier {
 		lblNewLabel.setBounds(0, 0, 1264, 684);
 		layeredPane.add(lblNewLabel);
 		
-		JButton loadMatch = new JButton("");
-		loadMatch.setIcon(new ImageIcon("Images/newUser.png"));
-		layeredPane.setLayer(loadMatch, 2);
-		loadMatch.setBounds(470, 220, 303, 69);
-		layeredPane.add(loadMatch);
-		loadMatch.setBorderPainted(false); 
-		loadMatch.setContentAreaFilled(false); 
-		loadMatch.setFocusPainted(false); 
-		loadMatch.setOpaque(false);
+		JButton create = new JButton("");
+		create.setIcon(new ImageIcon("Images/newUser.png"));
+		layeredPane.setLayer(create, 2);
+		create.setBounds(470, 220, 303, 69);
+		layeredPane.add(create);
+		create.setBorderPainted(false); 
+		create.setContentAreaFilled(false); 
+		create.setFocusPainted(false); 
+		create.setOpaque(false);
+		create.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UsersModifier.this.frame.dispose();
+				CreateUser cu = new CreateUser();
+				try {
+					cu.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
-		JButton player = new JButton("");
-		player.setIcon(new ImageIcon("Images/editUser.png"));
-		layeredPane.setLayer(player, 2);
-		player.setBounds(470, 320, 303, 69);
-		layeredPane.add(player);
-		player.setBorderPainted(false); 
-		player.setContentAreaFilled(false); 
-		player.setFocusPainted(false); 
-		player.setOpaque(false);
+		JButton edit = new JButton("");
+		edit.setIcon(new ImageIcon("Images/editUser.png"));
+		layeredPane.setLayer(edit, 2);
+		edit.setBounds(470, 320, 303, 69);
+		layeredPane.add(edit);
+		edit.setBorderPainted(false); 
+		edit.setContentAreaFilled(false); 
+		edit.setFocusPainted(false); 
+		edit.setOpaque(false);
 		
-		JButton newMatch = new JButton("");
+		JButton remove = new JButton("");
 		
-		layeredPane.setLayer(newMatch, 2);
-		newMatch.setIcon(new ImageIcon("Images/removeUser.png"));
-		newMatch.setBounds(470, 424, 303, 69);
-		layeredPane.add(newMatch);
-		newMatch.setBorderPainted(false); 
-		newMatch.setContentAreaFilled(false); 
-		newMatch.setFocusPainted(false); 
-		newMatch.setOpaque(false);
+		layeredPane.setLayer(remove, 2);
+		remove.setIcon(new ImageIcon("Images/removeUser.png"));
+		remove.setBounds(470, 424, 303, 69);
+		layeredPane.add(remove);
+		remove.setBorderPainted(false); 
+		remove.setContentAreaFilled(false); 
+		remove.setFocusPainted(false); 
+		remove.setOpaque(false);
+		remove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UsersModifier.this.frame.dispose();
+				RemoveUser ru = new RemoveUser();
+				try {
+					ru.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		
 	}
 

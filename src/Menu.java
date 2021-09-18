@@ -67,7 +67,7 @@ public class Menu {
 		JButton loadMatch = new JButton("");
 		loadMatch.setIcon(new ImageIcon("Images/loadMatch.png"));
 		layeredPane.setLayer(loadMatch, 2);
-		loadMatch.setBounds(470, 320, 303, 69);
+		loadMatch.setBounds(470, 287, 303, 69);
 		layeredPane.add(loadMatch);
 		loadMatch.setBorderPainted(false); 
 		loadMatch.setContentAreaFilled(false); 
@@ -77,22 +77,56 @@ public class Menu {
 		JButton player = new JButton("");
 		player.setIcon(new ImageIcon("Images/players.png"));
 		layeredPane.setLayer(player, 2);
-		player.setBounds(470, 424, 303, 69);
+		player.setBounds(470, 380, 303, 69);
 		layeredPane.add(player);
 		player.setBorderPainted(false); 
 		player.setContentAreaFilled(false); 
 		player.setFocusPainted(false); 
 		player.setOpaque(false);
+		player.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu.this.frame.dispose();
+				UsersModifier um = new UsersModifier();
+				try {
+					um.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
+		JButton stats = new JButton("");
+		stats.setIcon(new ImageIcon("Images/stats.png"));
+		layeredPane.setLayer(stats, 2);
+		stats.setBounds(470, 472, 303, 69);
+		layeredPane.add(stats);
+		stats.setBorderPainted(false); 
+		stats.setContentAreaFilled(false); 
+		stats.setFocusPainted(false); 
+		stats.setOpaque(false);
+		
+		stats.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu.this.frame.dispose();
+				Stats s = new Stats();
+				try {
+					s.restart();
+					} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	
 		
 		JButton newMatch = new JButton("");
 		newMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Menu.this.frame.dispose();
+				usersPool up = new usersPool();
 				try {
-					game g = new game();
-					g.restart();
-					Menu.this.frame.dispose();
+					up.restart();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -101,7 +135,7 @@ public class Menu {
 		});
 		layeredPane.setLayer(newMatch, 2);
 		newMatch.setIcon(new ImageIcon("Images/newMatch.png"));
-		newMatch.setBounds(470, 220, 303, 69);
+		newMatch.setBounds(470, 196, 303, 69);
 		layeredPane.add(newMatch);
 		newMatch.setBorderPainted(false); 
 		newMatch.setContentAreaFilled(false); 

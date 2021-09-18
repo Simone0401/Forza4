@@ -1,30 +1,30 @@
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
-import javax.swing.JScrollPane;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
-import javax.swing.ListSelectionModel;
-
-public class usersPool {
+public class RemoveUser {
 
 	private JFrame frame;
 	private HashMap <String,Player> players = new HashMap <>(); 
@@ -37,7 +37,7 @@ public class usersPool {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					usersPool window = new usersPool();
+					RemoveUser window = new RemoveUser();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,9 +47,9 @@ public class usersPool {
 	}
 
 	/**
-	 * gioca the application.
+	 * remove the application.
 	 */
-	public usersPool() {
+	public RemoveUser() {
 		Player p;
 		Map<String, Object> users = JSONHandler.getPlayers();
 		for( String username : users.keySet()) {
@@ -65,7 +65,7 @@ public class usersPool {
 		initialize();
 	}
 	
-	public void restart() throws FontFormatException, IOException  {
+	public void restart() throws FontFormatException, IOException {
 		this.frame.dispose();
 		this.initialize();
 		this.frame.setVisible(true);
@@ -98,7 +98,7 @@ public class usersPool {
 		this.usernames = (players.keySet().toArray());
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.5);
+		splitPane.setResizeWeight(1);
 		layeredPane.setLayer(splitPane, 2);
 		splitPane.setBounds(397, 255, 470, 307);
 		layeredPane.add(splitPane);
@@ -112,58 +112,44 @@ public class usersPool {
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
 		renderer.setHorizontalAlignment(JLabel.CENTER);
 		splitPane.setLeftComponent(this.list);
-		
-		JList list2 = new JList(usernames);
-		list2.setBounds(400, 544, 470, -361);
-		list2.setFont(new Font("Kid Games", Font.PLAIN, 21));
-		list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list2.setVisibleRowCount(usernames.length);
-		DefaultListCellRenderer renderer2 =  (DefaultListCellRenderer)list2.getCellRenderer();  
-		renderer2.setHorizontalAlignment(JLabel.CENTER);
-		splitPane.setRightComponent(list2);
+		splitPane.setRightComponent(null);
 		
 		JLabel lblNewLabel_4_2 = new JLabel("");
 		lblNewLabel_4_2.setIcon(new ImageIcon("Images/whodelete.png"));
 		layeredPane.setLayer(lblNewLabel_4_2, 4);
 		lblNewLabel_4_2.setBounds(479, 184, 295, 60);
 		layeredPane.add(lblNewLabel_4_2);;
-		
-		
-		
-		
-		
-		
 
 		
 		
-		JButton scegli = new JButton("");
-		scegli.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\gioca.png"));
-		layeredPane.setLayer(scegli, 2);
-		scegli.setBounds(482, 589, 304, 69);
-		scegli.setBorderPainted(false); 
-		scegli.setContentAreaFilled(false); 
-		scegli.setFocusPainted(false); 
-		scegli.setOpaque(false);
-		scegli.addActionListener(new ActionListener() {
+		JButton elimina = new JButton("");
+		elimina.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\DELETEBUTTON.png"));
+		layeredPane.setLayer(elimina, 2);
+		elimina.setBounds(482, 589, 304, 69);
+		elimina.setBorderPainted(false); 
+		elimina.setContentAreaFilled(false); 
+		elimina.setFocusPainted(false); 
+		elimina.setOpaque(false);
+		
+		elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(players.get(usernames[usersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
-					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					usersPool.this.frame.dispose();
+					JSONHandler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
+					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+					RemoveUser.this.frame.dispose();
+					RemoveUser up = new RemoveUser();
 					try {
-						game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]));
-						g.restart();
+						up.restart();
 					} catch (FontFormatException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
+					
 			}
 		});
-		layeredPane.add(scegli);
+		layeredPane.add(elimina);
 		
 			
 		
 	}
-}
+	}
+

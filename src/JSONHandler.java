@@ -42,7 +42,7 @@ public class JSONHandler {
 	 * Metodo per ottenere un dizionario di tutti gli username inseriti.
 	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto JSON
 	 */
-	private static Map<String, Object> getPlayers(){
+	public static Map<String, Object> getPlayers(){
 		Map<String, Object> giocatori = new HashMap<String, Object>();
 		
 		Object object = readPlayers();

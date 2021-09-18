@@ -1,35 +1,34 @@
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.SwingConstants;
-
-import org.json.simple.JSONObject;
-
-import javax.swing.JScrollPane;
-import java.awt.Font;
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
-public class usersPool {
+import org.json.simple.JSONObject;
+import javax.swing.JScrollPane;
+
+public class Stats {
 
 	private JFrame frame;
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
+
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +36,7 @@ public class usersPool {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					usersPool window = new usersPool();
+					Stats window = new Stats();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,9 +46,9 @@ public class usersPool {
 	}
 
 	/**
-	 * gioca the application.
+	 * Create the application.
 	 */
-	public usersPool() {
+	public Stats() {
 		Player p;
 		Map<String, Object> users = JSONHandler.getPlayers();
 		for( String username : users.keySet()) {
@@ -98,7 +97,7 @@ public class usersPool {
 		this.usernames = (players.keySet().toArray());
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.5);
+		splitPane.setResizeWeight(1);
 		layeredPane.setLayer(splitPane, 2);
 		splitPane.setBounds(397, 255, 470, 307);
 		layeredPane.add(splitPane);
@@ -112,56 +111,36 @@ public class usersPool {
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
 		renderer.setHorizontalAlignment(JLabel.CENTER);
 		splitPane.setLeftComponent(this.list);
-		
-		JList list2 = new JList(usernames);
-		list2.setBounds(400, 544, 470, -361);
-		list2.setFont(new Font("Kid Games", Font.PLAIN, 21));
-		list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list2.setVisibleRowCount(usernames.length);
-		DefaultListCellRenderer renderer2 =  (DefaultListCellRenderer)list2.getCellRenderer();  
-		renderer2.setHorizontalAlignment(JLabel.CENTER);
-		splitPane.setRightComponent(list2);
-		
-		JLabel lblNewLabel_4_2 = new JLabel("");
-		lblNewLabel_4_2.setIcon(new ImageIcon("Images/whodelete.png"));
-		layeredPane.setLayer(lblNewLabel_4_2, 4);
-		lblNewLabel_4_2.setBounds(479, 184, 295, 60);
-		layeredPane.add(lblNewLabel_4_2);;
+		splitPane.setRightComponent(null);
 		
 		
-		
-		
-		
-		
-
-		
-		
-		JButton scegli = new JButton("");
-		scegli.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\gioca.png"));
-		layeredPane.setLayer(scegli, 2);
-		scegli.setBounds(482, 589, 304, 69);
-		scegli.setBorderPainted(false); 
-		scegli.setContentAreaFilled(false); 
-		scegli.setFocusPainted(false); 
-		scegli.setOpaque(false);
-		scegli.addActionListener(new ActionListener() {
+		JButton visualizza = new JButton("");
+		visualizza.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\view.png"));
+		layeredPane.setLayer(visualizza, 2);
+		visualizza.setBounds(482, 589, 304, 69);
+		visualizza.setBorderPainted(false); 
+		visualizza.setContentAreaFilled(false); 
+		visualizza.setFocusPainted(false); 
+		visualizza.setOpaque(false);
+		visualizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(players.get(usernames[usersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
-					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					usersPool.this.frame.dispose();
-					try {
-						game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]));
-						g.restart();
-					} catch (FontFormatException | IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				Stats.this.frame.dispose();
+				PlayerStatsViewer psw = new PlayerStatsViewer(players.get(usernames[Stats.this.list.getSelectedIndex()]));
+				try {
+					psw.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
-		layeredPane.add(scegli);
+		layeredPane.add(visualizza);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\who.png"));
+		layeredPane.setLayer(lblNewLabel_1, 3);
+		lblNewLabel_1.setBounds(491, 184, 295, 60);
+		layeredPane.add(lblNewLabel_1);
 		
 			
 		

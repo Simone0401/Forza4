@@ -35,6 +35,8 @@ import java.awt.event.ActionListener;
 public class game {
 
 	private JFrame frame;
+	private Player p1;
+	private Player p2;
 
 	/**
 	 * Launch the application.
@@ -43,7 +45,7 @@ public class game {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					game window = new game();
+					game window = new game(null,null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,19 +54,27 @@ public class game {
 		});
 	}
 	
+	public Player[] getplayers() {
+		Player[] giocatori = { this.p1,this.p2};
+		return giocatori;
+	}
+	
 
 	/**
 	 * Create the application.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
-	public game() throws FontFormatException, IOException {
+	public game(Player p1, Player p2) throws FontFormatException, IOException {
+		this.p1 = p1;
+		this.p2 = p2;
 		initialize();
 	}
 	
-	public void restart() throws FontFormatException, IOException {
+	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
-		main(null);
+		this.initialize();
+		this.frame.setVisible(true);
 	}
 
 
@@ -75,12 +85,9 @@ public class game {
 	 */
 	private void initialize()   throws FontFormatException, IOException {
 		
-		Player p1 = new Player("Ferrix",0,0,0);
-		Player p2 = new Player("Simone041",0,0,0);
 		Match m = new Match();
 		Grid grid = new Grid();
 		boolean result = false;
-		System.out.println(System.getProperty("user.dir"));
 		
 		File font_file = new File("Font/Kid_Games.ttf");
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
@@ -128,7 +135,7 @@ public class game {
 		lblNewLabel.setBounds(0, 0, 1274, 694);
 		layeredPane.add(lblNewLabel);
 		
-		JLabel lblp1 = new JLabel(p1.getUsername().toUpperCase());
+		JLabel lblp1 = new JLabel(this.p1.getUsername().toUpperCase());
 		lblp1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblp1.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp1, 1);
@@ -137,7 +144,7 @@ public class game {
 		lblp1.setForeground(purple);
 		layeredPane.add(lblp1);
 		
-		JLabel lblp2 = new JLabel(p2.getUsername().toUpperCase());
+		JLabel lblp2 = new JLabel(this.p2.getUsername().toUpperCase());
 		lblp2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblp2.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp2, 1);

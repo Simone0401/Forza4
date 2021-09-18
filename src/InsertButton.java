@@ -79,9 +79,13 @@ public class InsertButton implements ActionListener {
 			if(bwin) {
 				if (p==1) {
 					wnr = p1.getUsername().toUpperCase();
+					p1.addWon();
+					p2.addLost();
 				}
 				else {
 					wnr = p2.getUsername().toUpperCase();
+					p2.addWon();
+					p1.addLost();
 				}
 				Winned w = new Winned(g,wnr);
 				this.m.ended();
@@ -89,10 +93,14 @@ public class InsertButton implements ActionListener {
 			else {
 				if(btie) {
 					Tied t = new Tied(g);
+					p1.addTie();
+					p2.addTie();
 				}
 			}
 			
 			}
+		JSONHandler.save(p1);
+		JSONHandler.save(p2);
 		return result;
 	}
 
