@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.json.simple.JSONObject;
+
 public class UserEdited {
 
 	private JFrame frame;
@@ -135,6 +137,12 @@ public class UserEdited {
 				}
 				else {
 					JSONHandler.updatePlayer(textField.getText(), UserEdited.this.p);
+					JSONObject playerJSON = JSONHandler.getPlayer(textField.getText());
+					Player newp = new Player((String) playerJSON.get("username"),
+			 				 (int) (long) playerJSON.get("won"),
+			 				 (int) (long) playerJSON.get("tied"),
+			 				 (int) (long) playerJSON.get("lost"));
+					JSONHandler.updateMatch(UserEdited.this.p, newp);
 				JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				try {
 					editUser eu = new editUser();

@@ -453,6 +453,7 @@ public class JSONHandler {
 				 				 (int) (long) playerJSON.get("won"),
 				 				 (int) (long) playerJSON.get("tied"),
 				 				 (int) (long) playerJSON.get("lost"));
+		
 		playerJSON = JSONHandler.getPlayer((String) match.get("player2"));
 		
 		Player player2 = new Player((String) playerJSON.get("username"),
@@ -495,12 +496,11 @@ public class JSONHandler {
 		
 		// Se la partita ha il giocatore è da eliminare
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-			if (element.getKey().toString().compareTo(p1.getUsername()+p2.getUsername())!=0) {
+			if (element.getKey().toString().compareTo(p1.getUsername()+p2.getUsername())!=0 &&
+					element.getKey().toString().compareTo(p2.getUsername()+p1.getUsername())!=0) {
 				matches.add(element.getValue());
 			}
-			else if( element.getKey().toString().compareTo(p2.getUsername()+p1.getUsername())!=0) {
-				matches.add(element.getValue());
-			}
+			
 		}
 		System.out.println("Partita eliminata correttamente!");
 		obj.put("matches", matches);
@@ -534,7 +534,8 @@ public class JSONHandler {
 	 */
 	public static void updateMatch(Player oldPlayer, Player newPlayer) {
 		JSONObject obj = new JSONObject();
-		JSONArray matches = new JSONArray();	
+		JSONArray matches = new JSONArray();
+		
 		
 		Map<String, Object> partite = getMatches();
 		
@@ -546,18 +547,23 @@ public class JSONHandler {
 			else {
 				JSONObject o = (JSONObject) element.getValue();
 				if (o.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
-					Match rechargeMatch = new Match((Grid) o.get("griglia"), newPlayer, (Player) o.get("player2"), (int)(long) o.get("turn"));
-					matches.add(rechargeMatch);
+					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) o.get("griglia"))), newPlayer, new Player((String) o.get("player2")), (int)(long) o.get("turn"));
+					JSONHandler.save(rechargeMatch);
+					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) o.get("player2")));
 				}
+				
+				
 				else {
-					Match rechargeMatch = new Match((Grid) o.get("griglia"), (Player) o.get("player1"), newPlayer,(int)(long) o.get("turn"));
-					matches.add(rechargeMatch);
+					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) o.get("griglia"))), new Player((String) o.get("player1")), newPlayer,(int)(long) o.get("turn"));
+					JSONHandler.save(rechargeMatch);
+					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) o.get("player1")));
 				}
+				
 			}
 		}
 		System.out.println("Partita eliminata correttamente!");
-		obj.put("matches", matches);
-		writeMatches(obj);
+		//obj.put("matches", matches);
+		//writeMatches(obj);
 	}
 
 }
