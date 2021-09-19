@@ -48,7 +48,6 @@ public class SaveMatch {
 								 				 (int) (long) playerJSON.get("tied"),
 								 				 (int) (long) playerJSON.get("lost"));
 					}
-					in.nextLine();
 				}
 				
 				else {

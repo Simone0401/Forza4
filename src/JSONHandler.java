@@ -51,6 +51,7 @@ public class JSONHandler {
 		
 		JSONObject jsonObject = (JSONObject) object;
 		JSONArray players = null;
+		
 		try {
 			players = (JSONArray) jsonObject.get("players");
 		} catch (NullPointerException fileEx) {
@@ -285,6 +286,12 @@ public class JSONHandler {
 			object = parser.parse(new FileReader(matchesFile));
 		} catch (FileNotFoundException fileEx) {
 			createMatchesFile();
+			try {
+				object = parser.parse(new FileReader(matchesFile));
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -380,18 +387,30 @@ public class JSONHandler {
 	 * Metodo per ottenere un dizionario di tutte le partite salvate.
 	 * @return il dizionario di tutte le partite. Come chiave si ha il nome della partita (username1 + username2), come valore si ha l'oggetto JSON
 	 */
-	private static Map<String, Object> getMatches(){
+	 public static Map<String, Object> getMatches(){
 		Map<String, Object> partite = new HashMap<String, Object>();
 		
 		Object object = readMatches();
 		
 		JSONObject jsonObject = (JSONObject) object;
-		JSONArray matches = (JSONArray) jsonObject.get("matches");
 		
-		for (Object o: matches) {
-			JSONObject match = (JSONObject) o;
-			partite.put((String) match.get("match_name"), match);	
+		JSONArray matches = null;
+		try {
+			matches = (JSONArray) jsonObject.get("matches");
+		} catch (NullPointerException fileEx) {
+			createMatchesFile();
+			matches = (JSONArray) jsonObject.get("matches");
 		}
+		
+		try {
+			for (Object o: matches) {
+				JSONObject match = (JSONObject) o;
+				partite.put((String) match.get("match_name"), match);
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		
 		return partite;
 	}
 	
@@ -404,6 +423,11 @@ public class JSONHandler {
 		return parseMatch((JSONObject) matches.get(matchName));
 	}
 	
+	/**
+	 * Metodo per ottenere i due giocatori relativi alla partita salvata
+	 * @param matchName nome del match da recuperare
+	 * @return lista dei due giocatori come array di 2 elementi
+	 */
 	public String[] getMatchPlayers(String matchName) {
 		String[] players = new String[2];
 		Map<String, Object> matches = getMatches();
