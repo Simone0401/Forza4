@@ -71,7 +71,7 @@ public class Match{
 	 * Metodo per ottenere l'attuale turno di gioco
 	 * @return 1 se è il turno del giocatore 1, 2 se è il turno del giocatore 2
 	 */
-	public int getValue() {
+	public int getTurn() {
 		return this.t;
 	}
 	
