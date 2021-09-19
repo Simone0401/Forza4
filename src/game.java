@@ -58,15 +58,59 @@ public class game {
 		});
 	}
 	
+	public void checkwin(InsertButton b,int p) throws FontFormatException, IOException {
+		String wnr;
+		boolean btie = match.getG().tieCheck();
+		boolean bwin = match.getG().checkGrid(b.getColumn(), p);
+		if(bwin) {
+			if (p==1) {
+				wnr = match.getP1().getUsername().toUpperCase();
+				match.getP1().addWon();
+				match.getP2().addLost();
+				
+			}
+			else {
+				wnr = match.getP2().getUsername().toUpperCase();
+				match.getP2().addWon();
+				match.getP1().addLost();
+			}
+			Winned w = new Winned(this,wnr);
+			this.match.ended();
+			JSONHandler.save(match.getP1());
+			JSONHandler.save(match.getP2());
+			JSONHandler.removeMatchFromPlayers(match.getP2(),match.getP1());
+		}
+		else {
+			if(btie) {
+				Tied t = new Tied(this);
+				match.getP1().addTie();
+				match.getP2().addTie();
+				JSONHandler.save(match.getP1());
+				JSONHandler.save(match.getP2());
+				JSONHandler.removeMatchFromPlayers(match.getP2(),match.getP1());
+			}
+		}
+	}
+	
+	/**
+	 * Metodo che restituisce i giocatori della partita in corso
+	 * @return lista dei giocatori
+	 */
 	public Player[] getplayers() {
 		Player[] giocatori = { this.match.getP1() ,this.match.getP2()};
 		return giocatori;
 	}
 	
+	/**
+	 * Metodo che imposta la variabile saved a false, che indica che ci sono modifiche da salvare nella griglia
+	 */
 	public void modified() {
 		this.saved = false;
 	}
 	
+	/**
+	 * Metodo che imposta la variabile saved a true, che indica che non ci sono modifiche da salvare nella griglia
+	 */
 	public void saved() {
 		this.saved = true;
 	}
@@ -91,11 +135,18 @@ public class game {
 		initialize();
 	}
 	
+	/**
+	 * Metodo che verifica se ci sono modifiche da salvare alla griglia nel file JSON
+	 * @return true se la griglia è salvata, false altrimenti
+	 */
 	private boolean isSaved() {
 		return this.saved;
 	}
 	
 	
+	/**
+	 * Metodo che imposta la griglia grafica come quella del match recuperato dal file JSON
+	 */
 	private void restoreGrid() {
 		for(int i = 0; i<6; i++) {
 			for(int j = 0; j<7; j++) {
@@ -106,6 +157,9 @@ public class game {
 		}
 	}
 	
+	/**
+	 * Metodo che crea la griglia grafica con tutti buchi vuoti.
+	 */
 	public void initializeGrid() {
 		int x = 350;
 		int y = 539;
@@ -121,6 +175,9 @@ public class game {
 		}
 	}
 	
+	/**
+	 * Metodo che fa mostra il giocatore che deve posizionare la pedina in base ai turni.
+	 */
 	public void swapPlaying() {
 		if(this.match.getTurn()==1) {
 			this.t2.setVisible(false);
@@ -132,11 +189,22 @@ public class game {
 		}
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();
 		this.frame.setVisible(true);
 	}
+	
+	/**
+	 * Metodo che resetta la griglia a fine partita
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void reset() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		game g = new game(this.match.getP1(),this.match.getP2());

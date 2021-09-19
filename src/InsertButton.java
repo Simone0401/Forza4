@@ -16,6 +16,7 @@ public class InsertButton implements ActionListener {
 	private JLayeredPane layeredPane;
 	private game g;
 	
+	
 	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, game g) {
 		this.column = column;
 		this.holes = holes;
@@ -24,6 +25,13 @@ public class InsertButton implements ActionListener {
 		this.g = g;
 	}
 	
+	public int getColumn() {
+		return this.column;
+	}
+	
+	/**
+	 * Metodo che inizializza il bottone sulle colonne della griglia
+	 */
 	public void init() {
 		
 		int x = 350;
@@ -53,7 +61,13 @@ public class InsertButton implements ActionListener {
 	
 	
 	
-	
+	/**
+	 * Metodo che inserisce la pedina
+	 * @param p
+	 * @return
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	private boolean insert(int p) throws FontFormatException, IOException {
 		String wnr;
 		int row = this.m.getG().getRow(column);
@@ -70,40 +84,17 @@ public class InsertButton implements ActionListener {
 			g.swapPlaying();
 			this.g.modified();
 			System.out.println(row);
-			bwin = m.getG().checkGrid(column, p);
-			btie =  m.getG().tieCheck();
-			if(bwin) {
-				if (p==1) {
-					wnr = m.getP1().getUsername().toUpperCase();
-					m.getP1().addWon();
-					m.getP2().addLost();
-					
-				}
-				else {
-					wnr = m.getP2().getUsername().toUpperCase();
-					m.getP2().addWon();
-					m.getP1().addLost();
-				}
-				Winned w = new Winned(g,wnr);
-				this.m.ended();
-				JSONHandler.save(m.getP1());
-				JSONHandler.save(m.getP2());
-				JSONHandler.removeMatchFromPlayers(m.getP2(),m.getP1());
-			}
-			else {
-				if(btie) {
-					Tied t = new Tied(g);
-					m.getP1().addTie();
-					m.getP2().addTie();
-					JSONHandler.save(m.getP1());
-					JSONHandler.save(m.getP2());
-					JSONHandler.removeMatchFromPlayers(m.getP2(),m.getP1());
-				}
-			}
+			
+			this.g.checkwin(this , p);
+			
+			
 			
 			}
+			
 		return result;
 	}
+	
+	
 
 	private static void spawnDiscs(String path,JLabel disc) {
 		disc.setIcon(new ImageIcon(path));
