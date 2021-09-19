@@ -179,7 +179,7 @@ public class usersPool {
 		scegli.setPressedIcon(new ImageIcon("Images/gioca-pressed.png"));
 		scegli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(usersPool.this.list.getSelectedIndex()==-1 && list2.getSelectedIndex()==-1 ) {
+				if(usersPool.this.list.getSelectedIndex()==-1 || list2.getSelectedIndex()==-1 ) {
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori !", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
 				}
