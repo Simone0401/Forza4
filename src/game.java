@@ -276,7 +276,7 @@ public class game {
 		JButton save = new JButton("");
 		layeredPane.setLayer(save, 4);
 		save.setIcon(new ImageIcon("Images/save.png"));
-		save.setBounds(79, 11, 50, 50);
+		save.setBounds(51, 11, 50, 50);
 		layeredPane.add(save);
 		save.setBorderPainted(false); 
 		save.setContentAreaFilled(false); 
