@@ -35,8 +35,7 @@ import java.awt.event.ActionListener;
 public class game {
 
 	private JFrame frame;
-	private Player p1;
-	private Player p2;
+	private Match match;
 
 	/**
 	 * Launch the application.
@@ -55,7 +54,7 @@ public class game {
 	}
 	
 	public Player[] getplayers() {
-		Player[] giocatori = { this.p1,this.p2};
+		Player[] giocatori = { this.match.getP1() ,this.match.getP2()};
 		return giocatori;
 	}
 	
@@ -66,8 +65,7 @@ public class game {
 	 * @throws FontFormatException 
 	 */
 	public game(Player p1, Player p2) throws FontFormatException, IOException {
-		this.p1 = p1;
-		this.p2 = p2;
+		this.match = new Match(p1,p2);
 		initialize();
 	}
 	
@@ -85,8 +83,6 @@ public class game {
 	 */
 	private void initialize()   throws FontFormatException, IOException {
 		
-		Match m = new Match();
-		Grid grid = new Grid();
 		boolean result = false;
 		
 		File font_file = new File("Font/Kid_Games.ttf");
@@ -135,7 +131,7 @@ public class game {
 		lblNewLabel.setBounds(0, 0, 1274, 694);
 		layeredPane.add(lblNewLabel);
 		
-		JLabel lblp1 = new JLabel(this.p1.getUsername().toUpperCase());
+		JLabel lblp1 = new JLabel(this.match.getP1().getUsername().toUpperCase());
 		lblp1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblp1.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp1, 1);
@@ -144,7 +140,7 @@ public class game {
 		lblp1.setForeground(purple);
 		layeredPane.add(lblp1);
 		
-		JLabel lblp2 = new JLabel(this.p2.getUsername().toUpperCase());
+		JLabel lblp2 = new JLabel(this.match.getP2().getUsername().toUpperCase());
 		lblp2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblp2.setFont(font.deriveFont(20f));
 		layeredPane.setLayer(lblp2, 1);
@@ -178,7 +174,7 @@ public class game {
 		//--------------------------------------------------------------------BOTTONI------------------------------------------------------
 		InsertButton btnColumn[] = new InsertButton[7];
 		for(int i = 0; i < 7; i++) {
-			btnColumn[i] = new InsertButton(grid,m,i,holes,layeredPane,p1,p2,this);
+			btnColumn[i] = new InsertButton(this.match,i,holes,layeredPane,this);
 			btnColumn[i].init();
 			
 		}

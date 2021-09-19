@@ -11,22 +11,16 @@ public class InsertButton implements ActionListener {
 	private Match m;
 	private Color transyellow=new Color(1f,1f,0f,.5f );
 	private JButton btnColumn0 = new JButton("");
-	private Grid grid;
 	private int column;
 	private JLabel [][] holes;
 	private JLayeredPane layeredPane;
-	private Player p1;
-	private Player p2;
 	private game g;
 	
-	public InsertButton(Grid grid, Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, Player p1, Player p2, game g) {
-		this.grid = grid;
+	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, game g) {
 		this.column = column;
 		this.holes = holes;
 		this.m = m;
 		this.layeredPane = layeredPane;
-		this.p1 = p1;
-		this.p2 = p2;
 		this.g = g;
 	}
 	
@@ -62,8 +56,8 @@ public class InsertButton implements ActionListener {
 	
 	private boolean insert(int p) throws FontFormatException, IOException {
 		String wnr;
-		int row = grid.getRow(column);
-		boolean result = grid.insert(column, p);
+		int row = this.m.getG().getRow(column);
+		boolean result = m.getG().insert(column, p);
 		boolean bwin;
 		boolean btie;
 		if (!result) {
@@ -74,18 +68,18 @@ public class InsertButton implements ActionListener {
 			insertDisc(p,disc);
 			m.changep();
 			System.out.println(row);
-			bwin = grid.checkGrid(column, p);
-			btie =  grid.tieCheck();
+			bwin = m.getG().checkGrid(column, p);
+			btie =  m.getG().tieCheck();
 			if(bwin) {
 				if (p==1) {
-					wnr = p1.getUsername().toUpperCase();
-					p1.addWon();
-					p2.addLost();
+					wnr = m.getP1().getUsername().toUpperCase();
+					m.getP1().addWon();
+					m.getP2().addLost();
 				}
 				else {
-					wnr = p2.getUsername().toUpperCase();
-					p2.addWon();
-					p1.addLost();
+					wnr = m.getP2().getUsername().toUpperCase();
+					m.getP2().addWon();
+					m.getP1().addLost();
 				}
 				Winned w = new Winned(g,wnr);
 				this.m.ended();
@@ -93,14 +87,14 @@ public class InsertButton implements ActionListener {
 			else {
 				if(btie) {
 					Tied t = new Tied(g);
-					p1.addTie();
-					p2.addTie();
+					m.getP1().addTie();
+					m.getP2().addTie();
 				}
 			}
 			
 			}
-		JSONHandler.save(p1);
-		JSONHandler.save(p2);
+		JSONHandler.save(m.getP1());
+		JSONHandler.save(m.getP2());
 		return result;
 	}
 
