@@ -487,8 +487,6 @@ public class JSONHandler {
 	 * @param p1 giocatore1
 	 * @param p2 giocatore2
 	 */
-	
-	
 	public static void removeMatchFromPlayers(Player p1,Player p2) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();	
@@ -509,7 +507,10 @@ public class JSONHandler {
 		writeMatches(obj);
 	}
 	
-	
+	/**
+	 * Metodo per eliminare tutti i match relativi ad un giocatore che si vuole eliminare
+	 * @param player giocatore che si vuole eliminare
+	 */
 	public static void removeMatchFromPlayer(Player player) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();	
@@ -520,6 +521,38 @@ public class JSONHandler {
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 			if (! element.getKey().toString().contains(player.getUsername())) {
 				matches.add(element.getValue());
+			}
+		}
+		System.out.println("Partita eliminata correttamente!");
+		obj.put("matches", matches);
+		writeMatches(obj);
+	}
+	
+	/**
+	 * Metodo per modificare i nomi e gli attributi delle partite salvate nel caso si modifica un utente
+	 * @param player giocatore da modificare
+	 */
+	public static void updateMatch(Player oldPlayer, Player newPlayer) {
+		JSONObject obj = new JSONObject();
+		JSONArray matches = new JSONArray();	
+		
+		Map<String, Object> partite = getMatches();
+		
+		// Se la partita ha il giocatore è da modificare
+		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+			if (! element.getKey().toString().contains(oldPlayer.getUsername())) {
+				matches.add(element.getValue());
+			}
+			else {
+				JSONObject o = (JSONObject) element.getValue();
+				if (o.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
+					Match rechargeMatch = new Match((Grid) o.get("griglia"), newPlayer, (Player) o.get("player2"), (int)(long) o.get("turn"));
+					matches.add(rechargeMatch);
+				}
+				else {
+					Match rechargeMatch = new Match((Grid) o.get("griglia"), (Player) o.get("player1"), newPlayer,(int)(long) o.get("turn"));
+					matches.add(rechargeMatch);
+				}
 			}
 		}
 		System.out.println("Partita eliminata correttamente!");
