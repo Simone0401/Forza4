@@ -132,7 +132,7 @@ public class SaveMatch {
 							System.out.print("C'è già una partita salvata tra i due giocatori, vuoi sovrscriverla? [y/n]: ");
 							check = in.nextLine();
 							if (check.compareTo("y") == 0) {
-								JSONHandler.save(grid, matchName, giocatore1, giocatore2);
+								JSONHandler.save();
 							}
 						}
 						// la partita non esiste
@@ -292,3 +292,4 @@ public class SaveMatch {
 	}
 	
 }
+// {"matches":[{"player1":"Simone","player2":"Marco","griglia":"[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]","match_name":"SimoneMarco"}]}
