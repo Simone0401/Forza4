@@ -327,9 +327,10 @@ public class JSONHandler {
 		
 		Map<String, Object> partite = getMatches();
 		
-		// Se la partita è presente si aggiornano le sue statistiche
-		String matchName = match.getP1().getUsername() + match.getP2().getUsername();
-		if (!checkMatch(matchName)) {
+		// Se la partita è presente si aggiornano le sue statistiche e la si sovrascrive
+		String matchName1 = match.getP1().getUsername() + match.getP2().getUsername();
+		String matchName2 = match.getP2().getUsername() + match.getP1().getUsername();
+		if (!(checkMatch(matchName1) || checkMatch(matchName2))) {
 			for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 				matches.add(element.getValue());
 			}
@@ -337,7 +338,7 @@ public class JSONHandler {
 		}
 		else {
 			for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				if (element.getKey().toString().compareTo(matchName) == 0) {
+				if (element.getKey().toString().compareTo(matchName1) == 0 || element.getKey().toString().compareTo(matchName2) == 0) {
 					matches.add(inserimento);
 				}
 				else {
@@ -479,6 +480,27 @@ public class JSONHandler {
 			start += 2;
 		}
 		return matrixGame;
+	}
+	
+	/**
+	 * Metodo per eliminare una partita nel caso in cui il giocatore viene eliminato
+	 * @param player giocatore eliminato
+	 */
+	public void removeMatchFromPlayer(Player player) {
+		JSONObject obj = new JSONObject();
+		JSONArray matches = new JSONArray();	
+		
+		Map<String, Object> partite = getMatches();
+		
+		// Se la partita ha il giocatore è da eliminare
+		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+			if (! element.getKey().toString().contains(player.getUsername())) {
+				matches.add(element.getValue());
+			}
+		}
+		System.out.println("Partita eliminata correttamente!");
+		obj.put("matches", matches);
+		writeMatches(obj);
 	}
 
 }
