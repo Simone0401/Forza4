@@ -98,7 +98,7 @@ public class Winned  {
 		btnAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					g.restart();
+					g.reset();
 					Winned.this.close();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block

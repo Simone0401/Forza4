@@ -72,6 +72,8 @@ public class UsersModifier {
 		
 		JButton create = new JButton("");
 		create.setIcon(new ImageIcon("Images/newUser.png"));
+		create.setRolloverIcon(new ImageIcon("Images/newUser-over.png"));
+		create.setPressedIcon(new ImageIcon("Images/newUser-pressed.png"));
 		layeredPane.setLayer(create, 2);
 		create.setBounds(470, 220, 303, 69);
 		layeredPane.add(create);
@@ -94,7 +96,9 @@ public class UsersModifier {
 		});
 		
 		JButton edit = new JButton("");
-		edit.setIcon(new ImageIcon("Images/USERMODIFICATORE.png"));
+		edit.setIcon(new ImageIcon("Images/usermodificatore.png"));
+		edit.setRolloverIcon(new ImageIcon("Images/usermodificatore-over.png"));
+		edit.setPressedIcon(new ImageIcon("Images/usermodificatore-pressed.png"));
 		layeredPane.setLayer(edit, 2);
 		edit.setBounds(470, 320, 303, 69);
 		layeredPane.add(edit);
@@ -120,6 +124,8 @@ public class UsersModifier {
 		
 		layeredPane.setLayer(remove, 2);
 		remove.setIcon(new ImageIcon("Images/removeUser.png"));
+		remove.setRolloverIcon(new ImageIcon("Images/removeUser-over.png"));
+		remove.setPressedIcon(new ImageIcon("Images/removeUser-pressed.png"));
 		remove.setBounds(470, 424, 303, 69);
 		layeredPane.add(remove);
 		remove.setBorderPainted(false); 
@@ -143,6 +149,8 @@ public class UsersModifier {
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
 		layeredPane.add(backbutton);
 		backbutton.setBorderPainted(false); 

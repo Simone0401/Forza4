@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
  * @author Argento Simone
  *
  */
+/*
 public class SaveMatch {
 	
 	public static void main(String[] args) {
@@ -292,4 +293,5 @@ public class SaveMatch {
 	}
 	
 }
+*/
 // {"matches":[{"player1":"Simone","player2":"Marco","griglia":"[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]","match_name":"SimoneMarco"}]}

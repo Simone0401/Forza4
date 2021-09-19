@@ -128,6 +128,8 @@ public class editUser {
 		
 		JButton modifica = new JButton("");
 		modifica.setIcon(new ImageIcon("Images/modifica.png"));
+		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
+		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
 		layeredPane.setLayer(modifica, 2);
 		modifica.setBounds(482, 589, 304, 69);
 		modifica.setBorderPainted(false); 
@@ -156,6 +158,8 @@ public class editUser {
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
 		layeredPane.add(backbutton);
 		backbutton.setBorderPainted(false); 

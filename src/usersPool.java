@@ -30,6 +30,7 @@ public class usersPool {
 	private JFrame frame;
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
+	private JList list2;
 	private Object[] usernames;
 	/**
 	 * Launch the application.
@@ -46,6 +47,34 @@ public class usersPool {
 			}
 		});
 	}
+	
+	public void oldMatchReload(String selezione) {
+		if(JOptionPane.showConfirmDialog(frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
+			try {
+				System.out.println("ok");
+				game g = new game(JSONHandler.getMatch(selezione));
+				g.restart();
+				usersPool.this.frame.dispose();
+			} catch (FontFormatException | IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+    	}
+		else {
+			try {
+				game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]));
+				g.restart();
+				usersPool.this.frame.dispose();
+			} catch (FontFormatException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+    }
+	
+	
 
 	/**
 	 * gioca the application.
@@ -119,7 +148,7 @@ public class usersPool {
 		renderer.setHorizontalAlignment(JLabel.CENTER);
 		splitPane.setLeftComponent(new JScrollPane(this.list));
 		
-		JList list2 = new JList(usernames);
+		list2 = new JList(usernames);
 		list2.setBounds(400, 544, 470, -361);
 		list2.setFont(new Font("Kid Games", Font.PLAIN, 21));
 		list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -158,14 +187,21 @@ public class usersPool {
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					
-					try {
+					if(JSONHandler.checkMatch(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[list2.getSelectedIndex()].toString() )) {
+						usersPool.this.oldMatchReload(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[usersPool.this.list2.getSelectedIndex()].toString() );
+					}
+					else if(JSONHandler.checkMatch(usernames[list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ))){
+						usersPool.this.oldMatchReload(usernames[usersPool.this.list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ));
+					}
+					else {
+						try {
 						game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]));
 						g.restart();
 						usersPool.this.frame.dispose();
 					} catch (FontFormatException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					}
 					}
 				}
 			}
@@ -182,6 +218,8 @@ public class usersPool {
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
 		layeredPane.add(backbutton);
 		backbutton.setBorderPainted(false); 

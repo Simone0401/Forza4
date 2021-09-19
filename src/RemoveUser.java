@@ -128,6 +128,8 @@ public class RemoveUser {
 		
 		JButton elimina = new JButton("");
 		elimina.setIcon(new ImageIcon("Images/deletebutton.png"));
+		elimina.setRolloverIcon(new ImageIcon("Images/deletebutton-over.png"));
+		elimina.setPressedIcon(new ImageIcon("Images/deletebutton-pressed.png"));
 		layeredPane.setLayer(elimina, 2);
 		elimina.setBounds(482, 589, 304, 69);
 		elimina.setBorderPainted(false); 
@@ -138,6 +140,7 @@ public class RemoveUser {
 		elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					JSONHandler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
+					JSONHandler.removeMatchFromPlayer(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
 					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
 					RemoveUser up = new RemoveUser();
@@ -156,6 +159,8 @@ public class RemoveUser {
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
 		layeredPane.add(backbutton);
 		backbutton.setBorderPainted(false); 

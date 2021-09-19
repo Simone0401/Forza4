@@ -36,7 +36,12 @@ public class game {
 
 	private JFrame frame;
 	private Match match;
-
+	private JLabel [][] holes = new JLabel [6] [7];
+	private JLayeredPane layeredPane = new JLayeredPane();
+	private boolean saved = false;
+	JLabel t1 = new JLabel("");
+	JLabel t2 = new JLabel("");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -58,6 +63,14 @@ public class game {
 		return giocatori;
 	}
 	
+	public void modified() {
+		this.saved = false;
+	}
+	
+	public void saved() {
+		this.saved = true;
+	}
+	
 
 	/**
 	 * Create the application.
@@ -66,13 +79,68 @@ public class game {
 	 */
 	public game(Player p1, Player p2) throws FontFormatException, IOException {
 		this.match = new Match(p1,p2);
+		this.initializeGrid();
 		initialize();
+	}
+	
+	public game(Match match) throws FontFormatException, IOException {
+		this.match = match;
+		this.initializeGrid();
+		this.restoreGrid();
+		this.saved();
+		initialize();
+	}
+	
+	private boolean isSaved() {
+		return this.saved;
+	}
+	
+	
+	private void restoreGrid() {
+		for(int i = 0; i<6; i++) {
+			for(int j = 0; j<7; j++) {
+				
+				InsertButton.insertDisc(this.match.getG().getMatrix()[i][j], this.holes[5-i][j] );
+				
+			}
+		}
+	}
+	
+	public void initializeGrid() {
+		int x = 350;
+		int y = 539;
+		for(int i = 0; i<6; i++) {
+			for(int j = 0; j<7; j++) {
+				holes[i][j] = new JLabel("");
+				layeredPane.setLayer(holes[i][j], 1);
+				holes[i][j].setIcon(new ImageIcon("Images/hole.png"));
+				holes[i][j].setBounds(x + j * 82, y - i*82 , 80, 80);
+				layeredPane.add(holes[i][j]);
+				
+			}
+		}
+	}
+	
+	public void swapPlaying() {
+		if(this.match.getTurn()==1) {
+			this.t2.setVisible(false);
+			this.t1.setVisible(true);
+		}
+		else {
+			this.t2.setVisible(true);
+			this.t1.setVisible(false);
+		}
 	}
 	
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();
 		this.frame.setVisible(true);
+	}
+	public void reset() throws FontFormatException, IOException  {
+		this.frame.dispose();
+		game g = new game(this.match.getP1(),this.match.getP2());
+		g.restart();
 	}
 
 
@@ -82,6 +150,8 @@ public class game {
 	 * @throws FontFormatException 
 	 */
 	private void initialize()   throws FontFormatException, IOException {
+		
+	
 		
 		boolean result = false;
 		
@@ -102,9 +172,14 @@ public class game {
 	            @Override
 	            public void windowClosing(WindowEvent e) {
 	                if(JOptionPane.showConfirmDialog(frame, "Sicuri di voler abbandonare la partita?") == JOptionPane.OK_OPTION){
-	                	if(JOptionPane.showConfirmDialog(frame, "Salvare la partita in corso?") == JOptionPane.OK_OPTION){
-	                		//salva partita
+	                	if(!game.this.isSaved()) {
+	                		if(JOptionPane.showConfirmDialog(frame, "Salvare la partita in corso?") == JOptionPane.OK_OPTION){
+	                			JSONHandler.save(game.this.match);
+	            				game.this.saved();
+	            				JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 	                	}
+	                	}
+	                	
 	                    frame.setVisible(false);
 	                    Menu m = new Menu();
 	                    try {
@@ -119,11 +194,25 @@ public class game {
 	        });
 		frame.getContentPane().setLayout(null);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
+		
 		layeredPane.setBounds(0, 0, 1274, 694);
 		frame.getContentPane().add(layeredPane);
 		
 		frame.setLocationRelativeTo(null);
+		t1.setIcon(new ImageIcon("Images/ptriangle.png"));
+		layeredPane.setLayer(t1, 4);
+		t1.setHorizontalAlignment(SwingConstants.CENTER);
+		t1.setBounds(125, 56, 60, 60);
+		layeredPane.add(t1);
+		
+		
+		t2.setIcon(new ImageIcon("Images/ytriangle.png"));
+		layeredPane.setLayer(t2, 4);
+		t2.setBounds(1100, 630, 60, 60);
+		layeredPane.add(t2);
+		t2.setVisible(false);
+		t1.setVisible(false);
+		this.swapPlaying();
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,24 +239,64 @@ public class game {
 		layeredPane.add(lblp2);
 		
 		
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		JButton backbutton = new JButton("");
+		layeredPane.setLayer(backbutton, 4);
+		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
+		backbutton.setBounds(10, 11, 50, 50);
+		layeredPane.add(backbutton);
+		backbutton.setBorderPainted(false); 
+		backbutton.setContentAreaFilled(false); 
+		backbutton.setFocusPainted(false); 
+		backbutton.setOpaque(false);
+		backbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JOptionPane.showConfirmDialog(frame, "Sicuri di voler abbandonare la partita?") == JOptionPane.OK_OPTION){
+                	if(!game.this.isSaved()) {
+                		if(JOptionPane.showConfirmDialog(frame, "Salvare la partita in corso?") == JOptionPane.OK_OPTION){
+                			JSONHandler.save(game.this.match);
+            				game.this.saved();
+            				JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                	}
+                	}
+                	
+                    frame.setVisible(false);
+                    Menu m = new Menu();
+                    try {
+						m.restart();
+					} catch (FontFormatException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                    frame.dispose();
+                }
+            }
+        });
+		JButton save = new JButton("");
+		layeredPane.setLayer(save, 4);
+		save.setIcon(new ImageIcon("Images/save.png"));
+		save.setBounds(79, 11, 50, 50);
+		layeredPane.add(save);
+		save.setBorderPainted(false); 
+		save.setContentAreaFilled(false); 
+		save.setFocusPainted(false); 
+		save.setOpaque(false);
 		
 		
 		
-		JLabel [][] holes = new JLabel [6] [7];
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JSONHandler.save(game.this.match);
+				game.this.saved();
+				JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 		
-		int x = 350;
-		int y = 539;
-		for(int i = 0; i<6; i++) {
-			for(int j = 0; j<7; j++) {
-				holes[i][j] = new JLabel("");
-				layeredPane.setLayer(holes[i][j], 1);
-				holes[i][j].setIcon(new ImageIcon("Images/hole.png"));
-				holes[i][j].setBounds(x + j * 82, y - i*82 , 80, 80);
-				layeredPane.add(holes[i][j]);
-				
-			}
-		}
+		
+		
+		
+		
 		
 		
 		

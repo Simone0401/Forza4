@@ -67,6 +67,8 @@ public class InsertButton implements ActionListener {
 			JLabel disc = holes[5-row][column];
 			insertDisc(p,disc);
 			m.changeT();
+			g.swapPlaying();
+			this.g.modified();
 			System.out.println(row);
 			bwin = m.getG().checkGrid(column, p);
 			btie =  m.getG().tieCheck();
@@ -75,6 +77,7 @@ public class InsertButton implements ActionListener {
 					wnr = m.getP1().getUsername().toUpperCase();
 					m.getP1().addWon();
 					m.getP2().addLost();
+					
 				}
 				else {
 					wnr = m.getP2().getUsername().toUpperCase();
@@ -83,18 +86,22 @@ public class InsertButton implements ActionListener {
 				}
 				Winned w = new Winned(g,wnr);
 				this.m.ended();
+				JSONHandler.save(m.getP1());
+				JSONHandler.save(m.getP2());
+				JSONHandler.removeMatchFromPlayers(m.getP2(),m.getP1());
 			}
 			else {
 				if(btie) {
 					Tied t = new Tied(g);
 					m.getP1().addTie();
 					m.getP2().addTie();
+					JSONHandler.save(m.getP1());
+					JSONHandler.save(m.getP2());
+					JSONHandler.removeMatchFromPlayers(m.getP2(),m.getP1());
 				}
 			}
 			
 			}
-		JSONHandler.save(m.getP1());
-		JSONHandler.save(m.getP2());
 		return result;
 	}
 
@@ -103,16 +110,20 @@ public class InsertButton implements ActionListener {
 		
 	}
 	
-	private static void insertDisc(int p,JLabel disc) {
+	public static void insertDisc(int p,JLabel disc) {
 		String path;
 		if(p == 1 ) {
 			 path = "Images/purple.png" ;
+			 spawnDiscs(path,disc);
 			
 		}
-		else {
+		else if(p==2) {
 			path = "Images/yellow.png" ;
+			spawnDiscs(path,disc);
 		}
-		spawnDiscs(path,disc);
+		else {
+		}
+		
 		
 	}
 	

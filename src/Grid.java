@@ -58,6 +58,7 @@ public class Grid {
 		}
 	}
 	
+	
 	/**
 	 * Metodo per ritornare la riga nella quale è stata posizionata la pedina
 	 * @param column colonna dove è stata aggiunta la pedina
@@ -227,17 +228,10 @@ public class Grid {
 	 */
 	private boolean crossCheck(int column, int row, int player) {
 		int disc  = this.crossUpDxCountDisc(column, row, player)
+					+ this.crossDownDxCountDisc(column, row, player)
+					+ this.crossUpSxCountDisc(column, row, player)
 					+ this.crossDownSxCountDisc(column, row, player)
 					+ 1;	// Si aggiunge al conteggio anche la pedina appena inserita
-		
-		if (disc >= 4) {
-			return true;
-		}
-		
-		disc = 0;
-		disc = this.crossDownDxCountDisc(column, row, player)
-			   + this.crossUpSxCountDisc(column, row, player)
-			   + 1;		// Si aggiunge al conteggio anche la pedina appena inserita
 		
 		if (disc >= 4) {
 			return true;

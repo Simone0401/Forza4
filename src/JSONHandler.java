@@ -483,10 +483,34 @@ public class JSONHandler {
 	}
 	
 	/**
-	 * Metodo per eliminare una partita nel caso in cui il giocatore viene eliminato
-	 * @param player giocatore eliminato
+	 * Metodo per eliminare una partita in sospeso fra due giocatori
+	 * @param p1 giocatore1
+	 * @param p2 giocatore2
 	 */
-	public void removeMatchFromPlayer(Player player) {
+	
+	
+	public static void removeMatchFromPlayers(Player p1,Player p2) {
+		JSONObject obj = new JSONObject();
+		JSONArray matches = new JSONArray();	
+		
+		Map<String, Object> partite = getMatches();
+		
+		// Se la partita ha il giocatore è da eliminare
+		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
+			if (element.getKey().toString().compareTo(p1.getUsername()+p2.getUsername())!=0) {
+				matches.add(element.getValue());
+			}
+			else if( element.getKey().toString().compareTo(p2.getUsername()+p1.getUsername())!=0) {
+				matches.add(element.getValue());
+			}
+		}
+		System.out.println("Partita eliminata correttamente!");
+		obj.put("matches", matches);
+		writeMatches(obj);
+	}
+	
+	
+	public static void removeMatchFromPlayer(Player player) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();	
 		

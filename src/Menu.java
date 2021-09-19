@@ -80,6 +80,14 @@ public class Menu {
 		loadMatch.setContentAreaFilled(false); 
 		loadMatch.setFocusPainted(false); 
 		loadMatch.setOpaque(false);
+		loadMatch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				LoadMatch um = new LoadMatch();
+				um.show();
+				Menu.this.frame.dispose();
+			}
+		});
 		
 		JButton player = new JButton("");
 		player.setIcon(new ImageIcon("Images/players.png"));

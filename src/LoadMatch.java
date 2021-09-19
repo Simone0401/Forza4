@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,11 +28,13 @@ public class LoadMatch {
 	private JFrame frame;
 	private HashMap <String,Match> matches = new HashMap <>(); 
 	private JList list;
-	private Object[] usernames;
+	private Object[] partite;
+	private ArrayList<Object> vs = new ArrayList<>();
 
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,7 +47,7 @@ public class LoadMatch {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the application.
 	 */
@@ -64,6 +67,10 @@ public class LoadMatch {
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();
+		this.frame.setVisible(true);
+	}
+	
+	public void show() {
 		this.frame.setVisible(true);
 	}
 
@@ -93,7 +100,13 @@ public class LoadMatch {
 		layeredPane.add(lblNewLabel);
 		
 		
-		this.usernames = (matches.keySet().toArray());
+		this.partite = (matches.keySet().toArray());
+		String stringa;
+		for (Object x : this.partite) {
+			stringa = matches.get(x).getP1().getUsername() + "  VS  " + matches.get(x).getP2().getUsername();
+			this.vs.add(stringa);
+		}
+		
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
@@ -102,40 +115,48 @@ public class LoadMatch {
 		layeredPane.add(splitPane);
 		splitPane.setEnabled( false );
 		
-		this.list = new JList(usernames);
+		
+		this.list = new JList(this.vs.toArray());
 		this.list.setBounds(400, 544, 470, -361);
 		this.list.setFont(new Font("Kid Games", Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.list.setVisibleRowCount(usernames.length);
+		this.list.setVisibleRowCount(vs.size());
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
 		renderer.setHorizontalAlignment(JLabel.CENTER);
 		splitPane.setLeftComponent(new JScrollPane(this.list));
 		splitPane.setRightComponent(null);
 		
+		JButton gioca = new JButton("");
+		gioca.setIcon(new ImageIcon("Images/gioca.png"));
+		layeredPane.setLayer(gioca, 2);
+		gioca.setBounds(482, 589, 304, 69);
+		gioca.setBorderPainted(false); 
+		gioca.setContentAreaFilled(false); 
+		gioca.setFocusPainted(false); 
+		gioca.setOpaque(false);
+		gioca.setRolloverIcon(new ImageIcon("Images/gioca-over.png"));
+		gioca.setPressedIcon(new ImageIcon("Images/gioca-pressed.png"));
 		
-		JButton visualizza = new JButton("");
-		visualizza.setIcon(new ImageIcon("Images/gioca.png"));
-		layeredPane.setLayer(visualizza, 2);
-		visualizza.setBounds(482, 589, 304, 69);
-		visualizza.setBorderPainted(false); 
-		visualizza.setContentAreaFilled(false); 
-		visualizza.setFocusPainted(false); 
-		visualizza.setOpaque(false);
-		/*
-		visualizza.addActionListener(new ActionListener() {
+		
+		
+		gioca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoadMatch.this.frame.dispose();
-				//PlayerStatsViewer psw = new PlayerStatsViewer(matches.get(usernames[LoadMatch.this.list.getSelectedIndex()]));
+				
+				int index = LoadMatch.this.list.getSelectedIndex();
+				String selezione = LoadMatch.this.vs.toArray()[index].toString().replace("  VS  ", "");
+				game g;
 				try {
-					psw.restart();
-				} catch (FontFormatException | IOException e1) {
+					g = new game(JSONHandler.getMatch(selezione));
+					g.restart();
+					LoadMatch.this.frame.dispose();
+				} catch (FontFormatException | IOException e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e2.printStackTrace();
 				}
 			}
 		});
-		*/
-		layeredPane.add(visualizza);
+		
+		layeredPane.add(gioca);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("Images/matchchoice.png"));
@@ -146,6 +167,8 @@ public class LoadMatch {
 		JButton backbutton = new JButton("");
 		layeredPane.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
+		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
+		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
 		layeredPane.add(backbutton);
 		backbutton.setBorderPainted(false); 
