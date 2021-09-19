@@ -146,9 +146,15 @@ public class usersPool {
 		scegli.setContentAreaFilled(false); 
 		scegli.setFocusPainted(false); 
 		scegli.setOpaque(false);
+		scegli.setRolloverIcon(new ImageIcon("Images/gioca-over.png"));
+		scegli.setPressedIcon(new ImageIcon("Images/gioca-pressed.png"));
 		scegli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(players.get(usernames[usersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
+				if(usersPool.this.list.getSelectedIndex()==-1 && list2.getSelectedIndex()==-1 ) {
+					JOptionPane.showMessageDialog(null, "Scegli due giocatori !", "ERROR", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				else if(players.get(usernames[usersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {

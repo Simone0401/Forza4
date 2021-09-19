@@ -417,9 +417,9 @@ public class JSONHandler {
 	
 	/**
 	 * Metodo per ottenere una partita dal file JSON
-	 * @return la partita dal file JSON come matrice di gioco
+	 * @return la partita dal file JSON come oggetto Match
 	 */
-	public Match getMatch(String matchName){
+	public static Match getMatch(String matchName){
 		Map<String, Object> matches = getMatches();
 		return parseMatch((JSONObject) matches.get(matchName));
 	}
@@ -429,7 +429,7 @@ public class JSONHandler {
 	 * @param matchName nome del match da recuperare
 	 * @return lista dei due giocatori come array di 2 elementi
 	 */
-	public String[] getMatchPlayers(String matchName) {
+	public static String[] getMatchPlayers(String matchName) {
 		String[] players = new String[2];
 		Map<String, Object> matches = getMatches();
 		JSONObject partita = (JSONObject) matches.get(matchName);

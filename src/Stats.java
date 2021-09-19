@@ -119,6 +119,8 @@ public class Stats {
 		
 		JButton visualizza = new JButton("");
 		visualizza.setIcon(new ImageIcon("Images/view.png"));
+		visualizza.setRolloverIcon(new ImageIcon("Images/view-over.png"));
+		visualizza.setPressedIcon(new ImageIcon("Images/view-pressed.png"));
 		layeredPane.setLayer(visualizza, 2);
 		visualizza.setBounds(482, 589, 304, 69);
 		visualizza.setBorderPainted(false); 
@@ -127,7 +129,8 @@ public class Stats {
 		visualizza.setOpaque(false);
 		visualizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Stats.this.frame.dispose();
+				if(Stats.this.list.getSelectedIndex()!=-1) {
+					Stats.this.frame.dispose();
 				PlayerStatsViewer psw = new PlayerStatsViewer(players.get(usernames[Stats.this.list.getSelectedIndex()]));
 				try {
 					psw.restart();
@@ -135,6 +138,11 @@ public class Stats {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Scegli un giocatore!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		});
 		layeredPane.add(visualizza);

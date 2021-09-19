@@ -25,7 +25,7 @@ import org.json.simple.JSONObject;
 public class LoadMatch {
 
 	private JFrame frame;
-	private HashMap <String,Player> matches = new HashMap <>(); 
+	private HashMap <String,Match> matches = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
 
@@ -50,14 +50,11 @@ public class LoadMatch {
 	 */
 	public LoadMatch() {
 		Player p;
-		Map<String, Object> users = JSONHandler.getPlayers();
-		for( String username : users.keySet()) {
-			JSONObject playerJSON = JSONHandler.getPlayer(username);
-			p = new Player((String) playerJSON.get("username"),
-					 				 (int) (long) playerJSON.get("won"),
-					 				 (int) (long) playerJSON.get("tied"),
-					 				 (int) (long) playerJSON.get("lost"));
-			this.matches.put(p.getUsername(), p);
+		Map<String, Object> matchs = JSONHandler.getMatches();
+		for( String mn : matchs.keySet()) {
+			Match match = JSONHandler.getMatch(mn);
+			
+			this.matches.put(mn, match);
 			
 		}
 		
@@ -124,10 +121,11 @@ public class LoadMatch {
 		visualizza.setContentAreaFilled(false); 
 		visualizza.setFocusPainted(false); 
 		visualizza.setOpaque(false);
+		/*
 		visualizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoadMatch.this.frame.dispose();
-				PlayerStatsViewer psw = new PlayerStatsViewer(matches.get(usernames[LoadMatch.this.list.getSelectedIndex()]));
+				//PlayerStatsViewer psw = new PlayerStatsViewer(matches.get(usernames[LoadMatch.this.list.getSelectedIndex()]));
 				try {
 					psw.restart();
 				} catch (FontFormatException | IOException e1) {
@@ -136,6 +134,7 @@ public class LoadMatch {
 				}
 			}
 		});
+		*/
 		layeredPane.add(visualizza);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

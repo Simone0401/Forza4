@@ -66,7 +66,7 @@ public class InsertButton implements ActionListener {
 		else {
 			JLabel disc = holes[5-row][column];
 			insertDisc(p,disc);
-			m.changep();
+			m.changeT();
 			System.out.println(row);
 			bwin = m.getG().checkGrid(column, p);
 			btie =  m.getG().tieCheck();
@@ -118,9 +118,9 @@ public class InsertButton implements ActionListener {
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if(!this.m.isended()) {
+		if(!this.m.isEnded()) {
 			try {
-				this.insert(this.m.getValue());
+				this.insert(this.m.getTurn());
 			} catch (FontFormatException | IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

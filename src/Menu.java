@@ -71,6 +71,8 @@ public class Menu {
 		
 		JButton loadMatch = new JButton("");
 		loadMatch.setIcon(new ImageIcon("Images/loadMatch.png"));
+		loadMatch.setRolloverIcon(new ImageIcon("Images/loadMatch-over.png"));
+		loadMatch.setPressedIcon(new ImageIcon("Images/loadMatch-pressed.png"));
 		layeredPane.setLayer(loadMatch, 2);
 		loadMatch.setBounds(470, 287, 303, 69);
 		layeredPane.add(loadMatch);
@@ -81,6 +83,8 @@ public class Menu {
 		
 		JButton player = new JButton("");
 		player.setIcon(new ImageIcon("Images/players.png"));
+		player.setRolloverIcon(new ImageIcon("Images/players-over.png"));
+		player.setPressedIcon(new ImageIcon("Images/players-pressed.png"));
 		layeredPane.setLayer(player, 2);
 		player.setBounds(470, 380, 303, 69);
 		layeredPane.add(player);
@@ -104,6 +108,8 @@ public class Menu {
 		
 		JButton stats = new JButton("");
 		stats.setIcon(new ImageIcon("Images/stats.png"));
+		stats.setRolloverIcon(new ImageIcon("Images/stats-over.png"));
+		stats.setPressedIcon(new ImageIcon("Images/stats-pressed.png"));
 		layeredPane.setLayer(stats, 2);
 		stats.setBounds(470, 472, 303, 69);
 		layeredPane.add(stats);
@@ -139,6 +145,8 @@ public class Menu {
 		});
 		layeredPane.setLayer(newMatch, 2);
 		newMatch.setIcon(new ImageIcon("Images/newMatch.png"));
+		newMatch.setRolloverIcon(new ImageIcon("Images/newMatch-over.png"));
+		newMatch.setPressedIcon(new ImageIcon("Images/newMatch-pressed.png"));
 		newMatch.setBounds(470, 196, 303, 69);
 		layeredPane.add(newMatch);
 		newMatch.setBorderPainted(false); 
