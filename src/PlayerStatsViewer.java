@@ -70,14 +70,14 @@ public class PlayerStatsViewer {
 		frame.getContentPane().add(layeredPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		layeredPane.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
 		layeredPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\blank.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("Images/blank.png"));
 		layeredPane.setLayer(lblNewLabel_1, 2);
 		lblNewLabel_1.setBounds(481, 178, 295, 60);
 		layeredPane.add(lblNewLabel_1);
@@ -90,37 +90,37 @@ public class PlayerStatsViewer {
 		layeredPane.add(plrlbl);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\wins.png"));
+		lblNewLabel_3.setIcon(new ImageIcon("Images/wins.png"));
 		layeredPane.setLayer(lblNewLabel_3, 3);
 		lblNewLabel_3.setBounds(481, 252, 295, 42);
 		layeredPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		layeredPane.setLayer(lblNewLabel_3_1, 3);
-		lblNewLabel_3_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\perse.png"));
+		lblNewLabel_3_1.setIcon(new ImageIcon("Images/perse.png"));
 		lblNewLabel_3_1.setBounds(481, 359, 295, 42);
 		layeredPane.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_3_1_1 = new JLabel("");
-		lblNewLabel_3_1_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\tied.png"));
+		lblNewLabel_3_1_1.setIcon(new ImageIcon("Images/tied.png"));
 		layeredPane.setLayer(lblNewLabel_3_1_1, 3);
 		lblNewLabel_3_1_1.setBounds(481, 454, 295, 42);
 		layeredPane.add(lblNewLabel_3_1_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\howmanymathces.png"));
+		lblNewLabel_4.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		layeredPane.setLayer(lblNewLabel_4, 4);
 		lblNewLabel_4.setBounds(481, 292, 295, 60);
 		layeredPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("");
-		lblNewLabel_4_1.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\howmanymathces.png"));
+		lblNewLabel_4_1.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		layeredPane.setLayer(lblNewLabel_4_1, 4);
 		lblNewLabel_4_1.setBounds(481, 398, 295, 60);
 		layeredPane.add(lblNewLabel_4_1);
 		
 		JLabel lblNewLabel_4_2 = new JLabel("");
-		lblNewLabel_4_2.setIcon(new ImageIcon("C:\\Forza 4\\Forza4\\Images\\howmanymathces.png"));
+		lblNewLabel_4_2.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		layeredPane.setLayer(lblNewLabel_4_2, 4);
 		lblNewLabel_4_2.setBounds(481, 495, 295, 60);
 		layeredPane.add(lblNewLabel_4_2);
