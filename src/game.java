@@ -237,7 +237,7 @@ public class game {
 		
 		
 		//---------------------------------------------------------------------------------------------------------------------
-		frame = new JFrame();
+		frame = new JFrame("FORZA 4");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1280, 720);
@@ -369,23 +369,13 @@ public class game {
             }
         });
 		
-		
-		
-		
-		
-		
-		
-		
 		//--------------------------------------------------------------------BOTTONI------------------------------------------------------
 		InsertButton btnColumn[] = new InsertButton[7];
 		for(int i = 0; i < 7; i++) {
 			btnColumn[i] = new InsertButton(this.match,i,holes,layeredPane,this);
 			btnColumn[i].init();
 			
-		}
-		
+		}	
 		//--------------------------------------------------------------------BOTTONI------------------------------------------------------
-		
-		
 	}
 }

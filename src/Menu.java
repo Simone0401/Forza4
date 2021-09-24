@@ -57,7 +57,7 @@ public class Menu {
 	 */
 	private void initialize() {
 		
-		frame = new JFrame();
+		frame = new JFrame("FORZA 4");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

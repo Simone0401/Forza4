@@ -45,7 +45,7 @@ public class Winned  {
 		
 		
 		
-		this.frame = new JFrame();
+		this.frame = new JFrame("FORZA 4");
 		this.frame.setUndecorated(true);
 		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		this.frame.setBounds(100, 100, 720, 380);

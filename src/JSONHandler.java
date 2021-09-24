@@ -449,6 +449,7 @@ public class JSONHandler {
 		Grid grid = new Grid(parseMatrix(matrixRead));
 		
 		JSONObject playerJSON = JSONHandler.getPlayer((String) match.get("player1"));
+		
 		Player player1 = new Player((String) playerJSON.get("username"),
 				 				 (int) (long) playerJSON.get("won"),
 				 				 (int) (long) playerJSON.get("tied"),

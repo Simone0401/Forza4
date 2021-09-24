@@ -61,7 +61,7 @@ public class CreateUser {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("FORZA 4");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
 
 		frame.setBounds(100, 100, 1280, 720);
