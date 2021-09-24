@@ -32,6 +32,7 @@ public class usersPool {
 	private JList list;
 	private JList list2;
 	private Object[] usernames;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +49,10 @@ public class usersPool {
 		});
 	}
 	
+	/**
+	 * Metodo che crea un OptionPane che avverte che c è una partita salvata tra i due giocatori e chiede se vuole essere ripresa
+	 * @param selezione
+	 */
 	public void oldMatchReload(String selezione) {
 		if(JOptionPane.showConfirmDialog(frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
 			try {
@@ -77,7 +82,7 @@ public class usersPool {
 	
 
 	/**
-	 * gioca the application.
+	 * Create the application.
 	 */
 	public usersPool() {
 		Player p;
@@ -95,15 +100,17 @@ public class usersPool {
 		initialize();
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();
 		this.frame.setVisible(true);
 	}
 	
-	public void show() {
-		this.frame.setVisible(true);
-	}
 	/**
 	 * Initialize the contents of the frame.
 	 */

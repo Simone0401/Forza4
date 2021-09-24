@@ -58,6 +58,14 @@ public class game {
 		});
 	}
 	
+	/**
+	 * Metodo che controlla la vittoria o il pareggio
+	 * @param b oggetto InsertButton (il bottone a forma di colonna)
+	 * @param p il numero corrispondente al tunro
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
+	
 	public void checkwin(InsertButton b,int p) throws FontFormatException, IOException {
 		String wnr;
 		boolean btie = match.getG().tieCheck();
@@ -151,7 +159,7 @@ public class game {
 		for(int i = 0; i<6; i++) {
 			for(int j = 0; j<7; j++) {
 				
-				InsertButton.insertDisc(this.match.getG().getMatrix()[i][j], this.holes[5-i][j] );
+				InsertButton.wichDisk(this.match.getG().getMatrix()[i][j], this.holes[5-i][j] );
 				
 			}
 		}

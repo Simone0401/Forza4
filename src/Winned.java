@@ -27,11 +27,20 @@ public class Winned  {
 	
 	
 
-	
+	/**
+	 * metodo che chiude la finestra
+	 */
 	public void close() {
 		this.frame.dispose();
 	}
 	
+	/**
+	 * Create the application
+	 * @param g 
+	 * @param usr
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public Winned(game g, String usr)throws FontFormatException, IOException {
 		
 		

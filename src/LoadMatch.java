@@ -32,23 +32,6 @@ public class LoadMatch {
 	private ArrayList<Object> vs = new ArrayList<>();
 
 	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoadMatch window = new LoadMatch();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-	/**
 	 * Create the application.
 	 */
 	public LoadMatch() {
@@ -64,15 +47,17 @@ public class LoadMatch {
 		initialize();
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();
 		this.frame.setVisible(true);
 	}
-	
-	public void show() {
-		this.frame.setVisible(true);
-	}
+
 
 	/**
 	 * Initialize the contents of the frame.

@@ -22,18 +22,17 @@ public class Tied {
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 
-	
-	
-
-	
+	/**
+	 * Metodo che chiude la finestra
+	 */
 	public void close() {
 		this.frame.dispose();
 	}
 	
+	/**
+	 * Create the application.
+	 */
 	public Tied(game g)throws FontFormatException, IOException {
-		
-		
-		
 		this.frame = new JFrame();
 		this.frame.setUndecorated(true);
 		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);

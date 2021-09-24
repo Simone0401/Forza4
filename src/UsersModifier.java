@@ -39,6 +39,11 @@ public class UsersModifier {
 		initialize();
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();

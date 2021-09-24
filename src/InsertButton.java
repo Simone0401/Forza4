@@ -25,6 +25,11 @@ public class InsertButton implements ActionListener {
 		this.g = g;
 	}
 	
+	
+	/**
+	 * Metodo che restituisce la colonna del bottone
+	 * @return
+	 */
 	public int getColumn() {
 		return this.column;
 	}
@@ -79,7 +84,7 @@ public class InsertButton implements ActionListener {
 		}
 		else {
 			JLabel disc = holes[5-row][column];
-			insertDisc(p,disc);
+			wichDisk(p,disc);
 			m.changeT();
 			g.swapPlaying();
 			this.g.modified();
@@ -88,29 +93,36 @@ public class InsertButton implements ActionListener {
 			this.g.checkwin(this , p);
 			
 			
-			
 			}
 			
 		return result;
 	}
 	
-	
-
-	private static void spawnDiscs(String path,JLabel disc) {
+	/**
+	 * Metodo che sostituisce una pedina ad uno spazio vuoto
+	 * @param path percorso immagine della pedina
+	 * @param disc oggetto Jlabel della matrice di dischi
+	 */
+	private static void spawnDisk(String path,JLabel disc) {
 		disc.setIcon(new ImageIcon(path));
 		
 	}
 	
-	public static void insertDisc(int p,JLabel disc) {
+	/**
+	 * Metodo che dato il turno chiama spawnDisk passando il path della pedina corrispondente
+	 * @param p numero identificativo del turno
+	 * @param disc oggetto Jlabel della matrice di dischi
+	 */
+	public static void wichDisk(int p,JLabel disc) {
 		String path;
 		if(p == 1 ) {
 			 path = "Images/purple.png" ;
-			 spawnDiscs(path,disc);
+			 spawnDisk(path,disc);
 			
 		}
 		else if(p==2) {
 			path = "Images/yellow.png" ;
-			spawnDiscs(path,disc);
+			spawnDisk(path,disc);
 		}
 		else {
 		}
@@ -118,7 +130,9 @@ public class InsertButton implements ActionListener {
 		
 	}
 	
-	
+	/**
+	 * Metodo che viene chiamato al click sul bottone, posiziona la pedina in base al turno
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(!this.m.isEnded()) {
 			try {

@@ -43,13 +43,18 @@ public class UserEdited {
 	}
 
 	/**
-	 * modifica the application.
+	 * Create the application.
 	 */
 	public UserEdited(Player p) {
 		this.p = p;
 		initialize();
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException  {
 		this.frame.dispose();
 		this.initialize();

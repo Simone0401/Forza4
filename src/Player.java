@@ -45,14 +45,23 @@ public class Player {
 		return username;
 	}
 	
+	/**
+	 * Metodo che aggiunge una vittoria
+	 */
 	public void addWon() {
 		this.won +=1;
 	}
 	
+	/**
+	 * Metodo che aggiunge una sconfitta
+	 */
 	public void addLost() {
 		this.lost +=1;
 	}
 	
+	/**
+	 * Metodo che aggiunge un pareggio
+	 */
 	public void addTie() {
 		this.tied +=1;
 	}

@@ -41,9 +41,15 @@ public class Menu {
 		initialize();
 	}
 	
+	/**
+	 * Metodo che viene chiamato dall'esterno per far partire la finestra
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void restart() throws FontFormatException, IOException {
 		this.frame.dispose();
-		this.main(null);
+		this.initialize();
+		this.frame.setVisible(true);
 	}
 
 	/**
@@ -84,7 +90,12 @@ public class Menu {
 			public void actionPerformed(ActionEvent e) {
 				
 				LoadMatch um = new LoadMatch();
-				um.show();
+				try {
+					um.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				Menu.this.frame.dispose();
 			}
 		});
@@ -147,7 +158,12 @@ public class Menu {
 			public void actionPerformed(ActionEvent e) {
 				
 				usersPool up = new usersPool();
-				up.show();
+				try {
+					up.restart();
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				Menu.this.frame.setVisible(false);}
 		});
