@@ -57,6 +57,13 @@ public class LoadMatch {
 		this.initialize();
 		this.frame.setVisible(true);
 	}
+	
+	public void show() {
+		
+		this.frame.setVisible(true);
+	}
+	
+	
 
 
 	/**

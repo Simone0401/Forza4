@@ -90,12 +90,7 @@ public class Menu {
 			public void actionPerformed(ActionEvent e) {
 				
 				LoadMatch um = new LoadMatch();
-				try {
-					um.restart();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				um.show();
 				Menu.this.frame.dispose();
 			}
 		});
