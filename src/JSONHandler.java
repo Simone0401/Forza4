@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.FileWriter;
-import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,17 +15,18 @@ import org.json.simple.parser.ParseException;
  * @author Argento Simone
  *
  */
-public class JSONHandler {
+public class JSONHandler implements GetterMatchInformation {
+	
 	// Percorso file dei salvataggi delle partite
 	private final static String matchesFile = "data/Matches.json";
 	
-	// Percorso file dei giocatori già creati
+	// Percorso file salvataggio giocatori creati
 	private final static String playersFile = "data/Players.json";
 	
 	/**
 	 * Metodo per controllare se l'username è stato già usato
 	 * @param playerUsername username del giocatore da controllare
-	 * @return vera se l'username è già stato usato, false altrimenti
+	 * @return true se l'username è già stato usato, false altrimenti
 	 */
 	public static boolean checkPlayer(String playerUsername) {
 		Map<String, Object> giocatori = getPlayers();
@@ -41,7 +40,7 @@ public class JSONHandler {
 	
 	/**
 	 * Metodo per ottenere un dizionario di tutti gli username inseriti.
-	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto JSON
+	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto JSON ad esso associato
 	 * @throws FileNotFoundException 
 	 */
 	public static Map<String, Object> getPlayers() {
@@ -52,6 +51,7 @@ public class JSONHandler {
 		JSONObject jsonObject = (JSONObject) object;
 		JSONArray players = null;
 		
+		// Si verifica che se il file esiste, altrimenti lo si crea
 		try {
 			players = (JSONArray) jsonObject.get("players");
 		} catch (NullPointerException fileEx) {
@@ -72,7 +72,7 @@ public class JSONHandler {
 	}
 	
 	/**
-	 * Metodo per ottenere un giocatore dal file JSON
+	 * Metodo per ottenere uno specifico giocatore dal file JSON
 	 * @return il giocatore dal file JSON come JSONObject
 	 */
 	public static JSONObject getPlayer(String username){
@@ -251,6 +251,7 @@ public class JSONHandler {
 	 * @param player giocatore da prepare per il file JSON
 	 * @return il giocatore pronto per essere gestito come JSONObject
 	 */
+	@SuppressWarnings("unchecked")
 	private static JSONObject getPlayerForJSON(Player player) {
 		JSONObject giocatore = new JSONObject();
 		giocatore.put("username", player.getUsername());
@@ -375,6 +376,7 @@ public class JSONHandler {
 	 * @param match partita da prepare per il file JSON
 	 * @return la partita pronta per essere gestita come JSONObject
 	 */
+	@SuppressWarnings("unchecked")
 	private static JSONObject getMatchForJSON(Match match) {
 		JSONObject partita = new JSONObject();
 		partita.put("match_name", match.getP1().getUsername() + match.getP2().getUsername());
@@ -393,10 +395,10 @@ public class JSONHandler {
 		Map<String, Object> partite = new HashMap<String, Object>();
 		
 		Object object = readMatches();
-		
 		JSONObject jsonObject = (JSONObject) object;
-		
 		JSONArray matches = null;
+		
+		// Si verifica prima se il file esiste, altrimenti viene creato
 		try {
 			matches = (JSONArray) jsonObject.get("matches");
 		} catch (NullPointerException fileEx) {
@@ -420,7 +422,7 @@ public class JSONHandler {
 	 * Metodo per ottenere una partita dal file JSON
 	 * @return la partita dal file JSON come oggetto Match
 	 */
-	public static Match getMatch(String matchName){
+	public Match getMatch(String matchName){
 		Map<String, Object> matches = getMatches();
 		return parseMatch((JSONObject) matches.get(matchName));
 	}
@@ -489,7 +491,8 @@ public class JSONHandler {
 	 * @param p1 giocatore1
 	 * @param p2 giocatore2
 	 */
-	public static void removeMatchFromPlayers(Player p1,Player p2) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void removeMatchFromPlayers(Player p1, Player p2) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();	
 		
@@ -503,7 +506,7 @@ public class JSONHandler {
 			}
 			
 		}
-		System.out.println("Partita eliminata correttamente!");
+		
 		obj.put("matches", matches);
 		writeMatches(obj);
 	}
@@ -512,6 +515,7 @@ public class JSONHandler {
 	 * Metodo per eliminare tutti i match relativi ad un giocatore che si vuole eliminare
 	 * @param player giocatore che si vuole eliminare
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void removeMatchFromPlayer(Player player) {
 		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();	
@@ -524,7 +528,7 @@ public class JSONHandler {
 				matches.add(element.getValue());
 			}
 		}
-		System.out.println("Partita eliminata correttamente!");
+		
 		obj.put("matches", matches);
 		writeMatches(obj);
 	}
@@ -533,8 +537,8 @@ public class JSONHandler {
 	 * Metodo per modificare i nomi e gli attributi delle partite salvate nel caso si modifica un utente
 	 * @param player giocatore da modificare
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void updateMatch(Player oldPlayer, Player newPlayer) {
-		JSONObject obj = new JSONObject();
 		JSONArray matches = new JSONArray();
 		
 		
@@ -546,25 +550,28 @@ public class JSONHandler {
 				matches.add(element.getValue());
 			}
 			else {
-				JSONObject o = (JSONObject) element.getValue();
-				if (o.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
-					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) o.get("griglia"))), newPlayer, new Player((String) o.get("player2")), (int)(long) o.get("turn"));
+				JSONObject obj = (JSONObject) element.getValue();
+				if (obj.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
+					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) obj.get("griglia"))),
+													newPlayer,
+													new Player((String) obj.get("player2")),
+													(int)(long) obj.get("turn"));
 					JSONHandler.save(rechargeMatch);
-					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) o.get("player2")));
+					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) obj.get("player2")));
 				}
 				
 				
 				else {
-					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) o.get("griglia"))), new Player((String) o.get("player1")), newPlayer,(int)(long) o.get("turn"));
+					Match rechargeMatch = new Match(new Grid(JSONHandler.parseMatrix((String) obj.get("griglia"))), 
+													new Player((String) obj.get("player1")),
+													newPlayer,
+													(int)(long) obj.get("turn"));
 					JSONHandler.save(rechargeMatch);
-					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) o.get("player1")));
+					JSONHandler.removeMatchFromPlayers(oldPlayer, new Player((String) obj.get("player1")));
 				}
 				
 			}
 		}
-		System.out.println("Partita eliminata correttamente!");
-		//obj.put("matches", matches);
-		//writeMatches(obj);
 	}
 
 }

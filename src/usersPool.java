@@ -32,6 +32,7 @@ public class usersPool {
 	private JList list;
 	private JList list2;
 	private Object[] usernames;
+	private GetterMatchInformation wayToSave;
 	
 	/**
 	 * Launch the application.
@@ -54,10 +55,11 @@ public class usersPool {
 	 * @param selezione
 	 */
 	public void oldMatchReload(String selezione) {
+		this.wayToSave = new JSONHandler();
 		if(JOptionPane.showConfirmDialog(frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
 			try {
 				System.out.println("ok");
-				game g = new game(JSONHandler.getMatch(selezione));
+				game g = new game(this.wayToSave.getMatch(selezione));
 				g.restart();
 				usersPool.this.frame.dispose();
 			} catch (FontFormatException | IOException e2) {

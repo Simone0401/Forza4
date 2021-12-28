@@ -117,17 +117,14 @@ public class Grid {
 	public boolean checkGrid(int column, int player) {
 		
 		int row = this.available[column] + 1;
-		System.out.println("colonna " + column + "   riga " + row);
 		
 		// Controllo orizzontale dal punto di immissione
 		if (this.horizontalCheck(column, row, player)) {
-			System.out.println("ORIZZONTALE");
 			return true;
 		}
 		
 		// Controllo verticale verso il basso dal punto di immissione
 		if (this.verticalCheck(column, row, player)) {
-			System.out.println("VERTICALE SOTTO");
 			return true;
 		}
 		
@@ -146,7 +143,7 @@ public class Grid {
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è posizionata la pedina
 	 * @param player giocatore che ha posizionato la pedina
-	 * @return true se ci sono 4 pedine allineate orizzontalemente, false altrimenti
+	 * @return true se ci sono 4 pedine allineate orizzontalmente, false altrimenti
 	 */
 	private boolean horizontalCheck(int column, int row, int player) {
 		
@@ -248,11 +245,11 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per contare quante pedine sono allineate diagoanalmente verso destra in alto rispetto a quella appena inserita nella colonna
+	 * Metodo per contare quante pedine sono allineate diagonalmente verso destra in alto rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è stata posizionata la pedina
 	 * @param player giocatore che ha inserito la pedina
-	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in alto
+	 * @return numero di pedine dello stesso colore allineate diagonalmente verso destra in alto
 	 */
 	private int crossUpDxCountDisc(int column, int row, int player) {
 		
@@ -268,11 +265,11 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per contare quante pedine sono allineate diagoanalmente verso destra in basso rispetto a quella appena inserita nella colonna
+	 * Metodo per contare quante pedine sono allineate diagonalmente verso destra in basso rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è stata posizionata la pedina
 	 * @param player giocatore che ha inserito la pedina
-	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso destra in basso
+	 * @return numero di pedine dello stesso colore allineate diagonalmente verso destra in basso
 	 */
 	private int crossDownDxCountDisc(int column, int row, int player) {
 		
@@ -288,11 +285,11 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per contare quante pedine sono allineate diagoanalmente verso sinistra in alto rispetto a quella appena inserita nella colonna
+	 * Metodo per contare quante pedine sono allineate diagonalmente verso sinistra in alto rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è stata posizionata la pedina
 	 * @param player giocatore che ha inserito la pedina
-	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in alto
+	 * @return numero di pedine dello stesso colore allineate diagonalmente verso sinistra in alto
 	 */
 	private int crossUpSxCountDisc(int column, int row, int player) {
 		
@@ -308,11 +305,11 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per contare quante pedine sono allineate diagoanalmente verso sinistra in basso rispetto a quella appena inserita nella colonna
+	 * Metodo per contare quante pedine sono allineate diagonalmente verso sinistra in basso rispetto a quella appena inserita nella colonna
 	 * @param column colonna dove è stata inserita la pedina
 	 * @param row riga dove è stata posizionata la pedina
 	 * @param player giocatore che ha inserito la pedina
-	 * @return numero di pedine dello stesso colore allineate diagoanalemte verso sinistra in basso
+	 * @return numero di pedine dello stesso colore allineate diagonalmente verso sinistra in basso
 	 */
 	private int crossDownSxCountDisc(int column, int row, int player) {
 		
@@ -352,9 +349,7 @@ public class Grid {
 	public boolean insert(int column, int player) {
 		int row = this.available[column];
 		if (this.fullCheck(row)) {
-			return false;
-			//System.out.println("COLONNA PIENA, SCEGLIERE UN ALTRA COLONNA");
-			
+			return false;	
 		}
 		else {
 			this.matrix[row][column] = player;
@@ -369,7 +364,6 @@ public class Grid {
 	 * @param row numero righe disponibili
 	 * @return true se la colonna è piena, fase altrimenti
 	 */
-	
 	public boolean fullCheck(int row) {
 		if (row == -1) {
 			return true;
@@ -377,38 +371,6 @@ public class Grid {
 		return false;
 	}
 	
-	
-	
-	/**
-	 * Metodo per stampare a video la griglia di gioco e le pedine contenute al suo interno
-	 */
-	public void show() {
-		
-		for (int j=0;j<6;j++) {
-			System.out.print(j + " [ ");
-			
-			for(int i=0;i<7;i++) {
-				if (this.matrix[j][i] != 0) {
-					System.out.print(this.matrix[j][i] +" , ");
-				}
-				else if (i != 6) {
-					System.out.print("  , ");
-				}
-				else {
-					System.out.print("  ");
-				}
-			}
-			
-			System.out.print("]");
-			System.out.println();
-			
-			if (j != 5) {
-				System.out.println();
-			}
-		}
-		System.out.println("   ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣");
-		System.out.println("    0   1   2   3   4   5   6\n");	
-	}
 }
 
 

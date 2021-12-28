@@ -30,20 +30,21 @@ public class LoadMatch {
 	private JList list;
 	private Object[] partite;
 	private ArrayList<Object> vs = new ArrayList<>();
+	private GetterMatchInformation wayToSave;
 
 	/**
 	 * Create the application.
 	 */
 	public LoadMatch() {
 		Player p;
+		this.wayToSave = new JSONHandler();
 		Map<String, Object> matchs = JSONHandler.getMatches();
 		for( String mn : matchs.keySet()) {
-			Match match = JSONHandler.getMatch(mn);
+			Match match = this.wayToSave.getMatch(mn);
 			
 			this.matches.put(mn, match);
 			
 		}
-		
 		initialize();
 	}
 	
@@ -138,7 +139,7 @@ public class LoadMatch {
 				String selezione = LoadMatch.this.vs.toArray()[index].toString().replace("  VS  ", "");
 				game g;
 				try {
-					g = new game(JSONHandler.getMatch(selezione));
+					g = new game(wayToSave.getMatch(selezione));
 					g.restart();
 					LoadMatch.this.frame.dispose();
 				} catch (FontFormatException | IOException e2) {
