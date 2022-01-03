@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Winned  {
+	
+	Index i;
 	private JFrame frame;
 	private game g;
 	File font_file = new File("Font/Kid_Games.ttf");
@@ -41,10 +43,10 @@ public class Winned  {
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
-	public Winned(game g, String usr)throws FontFormatException, IOException {
+	public Winned(game g, String usr, Index i)throws FontFormatException, IOException {
 		
 		
-		
+		this.i = i;
 		this.frame = new JFrame("FORZA 4");
 		this.frame.setUndecorated(true);
 		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -83,13 +85,9 @@ public class Winned  {
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Winned.this.close();
-				Menu m = new Menu();
-				try {
-					m.restart();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Menu m = new Menu(Winned.this.i);
+				Winned.this.i.addToCl(m, "m");
+				Winned.this.i.switchTo("m");
 			}
 		});
 		layeredPane.setLayer(btnExit, 3);

@@ -16,7 +16,8 @@ import javax.swing.JRootPane;
 import javax.swing.SwingConstants;
 
 public class Tied {
-
+	
+	Index i;
 	private JFrame frame;
 	private game g;
 	File font_file = new File("Font/Kid_Games.ttf");
@@ -32,7 +33,8 @@ public class Tied {
 	/**
 	 * Create the application.
 	 */
-	public Tied(game g)throws FontFormatException, IOException {
+	public Tied(game g, Index i)throws FontFormatException, IOException {
+		this.i = i;
 		this.frame = new JFrame("FORZA 4");
 		this.frame.setUndecorated(true);
 		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -79,13 +81,14 @@ public class Tied {
 		btnAgain.setFont(new Font("Kid Games", Font.PLAIN, 11));
 		btnAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
-					g.restart();
-					Tied.this.close();
+					Tied.this.g.reset();
 				} catch (FontFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 			}
 		});
 		layeredPane.setLayer(btnAgain, 3);

@@ -18,82 +18,52 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 
-public class CreateUser {
+public class CreateUser extends JLayeredPane{
 
-	private JFrame frame;
 	private JTextField txtUsername;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreateUser window = new CreateUser();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Index i;
+	
 
 	/**
 	 * Create the application.
 	 */
-	public CreateUser() {
+	public CreateUser(Index i) {
+		this.i = i;
 		initialize();
 	}
 	
-	/**
-	 * Metodo che viene chiamato dall'esterno per far partire la finestra
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
-	public void restart() throws FontFormatException, IOException {
-		this.frame.dispose();
-		this.main(null);
-	}
+
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("FORZA 4");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
-
-		frame.setBounds(100, 100, 1280, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); 
-		frame.getContentPane().setLayout(null);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1274, 694);
-		frame.getContentPane().add(layeredPane);
+		this.setBounds(0, 0, 1274, 694);
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		layeredPane.setLayer(lblNewLabel, 1);
+		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
-		layeredPane.add(lblNewLabel);
+		this.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon("Images/usernamelabel.png"));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Kid Games", Font.PLAIN, 41));
-		layeredPane.setLayer(lblNewLabel_1, 2);
+		this.setLayer(lblNewLabel_1, 2);
 		lblNewLabel_1.setBounds(485, 220, 295, 60);
-		layeredPane.add(lblNewLabel_1);
+		this.add(lblNewLabel_1);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Kid Games", Font.PLAIN, 27));
-		layeredPane.setLayer(textField, 2);
+		this.setLayer(textField, 2);
 		textField.setBounds(475, 291, 326, 61);
-		layeredPane.add(textField);
+		this.add(textField);
 		textField.setColumns(10);
 		
 		
@@ -128,39 +98,32 @@ public class CreateUser {
 				JSONHandler.save(p);
 				JOptionPane.showMessageDialog(null, "Giocatore creato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				
-				Menu m = new Menu();
-				try {
-					m.restart();
-					CreateUser.this.frame.dispose();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				CreateUser.this.i.switchTo("menu");
 			}
 			
 			}
 		});
 			
-		layeredPane.setLayer(create, 2);
+		this.setLayer(create, 2);
 		create.setIcon(new ImageIcon("Images/crea.png"));
 		create.setRolloverIcon(new ImageIcon("Images/crea-over.png"));
 		create.setPressedIcon(new ImageIcon("Images/crea-pressed.png"));
 		create.setBounds(538, 377, 198, 61);
-		layeredPane.add(create);
+		this.add(create);
 		create.setBorderPainted(false); 
 		create.setContentAreaFilled(false); 
 		create.setFocusPainted(false); 
 		create.setOpaque(false);
-		frame.getRootPane().setDefaultButton(create);
+		this.i.frame.getRootPane().setDefaultButton(create);
 		
 		
 		JButton backbutton = new JButton("");
-		layeredPane.setLayer(backbutton, 4);
+		this.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
 		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
 		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
-		layeredPane.add(backbutton);
+		this.add(backbutton);
 		backbutton.setBorderPainted(false); 
 		backbutton.setContentAreaFilled(false); 
 		backbutton.setFocusPainted(false); 
@@ -168,14 +131,9 @@ public class CreateUser {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UsersModifier m = new UsersModifier();
-				try {
-					m.restart();
-					CreateUser.this.frame.dispose();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				UsersModifier um = new UsersModifier(CreateUser.this.i);
+				CreateUser.this.i.addToCl(um, "um");
+				CreateUser.this.i.switchTo("um");
 			}
 		});
 		

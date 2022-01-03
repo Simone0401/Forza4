@@ -26,33 +26,20 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
-public class editUser {
+public class editUser extends JLayeredPane{
 
-	private JFrame frame;
+	Index i;
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					editUser window = new editUser();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public editUser() {
+	public editUser(Index i) {
+		this.i = i;
 		Player p;
 		Map<String, Object> users = JSONHandler.getPlayers();
 		for( String username : users.keySet()) {
@@ -68,49 +55,31 @@ public class editUser {
 		initialize();
 	}
 	
-	/**
-	 * Metodo che viene chiamato dall'esterno per far partire la finestra
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
-	public void restart() throws FontFormatException, IOException {
-		this.frame.dispose();
-		this.main(null);
-	}
+
+
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 
-		frame = new JFrame("FORZA 4");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
-		frame.setBounds(100, 100, 1280, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); 
-		frame.getContentPane().setLayout(null);
-		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1264, 699);
-		frame.getContentPane().add(layeredPane);
-		
-		
+		this.setBounds(0, 0, 1264, 699);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		layeredPane.setLayer(lblNewLabel, 1);
+		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
-		layeredPane.add(lblNewLabel);
+		this.add(lblNewLabel);
 		
 		
 		this.usernames = (players.keySet().toArray());
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
-		layeredPane.setLayer(splitPane, 2);
+		this.setLayer(splitPane, 2);
 		splitPane.setBounds(397, 255, 470, 307);
-		layeredPane.add(splitPane);
+		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
 		this.list = new JList(usernames);
@@ -125,9 +94,9 @@ public class editUser {
 		
 		JLabel lblNewLabel_4_2 = new JLabel("");
 		lblNewLabel_4_2.setIcon(new ImageIcon("Images/whoedit.png"));
-		layeredPane.setLayer(lblNewLabel_4_2, 4);
+		this.setLayer(lblNewLabel_4_2, 4);
 		lblNewLabel_4_2.setBounds(479, 184, 295, 60);
-		layeredPane.add(lblNewLabel_4_2);;
+		this.add(lblNewLabel_4_2);;
 
 		
 		
@@ -135,38 +104,33 @@ public class editUser {
 		modifica.setIcon(new ImageIcon("Images/modifica.png"));
 		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
-		layeredPane.setLayer(modifica, 2);
+		this.setLayer(modifica, 2);
 		modifica.setBounds(482, 589, 304, 69);
 		modifica.setBorderPainted(false); 
 		modifica.setContentAreaFilled(false); 
 		modifica.setFocusPainted(false); 
 		modifica.setOpaque(false);
-		frame.getRootPane().setDefaultButton(modifica);
+		this.i.frame.getRootPane().setDefaultButton(modifica);
 		
 		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
 					
-					UserEdited up = new UserEdited(players.get(usernames[editUser.this.list.getSelectedIndex()]));
-					try {
-						up.restart();
-						editUser.this.frame.dispose();
-					} catch (FontFormatException | IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					UserEdited ue = new UserEdited(players.get(usernames[editUser.this.list.getSelectedIndex()]),editUser.this.i);
+					editUser.this.i.addToCl(ue, "ue");
+					editUser.this.i.switchTo("ue");
 			}	
 			
 		});
-		layeredPane.add(modifica);
+		this.add(modifica);
 		
 		JButton backbutton = new JButton("");
-		layeredPane.setLayer(backbutton, 4);
+		this.setLayer(backbutton, 4);
 		backbutton.setIcon(new ImageIcon("Images/back.png"));
 		backbutton.setRolloverIcon(new ImageIcon("Images/back-over.png"));
 		backbutton.setPressedIcon(new ImageIcon("Images/back-pressed.png"));
 		backbutton.setBounds(10, 11, 50, 50);
-		layeredPane.add(backbutton);
+		this.add(backbutton);
 		backbutton.setBorderPainted(false); 
 		backbutton.setContentAreaFilled(false); 
 		backbutton.setFocusPainted(false); 
@@ -174,15 +138,11 @@ public class editUser {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UsersModifier m = new UsersModifier();
-				try {
-					m.restart();
-					editUser.this.frame.dispose();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				UsersModifier m = new UsersModifier(editUser.this.i);
+				editUser.this.i.addToCl(m, "menu");
+				editUser.this.i.switchTo("menu");
+				
 				}
-			}
 		});
 		
 	}

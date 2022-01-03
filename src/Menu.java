@@ -6,17 +6,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 
-public class Menu {
+public class Menu extends JLayeredPane {
 
-	private JFrame frame;
+	private Index i;
 
 	/**
 	 * Launch the application.
@@ -25,8 +29,6 @@ public class Menu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu window = new Menu();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,8 +39,10 @@ public class Menu {
 	/**
 	 * Create the application.
 	 */
-	public Menu() {
+	public Menu(Index i)  {
+		this.i= i;
 		initialize();
+		
 	}
 	
 	/**
@@ -47,9 +51,7 @@ public class Menu {
 	 * @throws IOException
 	 */
 	public void restart() throws FontFormatException, IOException {
-		this.frame.dispose();
 		this.initialize();
-		this.frame.setVisible(true);
 	}
 
 	/**
@@ -57,31 +59,30 @@ public class Menu {
 	 */
 	private void initialize() {
 		
-		frame = new JFrame("FORZA 4");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Images/icon.png"));
-		frame.setBounds(100, 100, 1280, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); 
-		frame.getContentPane().setLayout(null);
+		this.setBounds(0, 0, 1274, 694);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1274, 694);
-		frame.getContentPane().add(layeredPane);
+		WindowAdapter close = new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Menu.this.i.frame.dispose();
+			}
+		};
+		
+		this.i.frame.addWindowListener(close);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		layeredPane.setLayer(lblNewLabel, 1);
+		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
-		layeredPane.add(lblNewLabel);
+		this.add(lblNewLabel);
 		
 		JButton loadMatch = new JButton("");
 		loadMatch.setIcon(new ImageIcon("Images/loadMatch.png"));
 		loadMatch.setRolloverIcon(new ImageIcon("Images/loadMatch-over.png"));
 		loadMatch.setPressedIcon(new ImageIcon("Images/loadMatch-pressed.png"));
-		layeredPane.setLayer(loadMatch, 2);
+		this.setLayer(loadMatch, 2);
 		loadMatch.setBounds(470, 287, 303, 69);
-		layeredPane.add(loadMatch);
+		this.add(loadMatch);
 		loadMatch.setBorderPainted(false); 
 		loadMatch.setContentAreaFilled(false); 
 		loadMatch.setFocusPainted(false); 
@@ -89,9 +90,9 @@ public class Menu {
 		loadMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				LoadMatch um = new LoadMatch();
-				um.show();
-				Menu.this.frame.dispose();
+				LoadMatch lm = new LoadMatch(Menu.this.i);
+				Menu.this.i.addToCl(lm, "ldmtch");
+				Menu.this.i.switchTo("ldmtch");
 			}
 		});
 		
@@ -99,9 +100,9 @@ public class Menu {
 		player.setIcon(new ImageIcon("Images/players.png"));
 		player.setRolloverIcon(new ImageIcon("Images/players-over.png"));
 		player.setPressedIcon(new ImageIcon("Images/players-pressed.png"));
-		layeredPane.setLayer(player, 2);
+		this.setLayer(player, 2);
 		player.setBounds(470, 380, 303, 69);
-		layeredPane.add(player);
+		this.add(player);
 		player.setBorderPainted(false); 
 		player.setContentAreaFilled(false); 
 		player.setFocusPainted(false); 
@@ -109,14 +110,9 @@ public class Menu {
 		player.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UsersModifier um = new UsersModifier();
-				try {
-					um.restart();
-					Menu.this.frame.dispose();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				UsersModifier um = new UsersModifier(Menu.this.i);
+				Menu.this.i.addToCl(um, "um");
+				Menu.this.i.switchTo("um");
 			}
 		});
 		
@@ -124,9 +120,9 @@ public class Menu {
 		stats.setIcon(new ImageIcon("Images/stats.png"));
 		stats.setRolloverIcon(new ImageIcon("Images/stats-over.png"));
 		stats.setPressedIcon(new ImageIcon("Images/stats-pressed.png"));
-		layeredPane.setLayer(stats, 2);
+		this.setLayer(stats, 2);
 		stats.setBounds(470, 472, 303, 69);
-		layeredPane.add(stats);
+		this.add(stats);
 		stats.setBorderPainted(false); 
 		stats.setContentAreaFilled(false); 
 		stats.setFocusPainted(false); 
@@ -135,15 +131,9 @@ public class Menu {
 		stats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Stats s = new Stats();
-				try {
-					s.restart();
-					
-					Menu.this.frame.dispose();
-					} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Stats s = new Stats(Menu.this.i);
+				Menu.this.i.addToCl(s, "s");
+				Menu.this.i.switchTo("s");
 			}
 		});
 	
@@ -152,22 +142,17 @@ public class Menu {
 		newMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				usersPool up = new usersPool();
-				try {
-					up.restart();
-				} catch (FontFormatException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				usersPool up = new usersPool(Menu.this.i);
+				Menu.this.i.addToCl(up, "up");
+				Menu.this.i.switchTo("up");
 				}
-				
-				Menu.this.frame.setVisible(false);}
 		});
-		layeredPane.setLayer(newMatch, 2);
+		this.setLayer(newMatch, 2);
 		newMatch.setIcon(new ImageIcon("Images/newMatch.png"));
 		newMatch.setRolloverIcon(new ImageIcon("Images/newMatch-over.png"));
 		newMatch.setPressedIcon(new ImageIcon("Images/newMatch-pressed.png"));
 		newMatch.setBounds(470, 196, 303, 69);
-		layeredPane.add(newMatch);
+		this.add(newMatch);
 		newMatch.setBorderPainted(false); 
 		newMatch.setContentAreaFilled(false); 
 		newMatch.setFocusPainted(false); 
