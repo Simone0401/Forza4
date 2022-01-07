@@ -66,7 +66,7 @@ public class editUser extends JLayeredPane{
 		this.setBounds(0, 0, 1264, 699);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
@@ -101,7 +101,7 @@ public class editUser extends JLayeredPane{
 		
 		
 		JButton modifica = new JButton("");
-		modifica.setIcon(new ImageIcon("Images/modifica.png"));
+		modifica.setIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
 		this.setLayer(modifica, 2);

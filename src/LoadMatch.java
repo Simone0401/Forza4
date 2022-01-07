@@ -79,7 +79,7 @@ public class LoadMatch extends JLayeredPane {
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
@@ -113,7 +113,7 @@ public class LoadMatch extends JLayeredPane {
 		splitPane.setRightComponent(null);
 		
 		JButton gioca = new JButton("");
-		gioca.setIcon(new ImageIcon("Images/gioca.png"));
+		gioca.setIcon(new ImageIcon("Images/gioca-over.png"));
 		this.setLayer(gioca, 2);
 		gioca.setBounds(482, 589, 304, 69);
 		gioca.setBorderPainted(false); 

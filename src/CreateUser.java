@@ -44,7 +44,7 @@ public class CreateUser extends JLayeredPane{
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
@@ -105,7 +105,7 @@ public class CreateUser extends JLayeredPane{
 		});
 			
 		this.setLayer(create, 2);
-		create.setIcon(new ImageIcon("Images/crea.png"));
+		create.setIcon(new ImageIcon("Images/crea-over.png"));
 		create.setRolloverIcon(new ImageIcon("Images/crea-over.png"));
 		create.setPressedIcon(new ImageIcon("Images/crea-pressed.png"));
 		create.setBounds(538, 377, 198, 61);

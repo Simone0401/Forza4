@@ -68,7 +68,7 @@ public class Stats extends JLayeredPane{
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
 		lblNewLabel.setBounds(0, 0, 1264, 684);
@@ -96,7 +96,7 @@ public class Stats extends JLayeredPane{
 		
 		
 		JButton visualizza = new JButton("");
-		visualizza.setIcon(new ImageIcon("Images/view.png"));
+		visualizza.setIcon(new ImageIcon("Images/view-over.png"));
 		visualizza.setRolloverIcon(new ImageIcon("Images/view-over.png"));
 		visualizza.setPressedIcon(new ImageIcon("Images/view-pressed.png"));
 		this.setLayer(visualizza, 2);
@@ -125,6 +125,8 @@ public class Stats extends JLayeredPane{
 		this.setLayer(lblNewLabel_1, 3);
 		lblNewLabel_1.setBounds(491, 184, 295, 60);
 		this.add(lblNewLabel_1);
+		
+		
 		
 		JButton backbutton = new JButton("");
 		this.setLayer(backbutton, 4);

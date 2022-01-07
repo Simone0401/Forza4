@@ -89,10 +89,10 @@ public class usersPool extends JLayeredPane{
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("Images/menu.png"));
+		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 688);
+		lblNewLabel.setBounds(0, 0, 1264, 684);
 		this.add(lblNewLabel);
 		
 		
@@ -134,7 +134,7 @@ public class usersPool extends JLayeredPane{
 		
 		
 		JButton scegli = new JButton("");
-		scegli.setIcon(new ImageIcon("Images/gioca.png"));
+		scegli.setIcon(new ImageIcon("Images/gioca-over.png"));
 		this.setLayer(scegli, 2);
 		scegli.setBounds(481, 597, 304, 69);
 		scegli.setBorderPainted(false); 
