@@ -31,12 +31,14 @@ public class LoadMatch extends JLayeredPane {
 	private ArrayList<Object> vs = new ArrayList<>();
 	private Index i;
 
+
 	/**
 	 * Create the application.
 	 */
 	public LoadMatch(Index i) {
 		this.i = i;
 		Player p;
+		
 		Map<String, Object> matchs = JSONHandler.getMatches();
 		for( String mn : matchs.keySet()) {
 			Match match = JSONHandler.getMatch(mn);
@@ -44,7 +46,6 @@ public class LoadMatch extends JLayeredPane {
 			this.matches.put(mn, match);
 			
 		}
-		
 		initialize();
 	}
 	
@@ -135,6 +136,7 @@ public class LoadMatch extends JLayeredPane {
 					LoadMatch.this.i.addToCl(g, "g");
 					LoadMatch.this.i.switchTo("g");
 					
+
 				} catch (FontFormatException | IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();

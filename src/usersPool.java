@@ -31,16 +31,9 @@ public class usersPool extends JLayeredPane{
 	private JList list;
 	private JList list2;
 	private Object[] usernames;
+
 	private Index i;
 	
-	
-	
-	/**
-	 * Metodo che crea un OptionPane che avverte che c è una partita salvata tra i due giocatori e chiede se vuole essere ripresa
-	 * @param selezione
-	 * @throws IOException 
-	 * @throws FontFormatException 
-	 */
 	public void oldMatchReload(String selezione) throws FontFormatException, IOException {
 		if(JOptionPane.showConfirmDialog(usersPool.this.i.frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
 				System.out.println("ok");
@@ -48,6 +41,7 @@ public class usersPool extends JLayeredPane{
 				usersPool.this.i.addToCl(g, "g");
 				usersPool.this.i.switchTo("g");
 		
+
     	}
 		else {
 			
