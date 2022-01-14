@@ -23,7 +23,7 @@ public class CreateUser extends JLayeredPane{
 	private JTextField txtUsername;
 	private JTextField textField;
 	private Index i;
-	
+	private Handler handler = new JSONHandler();
 
 	/**
 	 * Create the application.
@@ -92,10 +92,10 @@ public class CreateUser extends JLayeredPane{
 		public void actionPerformed(ActionEvent e) {
 			String usr = textField.getText();
 			Player p = new Player(usr);
-			if(JSONHandler.checkPlayer(usr)) {
+			if(handler.checkPlayer(usr)) {
 				JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}else {
-				JSONHandler.save(p);
+				handler.save(p);
 				JOptionPane.showMessageDialog(null, "Giocatore creato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				
 				CreateUser.this.i.switchTo("menu");

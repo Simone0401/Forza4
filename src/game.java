@@ -42,6 +42,7 @@ public class game extends JLayeredPane {
 	JLabel t1 = new JLabel("");
 	JLabel t2 = new JLabel("");
 	private Index i;
+	private Handler handler = new JSONHandler();
 
 	/**
 	 * Metodo che controlla la vittoria o il pareggio
@@ -69,17 +70,17 @@ public class game extends JLayeredPane {
 			}
 			Winned w = new Winned(this, wnr, this.i);
 			this.match.ended();
-			JSONHandler.save(match.getP1());
-			JSONHandler.save(match.getP2());
-			JSONHandler.removeMatchFromPlayers(match.getP2(), match.getP1());
+			this.handler.save(match.getP1());
+			this.handler.save(match.getP2());
+			this.handler.removeMatchFromPlayers(match.getP2(), match.getP1());
 		} else {
 			if (btie) {
 				Tied t = new Tied(this, this.i);
 				match.getP1().addTie();
 				match.getP2().addTie();
-				JSONHandler.save(match.getP1());
-				JSONHandler.save(match.getP2());
-				JSONHandler.removeMatchFromPlayers(match.getP2(), match.getP1());
+				this.handler.save(match.getP1());
+				this.handler.save(match.getP2());
+				this.handler.removeMatchFromPlayers(match.getP2(), match.getP1());
 			}
 		}
 	}
@@ -229,7 +230,7 @@ public class game extends JLayeredPane {
 					if (!game.this.isSaved()) {
 						if (JOptionPane.showConfirmDialog(game.this.i.frame,
 								"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
-							JSONHandler.save(game.this.match);
+							handler.save(game.this.match);
 							game.this.saved();
 							JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 									JOptionPane.INFORMATION_MESSAGE);
@@ -305,7 +306,7 @@ public class game extends JLayeredPane {
 					if (!game.this.isSaved()) {
 						if (JOptionPane.showConfirmDialog(game.this.i.frame,
 								"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
-							JSONHandler.save(game.this.match);
+							handler.save(game.this.match);
 							game.this.saved();
 							JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 									JOptionPane.INFORMATION_MESSAGE);
@@ -329,7 +330,7 @@ public class game extends JLayeredPane {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JSONHandler.save(game.this.match);
+				handler.save(game.this.match);
 				game.this.saved();
 				JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			}

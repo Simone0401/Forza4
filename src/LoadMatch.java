@@ -30,6 +30,7 @@ public class LoadMatch extends JLayeredPane {
 	private Object[] partite;
 	private ArrayList<Object> vs = new ArrayList<>();
 	private Index i;
+	private Handler handler = new JSONHandler();
 
 
 	/**
@@ -39,9 +40,10 @@ public class LoadMatch extends JLayeredPane {
 		this.i = i;
 		Player p;
 		
-		Map<String, Object> matchs = JSONHandler.getMatches();
-		for( String mn : matchs.keySet()) {
-			Match match = JSONHandler.getMatch(mn);
+		Map<String, Match> matchs = this.handler.getMatches();
+		for(String mn : matchs.keySet()) {
+			
+			Match match = this.handler.getMatch(mn);
 			
 			this.matches.put(mn, match);
 			
@@ -132,7 +134,7 @@ public class LoadMatch extends JLayeredPane {
 				String selezione = LoadMatch.this.vs.toArray()[index].toString().replace("  VS  ", "");
 				game g;
 				try {
-					g = new game(JSONHandler.getMatch(selezione),LoadMatch.this.i);
+					g = new game(handler.getMatch(selezione),LoadMatch.this.i);
 					LoadMatch.this.i.addToCl(g, "g");
 					LoadMatch.this.i.switchTo("g");
 					
