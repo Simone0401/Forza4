@@ -40,6 +40,11 @@ public class JSONHandler extends Handler {
 		return false;
 	}
 	
+	
+	/*
+	 * TODO: la map deve essere String, Object. Necessario creare un metodo che parsa per restituire la map con i player
+	 */
+	
 	/**
 	 * Metodo per ottenere un dizionario di tutti gli username inseriti.
 	 * @return il dizionario di tutti gli username. Come chiave si ha il nome dell'utente (username), come valore si ha l'oggetto Player ad esso associato
@@ -116,7 +121,7 @@ public class JSONHandler extends Handler {
 		// Se il giocatore è presente si aggiornano le sue statistiche
 		if (!this.checkPlayer(player.getUsername())) {
 			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				players.add(element.getValue());
+				players.add(getPlayerForJSON((Player)element.getValue()));
 			}
 			players.add(inserimento);
 		}
@@ -126,7 +131,7 @@ public class JSONHandler extends Handler {
 					players.add(inserimento);
 				}
 				else {
-					players.add(element.getValue());
+					players.add(getPlayerForJSON((Player)element.getValue()));
 				}
 				
 			}
@@ -169,7 +174,7 @@ public class JSONHandler extends Handler {
 				}
 				
 				else {
-					players.add(element.getValue());
+					players.add(getPlayerForJSON((Player)element.getValue()));
 				}
 				
 			}
@@ -197,7 +202,7 @@ public class JSONHandler extends Handler {
 			for (Map.Entry element : giocatori.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 				System.out.println(element.getKey() + "-->" + player.getUsername());
 				if (element.getKey().toString().compareTo(player.getUsername()) != 0) {
-					players.add(element.getValue());
+					players.add(getPlayerForJSON((Player)element.getValue()));
 				}
 			}
 			System.out.println("Player eliminato correttamente!");
@@ -353,7 +358,7 @@ public class JSONHandler extends Handler {
 		String matchName2 = match.getP2().getUsername() + match.getP1().getUsername();
 		if (!(checkMatch(matchName1) || checkMatch(matchName2))) {
 			for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
-				matches.add(element.getValue());
+				matches.add(getMatchForJSON((Match)element.getValue()));
 			}
 			matches.add(inserimento);
 		}
@@ -363,7 +368,7 @@ public class JSONHandler extends Handler {
 					matches.add(inserimento);
 				}
 				else {
-					matches.add(element.getValue());
+					matches.add(getMatchForJSON((Match)element.getValue()));
 				}
 				
 			}
@@ -564,7 +569,7 @@ public class JSONHandler extends Handler {
 		// Se la partita ha il giocatore è da eliminare
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 			if (! element.getKey().toString().contains(player.getUsername())) {
-				matches.add(element.getValue());
+				matches.add(getMatchForJSON((Match)element.getValue()));
 			}
 		}
 		
@@ -586,10 +591,10 @@ public class JSONHandler extends Handler {
 		// Se la partita ha il giocatore è da modificare
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 			if (! element.getKey().toString().contains(oldPlayer.getUsername())) {
-				matches.add(element.getValue());
+				matches.add(getMatchForJSON((Match)element.getValue()));
 			}
 			else {
-				JSONObject obj = (JSONObject) element.getValue();
+				JSONObject obj = getMatchForJSON((Match)element.getValue());
 				if (obj.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
 					
 					Match rechargeMatch = parseMatch(obj, newPlayer, 1);
