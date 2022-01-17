@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -84,9 +85,6 @@ public class JSONHandler extends Handler {
 	 * @return il giocatore dal file JSON come JSONObject
 	 */
 	public Player getPlayer(String username){
-		//TODO: creare un oggetto ArrayList riempito di giocatori in modo tale
-		//da rendere il programma indipendente dal tipo di supporto di memoriz
-		//zazione
 		Map<String, Player> players = getPlayers();
 		Player p = players.get(username);
 		return p;
@@ -341,7 +339,7 @@ public class JSONHandler extends Handler {
 	}
 	
 	/**
-	 * Metodo per salvare la partita sul file JSON
+	 * Metodo per salvare la partita sul file JSON. Il metodo controlla anche se la partita è già stata salvata, in caso di esito positivo ne aggiorna le statistiche.
 	 * @param match partita da salvare sul file JSON
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -438,6 +436,34 @@ public class JSONHandler extends Handler {
 				Match m = parseMatch(match); 
 				
 				partite.put((String) match.get("match_name"), m);
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		return partite;
+	}
+	
+	private Map<String, Object> getMatchesOBJ(){
+		Map<String, Object> partite = new HashMap<String, Object>();
+		
+		Object object = readMatches();
+		JSONObject jsonObject = (JSONObject) object;
+		JSONArray matches = null;
+		
+		// Si verifica prima se il file esiste, altrimenti viene creato
+		try {
+			matches = (JSONArray) jsonObject.get("matches");
+		} catch (NullPointerException fileEx) {
+			createMatchesFile();
+			matches = (JSONArray) jsonObject.get("matches");
+		}
+		
+		try {
+			for (Object o: matches) {
+				JSONObject match = (JSONObject) o;
+				
+				partite.put((String) match.get("match_name"), match);
 			}
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -546,7 +572,7 @@ public class JSONHandler extends Handler {
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 			if (element.getKey().toString().compareTo(p1.getUsername()+p2.getUsername())!=0 &&
 					element.getKey().toString().compareTo(p2.getUsername()+p1.getUsername())!=0) {
-				matches.add(element.getValue());
+				matches.add(getMatchForJSON((Match) element.getValue()));
 			}
 			
 		}
@@ -579,41 +605,51 @@ public class JSONHandler extends Handler {
 	
 	/**
 	 * Metodo per modificare i nomi e gli attributi delle partite salvate nel caso si modifica un utente
-	 * @param player giocatore da modificare
+	 * @param oldPlayer rappresenta il vecchio giocatore ancora presente sul file
+	 * @param newPlayer rappresenta il giocatore con l'username aggiornato
+	 */
+	public void updateMatch(Player oldPlayer, Player newPlayer) {
+		updateMatchOBJ(oldPlayer, newPlayer);
+	}
+	
+	/**
+	 * Metodo per modificare il nome di una partita sul file JSON relativa ad un vecchio Player di cui è stato modificato il nome
+	 * @param oldPlayer vecchio giocatore del quale rimuovere le partite a lui associate
+	 * @param newPlayer nuovo giocatore da associare alle partite relative del vecchio giocatore
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void updateMatch(Player oldPlayer, Player newPlayer) {
+	private void updateMatchOBJ(Player oldPlayer, Player newPlayer) {
 		JSONArray matches = new JSONArray();
 		
 		
-		Map<String, Match> partite = getMatches();
+		Map<String, Object> partite = getMatchesOBJ();
 		
 		// Se la partita ha il giocatore è da modificare
 		for (Map.Entry element : partite.entrySet()) {		// MAP.Entry : è un'interfaccia per accedere a tutti gli elementi di una Map
 			if (! element.getKey().toString().contains(oldPlayer.getUsername())) {
-				matches.add(getMatchForJSON((Match)element.getValue()));
+				matches.add((JSONObject) element.getValue());
 			}
 			else {
-				JSONObject obj = getMatchForJSON((Match)element.getValue());
+				JSONObject obj = (JSONObject) element.getValue();
 				if (obj.get("player1").toString().compareTo(oldPlayer.getUsername()) == 0) {
 					
 					Match rechargeMatch = parseMatch(obj, newPlayer, 1);
-					
-					this.save(rechargeMatch);
 					this.removeMatchFromPlayers(oldPlayer, new Player((String) obj.get("player2")));
+					this.save(rechargeMatch);
+					
 				}
 				
 				
 				else {
 					
 					Match rechargeMatch = parseMatch(obj, newPlayer, 2);
-					
-					this.save(rechargeMatch);
 					this.removeMatchFromPlayers(oldPlayer, new Player((String) obj.get("player1")));
+					this.save(rechargeMatch);
+					
 				}
 				
 			}
 		}
 	}
-
+	
 }

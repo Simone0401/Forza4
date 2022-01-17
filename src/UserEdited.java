@@ -108,11 +108,13 @@ public class UserEdited extends JLayeredPane {
 		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(handler.checkPlayer(textField.getText())) {
-				JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					handler.updatePlayer(textField.getText(), UserEdited.this.p);
 					Player newp = handler.getPlayer(textField.getText());
+					handler.updateMatch(UserEdited.this.p, newp);
+					
 					
 					JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
