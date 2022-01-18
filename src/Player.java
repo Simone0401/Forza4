@@ -22,7 +22,19 @@ public class Player {
 		this.username = username;
 		this.won = won;
 		this.tied = tied;
-		this.lost = lost;
+		this.lost = lost; 
+	}
+	
+	/**
+	 * Costruttore per il giocatore che non è mai stato creato
+	 * @param username nome del giocatore
+	 * 
+	 */
+	public Player(String username) {
+		this.username = username;
+		this.won = 0;
+		this.tied = 0;
+		this.lost = 0;
 	}
 	
 	/**
@@ -31,6 +43,27 @@ public class Player {
 	 */
 	public String getUsername() {
 		return username;
+	}
+	
+	/**
+	 * Metodo che aggiunge una vittoria
+	 */
+	public void addWon() {
+		this.won +=1;
+	}
+	
+	/**
+	 * Metodo che aggiunge una sconfitta
+	 */
+	public void addLost() {
+		this.lost +=1;
+	}
+	
+	/**
+	 * Metodo che aggiunge un pareggio
+	 */
+	public void addTie() {
+		this.tied +=1;
 	}
 	
 	/**
