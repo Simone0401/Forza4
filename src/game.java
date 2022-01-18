@@ -69,7 +69,7 @@ public class game extends JLayeredPane {
 				match.getP1().addLost();
 			}
 			Winned w = new Winned(this, wnr, this.i);
-			this.match.ended();
+			this.match.end();
 			this.handler.save(match.getP1());
 			this.handler.save(match.getP2());
 			this.handler.removeMatchFromPlayers(match.getP2(), match.getP1());
@@ -229,7 +229,7 @@ public class game extends JLayeredPane {
 							if (JOptionPane.showConfirmDialog(game.this.i.frame,
 									"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
 								handler.save(game.this.match);
-								game.this.saved();
+								game.this.save();
 								JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 										JOptionPane.INFORMATION_MESSAGE);
 							}
@@ -307,7 +307,7 @@ public class game extends JLayeredPane {
 							if (JOptionPane.showConfirmDialog(game.this.i.frame,
 									"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
 								handler.save(game.this.match);
-								game.this.saved();
+								game.this.save();
 								JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 										JOptionPane.INFORMATION_MESSAGE);
 							}
@@ -333,7 +333,7 @@ public class game extends JLayeredPane {
 			public void actionPerformed(ActionEvent e) {
 				if(!game.this.match.isEnded()) {
 					handler.save(game.this.match);
-					game.this.saved();
+					game.this.save();
 					JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
