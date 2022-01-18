@@ -113,13 +113,20 @@ public class RemoveUser extends JLayeredPane{
 		
 		elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					handler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
+					int index = RemoveUser.this.list.getSelectedIndex();
+					if(index == -1) {
+						JOptionPane.showMessageDialog(null, "Scegli un utente da rimuovere!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						handler.remove(players.get(usernames[index]));
 					handler.removeMatchFromPlayer(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
 					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
 					RemoveUser ru = new RemoveUser(RemoveUser.this.i);
 					RemoveUser.this.i.addToCl(ru, "ru");
 					RemoveUser.this.i.switchTo("ru");
+					}
+					
 					
 			}
 		});

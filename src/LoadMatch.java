@@ -135,18 +135,18 @@ public class LoadMatch extends JLayeredPane {
 				if ( index==-1) {
 					JOptionPane.showMessageDialog(null, "Scegli una partita da caricare!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-				try {
+				else {
 					String selezione = LoadMatch.this.vs.toArray()[index].toString().replace("  VS  ", "");
 					game g;
-					g = new game(handler.getMatch(selezione),LoadMatch.this.i);
-					LoadMatch.this.i.addToCl(g, "g");
+					try {
+						g = new game(handler.getMatch(selezione),LoadMatch.this.i);
+						LoadMatch.this.i.addToCl(g, "g");
 					LoadMatch.this.i.switchTo("g");
+					} catch (FontFormatException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
-
-				} catch (FontFormatException | IOException e2) {
-					// TODO Auto-generated catch block
-					
-					e2.printStackTrace();
 				}
 			}
 		});

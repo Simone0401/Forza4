@@ -112,10 +112,16 @@ public class editUser extends JLayeredPane{
 		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
-					
-					UserEdited ue = new UserEdited(players.get(usernames[editUser.this.list.getSelectedIndex()]),editUser.this.i);
-					editUser.this.i.addToCl(ue, "ue");
-					editUser.this.i.switchTo("ue");
+					int index = editUser.this.list.getSelectedIndex();
+					if ( index==-1) {
+						JOptionPane.showMessageDialog(null, "Scegli un utente da modificare!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						UserEdited ue = new UserEdited(players.get(usernames[index]),editUser.this.i);
+						editUser.this.i.addToCl(ue, "ue");
+						editUser.this.i.switchTo("ue");
+					}
+						
 			}	
 			
 		});
