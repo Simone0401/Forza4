@@ -32,6 +32,7 @@ public class RemoveUser extends JLayeredPane{
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
+	private Handler handler = new JSONHandler();
 	
 
 	/**
@@ -40,14 +41,12 @@ public class RemoveUser extends JLayeredPane{
 	public RemoveUser(Index i) {
 		this.i = i;
 		Player p;
-		Map<String, Object> users = JSONHandler.getPlayers();
-		for( String username : users.keySet()) {
-			JSONObject playerJSON = JSONHandler.getPlayer(username);
-			p = new Player((String) playerJSON.get("username"),
-					 				 (int) (long) playerJSON.get("won"),
-					 				 (int) (long) playerJSON.get("tied"),
-					 				 (int) (long) playerJSON.get("lost"));
-			this.players.put(p.getUsername(), p);
+		Map<String, Player> users = this.handler.getPlayers();
+		for(String username : users.keySet()) {
+			
+			Player player = this.handler.getPlayer(username);
+			
+			this.players.put(player.getUsername(), player);
 			
 		}
 		
@@ -114,8 +113,8 @@ public class RemoveUser extends JLayeredPane{
 		
 		elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					JSONHandler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
-					JSONHandler.removeMatchFromPlayer(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
+					handler.remove(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
+					handler.removeMatchFromPlayer(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
 					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
 					RemoveUser ru = new RemoveUser(RemoveUser.this.i);

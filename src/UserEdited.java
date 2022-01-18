@@ -25,7 +25,7 @@ public class UserEdited extends JLayeredPane {
 	private JTextField txtUsername;
 	private JTextField textField;
 	private Player p;
-
+	private Handler handler = new JSONHandler();
 	
 
 	/**
@@ -107,23 +107,21 @@ public class UserEdited extends JLayeredPane {
 		
 		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(JSONHandler.checkPlayer(textField.getText())) {
-				JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				if(handler.checkPlayer(textField.getText())) {
+					JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					JSONHandler.updatePlayer(textField.getText(), UserEdited.this.p);
-					JSONObject playerJSON = JSONHandler.getPlayer(textField.getText());
-					Player newp = new Player((String) playerJSON.get("username"),
-			 				 (int) (long) playerJSON.get("won"),
-			 				 (int) (long) playerJSON.get("tied"),
-			 				 (int) (long) playerJSON.get("lost"));
-					JSONHandler.updateMatch(UserEdited.this.p, newp);
-				JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-				
-				editUser eu = new editUser(UserEdited.this.i);
-				UserEdited.this.i.addToCl(eu, "eu");
-				UserEdited.this.i.switchTo("eu");
-				
+					handler.updatePlayer(textField.getText(), UserEdited.this.p);
+					Player newp = handler.getPlayer(textField.getText());
+					handler.updateMatch(UserEdited.this.p, newp);
+					
+					
+					JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+					
+					editUser eu = new editUser(UserEdited.this.i);
+					UserEdited.this.i.addToCl(eu, "eu");
+					UserEdited.this.i.switchTo("eu");
+					
 				}
 				
 			}

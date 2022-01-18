@@ -49,7 +49,6 @@ public class Index {
 	/**
 	 * Metodo che rimuove tutti i window listener del frame
 	 */
-	
 	public void removelisteners() {
 		WindowListener[] wls  = this.frame.getWindowListeners();
 		for (WindowListener listener : wls) {
@@ -62,7 +61,6 @@ public class Index {
 	 * @param p LayeredPane da aggiungere
 	 * @param id id del LayeredPane
 	 */
-	
 	public void addToCl(JLayeredPane p,String id) {
 		if(!this.open.contains(id) || id.equals("g")) {
 			this.MainPanel.add(p,id);

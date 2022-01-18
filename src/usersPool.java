@@ -34,16 +34,12 @@ public class usersPool extends JLayeredPane{
 
 	private Index i;
 	
-	/**
-	 * Metodo che data una stringa carica la partita dal file jsonh
-	 * @param selezione stringa che specifica la partita da caricare
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
+	private Handler handler;
+	
 	public void oldMatchReload(String selezione) throws FontFormatException, IOException {
 		if(JOptionPane.showConfirmDialog(usersPool.this.i.frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
 				System.out.println("ok");
-				game g = new game(JSONHandler.getMatch(selezione), usersPool.this.i);
+				game g = new game(this.handler.getMatch(selezione), usersPool.this.i);
 				usersPool.this.i.addToCl(g, "g");
 				usersPool.this.i.switchTo("g");
 		
@@ -65,15 +61,13 @@ public class usersPool extends JLayeredPane{
 	 * Create the application.
 	 */
 	public usersPool(Index i) {
+		this.handler = new JSONHandler();
 		this.i = i;
 		Player p;
-		Map<String, Object> users = JSONHandler.getPlayers();
+		Map<String, Player> users = this.handler.getPlayers();
 		for( String username : users.keySet()) {
-			JSONObject playerJSON = JSONHandler.getPlayer(username);
-			p = new Player((String) playerJSON.get("username"),
-					 				 (int) (long) playerJSON.get("won"),
-					 				 (int) (long) playerJSON.get("tied"),
-					 				 (int) (long) playerJSON.get("lost"));
+			p = this.handler.getPlayer(username);
+	
 			this.players.put(p.getUsername(), p);
 			
 		}
@@ -159,7 +153,7 @@ public class usersPool extends JLayeredPane{
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					if(JSONHandler.checkMatch(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[list2.getSelectedIndex()].toString() )) {
+					if(handler.checkMatch(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[list2.getSelectedIndex()].toString() )) {
 						try {
 							usersPool.this.oldMatchReload(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[usersPool.this.list2.getSelectedIndex()].toString() );
 						} catch (FontFormatException | IOException e1) {
@@ -167,7 +161,7 @@ public class usersPool extends JLayeredPane{
 							e1.printStackTrace();
 						}
 					}
-					else if(JSONHandler.checkMatch(usernames[list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ))){
+					else if(handler.checkMatch(usernames[list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ))){
 						try {
 							usersPool.this.oldMatchReload(usernames[usersPool.this.list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ));
 						} catch (FontFormatException | IOException e1) {

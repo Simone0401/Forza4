@@ -32,7 +32,7 @@ public class editUser extends JLayeredPane{
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
 	private Object[] usernames;
-
+	private Handler handler = new JSONHandler();
 	
 
 	/**
@@ -40,14 +40,11 @@ public class editUser extends JLayeredPane{
 	 */
 	public editUser(Index i) {
 		this.i = i;
-		Player p;
-		Map<String, Object> users = JSONHandler.getPlayers();
+		Map<String, Player> users = this.handler.getPlayers();
+		
 		for( String username : users.keySet()) {
-			JSONObject playerJSON = JSONHandler.getPlayer(username);
-			p = new Player((String) playerJSON.get("username"),
-					 				 (int) (long) playerJSON.get("won"),
-					 				 (int) (long) playerJSON.get("tied"),
-					 				 (int) (long) playerJSON.get("lost"));
+			
+			Player p = this.handler.getPlayer(username);
 			this.players.put(p.getUsername(), p);
 			
 		}
