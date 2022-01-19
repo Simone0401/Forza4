@@ -4,6 +4,7 @@ import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +36,10 @@ public class Stats extends JLayeredPane{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public Stats(Index i) {
+	public Stats(Index i) throws FontFormatException, IOException {
 		this.i=i;
 		Map<String, Player> users = this.handler.getPlayers();
 		for( String username : users.keySet()) {
@@ -52,14 +55,17 @@ public class Stats extends JLayeredPane{
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 		
 		
 		this.setBounds(0, 0, 1264, 699);
 		
-		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -81,7 +87,7 @@ public class Stats extends JLayeredPane{
 		
 		this.list = new JList(usernames);
 		this.list.setBounds(400, 544, 470, -361);
-		this.list.setFont(new Font("Kid Games", Font.PLAIN, 21));
+		this.list.setFont(font.deriveFont(Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
@@ -103,9 +109,16 @@ public class Stats extends JLayeredPane{
 		visualizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Stats.this.list.getSelectedIndex()!=-1) {
-				PlayerStatsViewer psw = new PlayerStatsViewer(players.get(usernames[Stats.this.list.getSelectedIndex()]),Stats.this.i);
-				Stats.this.i.addToCl(psw, "psw");
-				Stats.this.i.switchTo("psw");
+				PlayerStatsViewer psw;
+				try {
+					psw = new PlayerStatsViewer(players.get(usernames[Stats.this.list.getSelectedIndex()]),Stats.this.i);
+					Stats.this.i.addToCl(psw, "psw");
+					Stats.this.i.switchTo("psw");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Scegli un giocatore!", "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -9,6 +9,7 @@ import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 public class PlayerStatsViewer extends JLayeredPane {
@@ -19,8 +20,10 @@ public class PlayerStatsViewer extends JLayeredPane {
 	
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public PlayerStatsViewer(Player p,Index i) {
+	public PlayerStatsViewer(Player p,Index i) throws FontFormatException, IOException {
 		this.p = p;
 		this.i = i;
 		initialize();
@@ -28,11 +31,16 @@ public class PlayerStatsViewer extends JLayeredPane {
 	
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 	
 		this.setBounds(0, 0, 1274, 694);
+		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
@@ -49,7 +57,7 @@ public class PlayerStatsViewer extends JLayeredPane {
 		
 		JLabel plrlbl = new JLabel(this.p.getUsername());
 		this.setLayer(plrlbl, 4);
-		plrlbl.setFont(new Font("Kid Games", Font.PLAIN, 28));
+		plrlbl.setFont(font.deriveFont(Font.PLAIN, 28));
 		plrlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		plrlbl.setBounds(513, 193, 238, 31);
 		this.add(plrlbl);
@@ -92,7 +100,7 @@ public class PlayerStatsViewer extends JLayeredPane {
 		
 		JLabel wnlbl = new JLabel(String.valueOf(this.p.getWon()));
 		wnlbl.setHorizontalAlignment(SwingConstants.CENTER);
-		wnlbl.setFont(new Font("Kid Games", Font.PLAIN, 30));
+		wnlbl.setFont(font.deriveFont(Font.PLAIN, 30));
 		this.setLayer(wnlbl, 5);
 		wnlbl.setBounds(604, 305, 48, 36);
 		this.add(wnlbl);
@@ -100,14 +108,14 @@ public class PlayerStatsViewer extends JLayeredPane {
 		JLabel tdlbl = new JLabel(String.valueOf(this.p.getTied()));
 		this.setLayer(tdlbl, 5);
 		tdlbl.setHorizontalAlignment(SwingConstants.CENTER);
-		tdlbl.setFont(new Font("Kid Games", Font.PLAIN, 30));
+		tdlbl.setFont(font.deriveFont( Font.PLAIN, 30));
 		tdlbl.setBounds(604, 507, 48, 36);
 		this.add(tdlbl);
 		
 		JLabel lostlbl = new JLabel(String.valueOf(this.p.getLost()));
 		this.setLayer(lostlbl, 5);
 		lostlbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lostlbl.setFont(new Font("Kid Games", Font.PLAIN, 30));
+		lostlbl.setFont(font.deriveFont(Font.PLAIN, 30));
 		lostlbl.setBounds(604, 412, 48, 36);
 		this.add(lostlbl);
 		
@@ -126,9 +134,16 @@ public class PlayerStatsViewer extends JLayeredPane {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Stats s = new Stats(PlayerStatsViewer.this.i);
-				PlayerStatsViewer.this.i.addToCl(s, "s");
-				PlayerStatsViewer.this.i.switchTo("s");
+				Stats s;
+				try {
+					s = new Stats(PlayerStatsViewer.this.i);
+					PlayerStatsViewer.this.i.addToCl(s, "s");
+					PlayerStatsViewer.this.i.switchTo("s");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				}
 			
 		});

@@ -3,6 +3,7 @@ import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,8 +60,10 @@ public class usersPool extends JLayeredPane{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public usersPool(Index i) {
+	public usersPool(Index i) throws FontFormatException, IOException {
 		this.handler = new JSONHandler();
 		this.i = i;
 		Player p;
@@ -79,8 +82,10 @@ public class usersPool extends JLayeredPane{
 	
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 		
 		
@@ -105,9 +110,12 @@ public class usersPool extends JLayeredPane{
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
+		
 		this.list = new JList(usernames);
 		this.list.setBounds(400, 544, 470, -361);
-		this.list.setFont(new Font("Kid Games", Font.PLAIN, 21));
+		this.list.setFont(font.deriveFont(Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
@@ -116,7 +124,7 @@ public class usersPool extends JLayeredPane{
 		
 		list2 = new JList(usernames);
 		list2.setBounds(400, 544, 470, -361);
-		list2.setFont(new Font("Kid Games", Font.PLAIN, 21));
+		list2.setFont(font.deriveFont(Font.PLAIN, 21));
 		list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list2.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer2 =  (DefaultListCellRenderer)list2.getCellRenderer();  

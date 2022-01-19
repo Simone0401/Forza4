@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -27,8 +28,10 @@ public class CreateUser extends JLayeredPane{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public CreateUser(Index i) {
+	public CreateUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
 		initialize();
 	}
@@ -37,10 +40,15 @@ public class CreateUser extends JLayeredPane{
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 		this.setBounds(0, 0, 1274, 694);
+		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -53,14 +61,14 @@ public class CreateUser extends JLayeredPane{
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon("Images/usernamelabel.png"));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Kid Games", Font.PLAIN, 41));
+		lblNewLabel_1.setFont(font.deriveFont(Font.PLAIN, 41));
 		this.setLayer(lblNewLabel_1, 2);
 		lblNewLabel_1.setBounds(485, 220, 295, 60);
 		this.add(lblNewLabel_1);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Kid Games", Font.PLAIN, 27));
+		textField.setFont(font.deriveFont(Font.PLAIN, 27));
 		this.setLayer(textField, 2);
 		textField.setBounds(475, 291, 326, 61);
 		this.add(textField);
@@ -92,9 +100,15 @@ public class CreateUser extends JLayeredPane{
 		public void actionPerformed(ActionEvent e) {
 			String usr = textField.getText();
 			Player p = new Player(usr);
-			if(handler.checkPlayer(usr)) {
+			if(usr.length() == 0) {
+				JOptionPane.showMessageDialog(null, "Scegli un username!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			else if(handler.checkPlayer(usr)) {
 				JOptionPane.showMessageDialog(null, "Username già in uso!", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}else {
+			}
+			
+			else {
 				handler.save(p);
 				JOptionPane.showMessageDialog(null, "Giocatore creato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				

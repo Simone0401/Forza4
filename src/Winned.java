@@ -60,6 +60,9 @@ public class Winned  {
 		this.frame.setLocationRelativeTo(null);
 		
 		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/winned.png"));
 		layeredPane.setLayer(lblNewLabel, 1);
@@ -67,7 +70,7 @@ public class Winned  {
 		layeredPane.add(lblNewLabel);
 		JLabel win = new JLabel("HAI VINTO " + usr);
 		win.setHorizontalAlignment(SwingConstants.CENTER);
-		win.setFont(new Font("Kid Games", Font.PLAIN, 28));
+		win.setFont(font.deriveFont(Font.PLAIN, 28));
 		layeredPane.setLayer(win, 2);
 		win.setBounds(130, 75, 484, 63);
 		Color purple = new Color(108,0,255);
@@ -81,7 +84,7 @@ public class Winned  {
 		btnExit.setOpaque(false);
 		btnExit.setIcon(new ImageIcon("Images/exitButton.png"));
 		btnExit.setForeground(Color.BLACK);
-		btnExit.setFont(new Font("Kid Games", Font.PLAIN, 11));
+		btnExit.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Winned.this.close();
@@ -102,7 +105,7 @@ public class Winned  {
 		gridview.setOpaque(false);
 		gridview.setIcon(new ImageIcon("Images/viewButton.png"));
 		gridview.setForeground(Color.BLACK);
-		gridview.setFont(new Font("Kid Games", Font.PLAIN, 11));
+		gridview.setFont(font.deriveFont(Font.PLAIN, 11));
 		gridview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Winned.this.close();
@@ -120,7 +123,7 @@ public class Winned  {
 		btnAgain.setOpaque(false);
 		btnAgain.setIcon(new ImageIcon("Images/againButton.png"));
 		btnAgain.setForeground(Color.BLACK);
-		btnAgain.setFont(new Font("Kid Games", Font.PLAIN, 11));
+		btnAgain.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,10 @@ public class editUser extends JLayeredPane{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public editUser(Index i) {
+	public editUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
 		Map<String, Player> users = this.handler.getPlayers();
 		
@@ -57,10 +60,15 @@ public class editUser extends JLayeredPane{
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 
 		this.setBounds(0, 0, 1264, 699);
+		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
@@ -81,7 +89,7 @@ public class editUser extends JLayeredPane{
 		
 		this.list = new JList(usernames);
 		this.list.setBounds(400, 544, 470, -361);
-		this.list.setFont(new Font("Kid Games", Font.PLAIN, 21));
+		this.list.setFont(font.deriveFont(Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
@@ -117,9 +125,16 @@ public class editUser extends JLayeredPane{
 						JOptionPane.showMessageDialog(null, "Scegli un utente da modificare!", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						UserEdited ue = new UserEdited(players.get(usernames[index]),editUser.this.i);
-						editUser.this.i.addToCl(ue, "ue");
-						editUser.this.i.switchTo("ue");
+						UserEdited ue;
+						try {
+							ue = new UserEdited(players.get(usernames[index]),editUser.this.i);
+							editUser.this.i.addToCl(ue, "ue");
+							editUser.this.i.switchTo("ue");
+						} catch (FontFormatException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					}
 						
 			}	

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -30,8 +31,10 @@ public class UserEdited extends JLayeredPane {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public UserEdited(Player p, Index i) {
+	public UserEdited(Player p, Index i) throws FontFormatException, IOException {
 		this.i = i;
 		this.p = p;
 		initialize();
@@ -41,11 +44,16 @@ public class UserEdited extends JLayeredPane {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 		
 		this.setBounds(0, 0, 1274, 694);
+		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -58,14 +66,14 @@ public class UserEdited extends JLayeredPane {
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon("Images/newUsername.png"));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Kid Games", Font.PLAIN, 41));
+		lblNewLabel_1.setFont(font.deriveFont( Font.PLAIN, 41));
 		this.setLayer(lblNewLabel_1, 2);
 		lblNewLabel_1.setBounds(485, 220, 295, 60);
 		this.add(lblNewLabel_1);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Kid Games", Font.PLAIN, 27));
+		textField.setFont(font.deriveFont(Font.PLAIN, 27));
 		this.setLayer(textField, 2);
 		textField.setBounds(475, 291, 326, 61);
 		this.add(textField);
@@ -118,9 +126,16 @@ public class UserEdited extends JLayeredPane {
 					
 					JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
-					editUser eu = new editUser(UserEdited.this.i);
-					UserEdited.this.i.addToCl(eu, "eu");
-					UserEdited.this.i.switchTo("eu");
+					editUser eu;
+					try {
+						eu = new editUser(UserEdited.this.i);
+						UserEdited.this.i.addToCl(eu, "eu");
+						UserEdited.this.i.switchTo("eu");
+					} catch (FontFormatException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					
 				}
 				
@@ -142,9 +157,16 @@ public class UserEdited extends JLayeredPane {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editUser m = new editUser(UserEdited.this.i);
-				UserEdited.this.i.addToCl(m, "m");
-				UserEdited.this.i.switchTo("m");
+				editUser m;
+				try {
+					m = new editUser(UserEdited.this.i);
+					UserEdited.this.i.addToCl(m, "m");
+					UserEdited.this.i.switchTo("m");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});

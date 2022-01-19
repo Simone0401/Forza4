@@ -57,9 +57,16 @@ public class UsersModifier extends JLayeredPane{
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				CreateUser cu = new CreateUser(UsersModifier.this.i);
-				UsersModifier.this.i.addToCl(cu, "cu");
-				UsersModifier.this.i.switchTo("cu");
+				CreateUser cu;
+				try {
+					cu = new CreateUser(UsersModifier.this.i);
+					UsersModifier.this.i.addToCl(cu, "cu");
+					UsersModifier.this.i.switchTo("cu");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -77,9 +84,16 @@ public class UsersModifier extends JLayeredPane{
 		edit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editUser eu = new editUser(UsersModifier.this.i);
-				UsersModifier.this.i.addToCl(eu, "eu");
-				UsersModifier.this.i.switchTo("eu");
+				editUser eu;
+				try {
+					eu = new editUser(UsersModifier.this.i);
+					UsersModifier.this.i.addToCl(eu, "eu");
+					UsersModifier.this.i.switchTo("eu");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -98,9 +112,16 @@ public class UsersModifier extends JLayeredPane{
 		remove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				RemoveUser ru = new RemoveUser(UsersModifier.this.i);
-				UsersModifier.this.i.addToCl(ru, "ru");
-				UsersModifier.this.i.switchTo("ru");
+				RemoveUser ru;
+				try {
+					ru = new RemoveUser(UsersModifier.this.i);
+					UsersModifier.this.i.addToCl(ru, "ru");
+					UsersModifier.this.i.switchTo("ru");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		

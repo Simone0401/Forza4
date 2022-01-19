@@ -90,9 +90,16 @@ public class Menu extends JLayeredPane {
 		loadMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				LoadMatch lm = new LoadMatch(Menu.this.i);
-				Menu.this.i.addToCl(lm, "ldmtch");
-				Menu.this.i.switchTo("ldmtch");
+				LoadMatch lm;
+				try {
+					lm = new LoadMatch(Menu.this.i);
+					Menu.this.i.addToCl(lm, "ldmtch");
+					Menu.this.i.switchTo("ldmtch");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -131,9 +138,16 @@ public class Menu extends JLayeredPane {
 		stats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Stats s = new Stats(Menu.this.i);
-				Menu.this.i.addToCl(s, "s");
-				Menu.this.i.switchTo("s");
+				Stats s;
+				try {
+					s = new Stats(Menu.this.i);
+					Menu.this.i.addToCl(s, "s");
+					Menu.this.i.switchTo("s");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 	
@@ -142,9 +156,16 @@ public class Menu extends JLayeredPane {
 		newMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				usersPool up = new usersPool(Menu.this.i);
-				Menu.this.i.addToCl(up, "up");
-				Menu.this.i.switchTo("up");
+				usersPool up;
+				try {
+					up = new usersPool(Menu.this.i);
+					Menu.this.i.addToCl(up, "up");
+					Menu.this.i.switchTo("up");
+				} catch (FontFormatException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				}
 		});
 		this.setLayer(newMatch, 2);

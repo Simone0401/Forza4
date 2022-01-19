@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,10 @@ public class RemoveUser extends JLayeredPane{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	public RemoveUser(Index i) {
+	public RemoveUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
 		Player p;
 		Map<String, Player> users = this.handler.getPlayers();
@@ -57,13 +60,16 @@ public class RemoveUser extends JLayeredPane{
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 */
-	private void initialize() {
+	private void initialize() throws FontFormatException, IOException {
 		
 		this.setBounds(0, 0, 1264, 699);
 
 		
-		
+		File font_file = new File("Font/Kid_Games.ttf"); 
+		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
@@ -84,7 +90,7 @@ public class RemoveUser extends JLayeredPane{
 		
 		this.list = new JList(usernames);
 		this.list.setBounds(400, 544, 470, -361);
-		this.list.setFont(new Font("Kid Games", Font.PLAIN, 21));
+		this.list.setFont(font.deriveFont( Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setVisibleRowCount(usernames.length);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)this.list.getCellRenderer();  
@@ -122,9 +128,16 @@ public class RemoveUser extends JLayeredPane{
 					handler.removeMatchFromPlayer(players.get(usernames[RemoveUser.this.list.getSelectedIndex()]));
 					JOptionPane.showMessageDialog(null, "Giocatore eliminato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
-					RemoveUser ru = new RemoveUser(RemoveUser.this.i);
-					RemoveUser.this.i.addToCl(ru, "ru");
-					RemoveUser.this.i.switchTo("ru");
+					RemoveUser ru;
+					try {
+						ru = new RemoveUser(RemoveUser.this.i);
+						RemoveUser.this.i.addToCl(ru, "ru");
+						RemoveUser.this.i.switchTo("ru");
+					} catch (FontFormatException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					}
 					
 					
