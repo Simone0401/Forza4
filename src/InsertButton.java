@@ -14,10 +14,10 @@ public class InsertButton implements ActionListener {
 	private int column;
 	private JLabel [][] holes;
 	private JLayeredPane layeredPane;
-	private game g;
+	private Game g;
 	
 	
-	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, game g) {
+	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, Game g) {
 		this.column = column;
 		this.holes = holes;
 		this.m = m;

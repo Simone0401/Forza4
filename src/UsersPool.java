@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
-public class usersPool extends JLayeredPane{
+public class UsersPool extends JLayeredPane{
 
 	private HashMap <String,Player> players = new HashMap <>(); 
 	private JList list;
@@ -38,19 +38,19 @@ public class usersPool extends JLayeredPane{
 	private Handler handler;
 	
 	public void oldMatchReload(String selezione) throws FontFormatException, IOException {
-		if(JOptionPane.showConfirmDialog(usersPool.this.i.frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
+		if(JOptionPane.showConfirmDialog(UsersPool.this.i.frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){
 				System.out.println("ok");
-				game g = new game(this.handler.getMatch(selezione), usersPool.this.i);
-				usersPool.this.i.addToCl(g, "g");
-				usersPool.this.i.switchTo("g");
+				Game g = new Game(this.handler.getMatch(selezione), UsersPool.this.i);
+				UsersPool.this.i.addToCl(g, "g");
+				UsersPool.this.i.switchTo("g");
 		
 
     	}
 		else {
 			
-				game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]),usersPool.this.i);
-				usersPool.this.i.addToCl(g, "g");
-				usersPool.this.i.switchTo("g");
+				Game g = new Game(players.get(usernames[UsersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]),UsersPool.this.i);
+				UsersPool.this.i.addToCl(g, "g");
+				UsersPool.this.i.switchTo("g");
 			
 			
 		}
@@ -63,7 +63,7 @@ public class usersPool extends JLayeredPane{
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
-	public usersPool(Index i) throws FontFormatException, IOException {
+	public UsersPool(Index i) throws FontFormatException, IOException {
 		this.handler = new JSONHandler();
 		this.i = i;
 		Player p;
@@ -153,25 +153,25 @@ public class usersPool extends JLayeredPane{
 		scegli.setPressedIcon(new ImageIcon("Images/gioca-pressed.png"));
 		scegli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(usersPool.this.list.getSelectedIndex()==-1 || list2.getSelectedIndex()==-1 ) {
+				if(UsersPool.this.list.getSelectedIndex()==-1 || list2.getSelectedIndex()==-1 ) {
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori !", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
 				}
-				else if(players.get(usernames[usersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
+				else if(players.get(usernames[UsersPool.this.list.getSelectedIndex()])==players.get(usernames[list2.getSelectedIndex()])){
 					JOptionPane.showMessageDialog(null, "Scegli due giocatori diversi!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					if(handler.checkMatch(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[list2.getSelectedIndex()].toString() )) {
+					if(handler.checkMatch(usernames[UsersPool.this.list.getSelectedIndex()].toString() + usernames[list2.getSelectedIndex()].toString() )) {
 						try {
-							usersPool.this.oldMatchReload(usernames[usersPool.this.list.getSelectedIndex()].toString() + usernames[usersPool.this.list2.getSelectedIndex()].toString() );
+							UsersPool.this.oldMatchReload(usernames[UsersPool.this.list.getSelectedIndex()].toString() + usernames[UsersPool.this.list2.getSelectedIndex()].toString() );
 						} catch (FontFormatException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
-					else if(handler.checkMatch(usernames[list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ))){
+					else if(handler.checkMatch(usernames[list2.getSelectedIndex()].toString() + usernames[UsersPool.this.list.getSelectedIndex()].toString( ))){
 						try {
-							usersPool.this.oldMatchReload(usernames[usersPool.this.list2.getSelectedIndex()].toString() + usernames[usersPool.this.list.getSelectedIndex()].toString( ));
+							UsersPool.this.oldMatchReload(usernames[UsersPool.this.list2.getSelectedIndex()].toString() + usernames[UsersPool.this.list.getSelectedIndex()].toString( ));
 						} catch (FontFormatException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -179,9 +179,9 @@ public class usersPool extends JLayeredPane{
 					}
 					else {
 						try {
-						game g = new game(players.get(usernames[usersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]), usersPool.this.i);
-						usersPool.this.i.addToCl(g, "g");
-						usersPool.this.i.switchTo("g");
+						Game g = new Game(players.get(usernames[UsersPool.this.list.getSelectedIndex()]),players.get(usernames[list2.getSelectedIndex()]), UsersPool.this.i);
+						UsersPool.this.i.addToCl(g, "g");
+						UsersPool.this.i.switchTo("g");
 					} catch (FontFormatException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -212,7 +212,7 @@ public class usersPool extends JLayeredPane{
 		backbutton.setOpaque(false);
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				usersPool.this.i.switchTo("menu");
+				UsersPool.this.i.switchTo("menu");
 				
 			}
 		});

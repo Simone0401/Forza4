@@ -156,9 +156,9 @@ public class Menu extends JLayeredPane {
 		newMatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				usersPool up;
+				UsersPool up;
 				try {
-					up = new usersPool(Menu.this.i);
+					up = new UsersPool(Menu.this.i);
 					Menu.this.i.addToCl(up, "up");
 					Menu.this.i.switchTo("up");
 				} catch (FontFormatException | IOException e1) {

@@ -33,12 +33,12 @@ import java.io.IOException;
 import java.awt.event.ActionListener;
 
 
-public class game extends JLayeredPane {
+public class Game extends JLayeredPane {
 	
 	int x = 0;
 	private Match match;
 	private JLabel[][] holes = new JLabel[6][7];
-	private boolean saved = false;
+	private boolean saved = true;
 	JLabel t1 = new JLabel("");
 	JLabel t2 = new JLabel("");
 	private Index i;
@@ -118,14 +118,14 @@ public class game extends JLayeredPane {
 	 * @throws IOException
 	 * @throws FontFormatException
 	 */
-	public game(Player p1, Player p2, Index i) throws FontFormatException, IOException {
+	public Game(Player p1, Player p2, Index i) throws FontFormatException, IOException {
 		this.i = i;
 		this.match = new Match(p1, p2);
 		this.initializeGrid();
 		initialize();
 	}
 
-	public game(Match match, Index i) throws FontFormatException, IOException {
+	public Game(Match match, Index i) throws FontFormatException, IOException {
 		this.i = i;
 		this.match = match;
 		this.initializeGrid();
@@ -197,7 +197,7 @@ public class game extends JLayeredPane {
 	 * @throws IOException
 	 */
 	public void reset() throws FontFormatException, IOException {
-		game g = new game(this.match.getP1(), this.match.getP2(), this.i);
+		Game g = new Game(this.match.getP1(), this.match.getP2(), this.i);
 		this.i.addToCl(g, "g");
 		this.i.switchTo("g");
 	}
@@ -221,26 +221,26 @@ public class game extends JLayeredPane {
 		
 		this.i.frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(game.this.i.frame,
+				if (JOptionPane.showConfirmDialog(Game.this.i.frame,
 						"Sicuri di voler abbandonare la partita?") == JOptionPane.OK_OPTION) {
 					
-					if (!game.this.match.isEnded()) {
-						if (!game.this.isSaved()) {
-							if (JOptionPane.showConfirmDialog(game.this.i.frame,
+					if (!Game.this.match.isEnded()) {
+						if (!Game.this.isSaved()) {
+							if (JOptionPane.showConfirmDialog(Game.this.i.frame,
 									"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
-								handler.save(game.this.match);
-								game.this.save();
+								handler.save(Game.this.match);
+								Game.this.save();
 								JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 										JOptionPane.INFORMATION_MESSAGE);
 							}
 						}
 					}
 					
-					game.this.i.removelisteners();
-					Menu m = new Menu(game.this.i);
+					Game.this.i.removelisteners();
+					Menu m = new Menu(Game.this.i);
 					
-					game.this.i.addToCl(m, "menu");
-					game.this.i.switchTo("menu");
+					Game.this.i.addToCl(m, "menu");
+					Game.this.i.switchTo("menu");
 					
 				}
 			}
@@ -300,28 +300,30 @@ public class game extends JLayeredPane {
 		backbutton.setOpaque(false);		
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(game.this.i.frame,
+				if (JOptionPane.showConfirmDialog(Game.this.i.frame,
 						"Sicuri di voler abbandonare la partita?") == JOptionPane.OK_OPTION) {
-					if(!game.this.match.isEnded()) {
-						if (!game.this.isSaved()) {
-							if (JOptionPane.showConfirmDialog(game.this.i.frame,
+					if(!Game.this.match.isEnded()) {
+						if (!Game.this.isSaved()) {
+							if (JOptionPane.showConfirmDialog(Game.this.i.frame,
 									"Salvare la partita in corso?") == JOptionPane.OK_OPTION) {
-								handler.save(game.this.match);
-								game.this.save();
+								handler.save(Game.this.match);
+								Game.this.save();
 								JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS",
 										JOptionPane.INFORMATION_MESSAGE);
 							}
 						}
 					}
-					Menu m = new Menu(game.this.i);
-					game.this.i.addToCl(m, "menu");
-					game.this.i.switchTo("menu");
+					Menu m = new Menu(Game.this.i);
+					Game.this.i.addToCl(m, "menu");
+					Game.this.i.switchTo("menu");
 				}
 			}
 		});
 		JButton save = new JButton("");
 		this.setLayer(save, 4);
 		save.setIcon(new ImageIcon("Images/save.png"));
+		save.setRolloverIcon(new ImageIcon("Images/save-over.png"));
+		save.setPressedIcon(new ImageIcon("Images/save-pressed.png"));
 		save.setBounds(51, 11, 50, 50);
 		this.add(save);
 		save.setBorderPainted(false);
@@ -331,9 +333,9 @@ public class game extends JLayeredPane {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!game.this.match.isEnded()) {
-					handler.save(game.this.match);
-					game.this.save();
+				if(!Game.this.match.isEnded()) {
+					handler.save(Game.this.match);
+					Game.this.save();
 					JOptionPane.showMessageDialog(null, "Partita salvata", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {

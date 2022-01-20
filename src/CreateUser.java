@@ -119,7 +119,7 @@ public class CreateUser extends JLayeredPane{
 		});
 			
 		this.setLayer(create, 2);
-		create.setIcon(new ImageIcon("Images/crea-over.png"));
+		create.setIcon(new ImageIcon("Images/crea.png"));
 		create.setRolloverIcon(new ImageIcon("Images/crea-over.png"));
 		create.setPressedIcon(new ImageIcon("Images/crea-pressed.png"));
 		create.setBounds(538, 377, 198, 61);

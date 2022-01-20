@@ -19,7 +19,7 @@ public class Tied {
 	
 	Index i;
 	private JFrame frame;
-	private game g;
+	private Game g;
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 
@@ -33,7 +33,7 @@ public class Tied {
 	/**
 	 * Create the application.
 	 */
-	public Tied(game g, Index i)throws FontFormatException, IOException {
+	public Tied(Game g, Index i)throws FontFormatException, IOException {
 		this.i = i;
 		this.frame = new JFrame("FORZA 4");
 		this.frame.setUndecorated(true);

@@ -84,9 +84,9 @@ public class UsersModifier extends JLayeredPane{
 		edit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editUser eu;
+				EditUser eu;
 				try {
-					eu = new editUser(UsersModifier.this.i);
+					eu = new EditUser(UsersModifier.this.i);
 					UsersModifier.this.i.addToCl(eu, "eu");
 					UsersModifier.this.i.switchTo("eu");
 				} catch (FontFormatException | IOException e1) {

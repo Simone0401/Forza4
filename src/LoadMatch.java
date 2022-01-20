@@ -143,9 +143,9 @@ public class LoadMatch extends JLayeredPane {
 				}
 				else {
 					String selezione = LoadMatch.this.vs.toArray()[index].toString().replace("  VS  ", "");
-					game g;
+					Game g;
 					try {
-						g = new game(handler.getMatch(selezione),LoadMatch.this.i);
+						g = new Game(handler.getMatch(selezione),LoadMatch.this.i);
 						LoadMatch.this.i.addToCl(g, "g");
 					LoadMatch.this.i.switchTo("g");
 					} catch (FontFormatException | IOException e1) {

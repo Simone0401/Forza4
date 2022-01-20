@@ -126,9 +126,9 @@ public class UserEdited extends JLayeredPane {
 					
 					JOptionPane.showMessageDialog(null, "Giocatore modificato", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 					
-					editUser eu;
+					EditUser eu;
 					try {
-						eu = new editUser(UserEdited.this.i);
+						eu = new EditUser(UserEdited.this.i);
 						UserEdited.this.i.addToCl(eu, "eu");
 						UserEdited.this.i.switchTo("eu");
 					} catch (FontFormatException | IOException e1) {
@@ -157,9 +157,9 @@ public class UserEdited extends JLayeredPane {
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editUser m;
+				EditUser m;
 				try {
-					m = new editUser(UserEdited.this.i);
+					m = new EditUser(UserEdited.this.i);
 					UserEdited.this.i.addToCl(m, "m");
 					UserEdited.this.i.switchTo("m");
 				} catch (FontFormatException | IOException e1) {

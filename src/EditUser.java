@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
-public class editUser extends JLayeredPane{
+public class EditUser extends JLayeredPane{
 
 	Index i;
 	private HashMap <String,Player> players = new HashMap <>(); 
@@ -41,7 +41,7 @@ public class editUser extends JLayeredPane{
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
-	public editUser(Index i) throws FontFormatException, IOException {
+	public EditUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
 		Map<String, Player> users = this.handler.getPlayers();
 		
@@ -120,16 +120,16 @@ public class editUser extends JLayeredPane{
 		modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
-					int index = editUser.this.list.getSelectedIndex();
+					int index = EditUser.this.list.getSelectedIndex();
 					if ( index==-1) {
 						JOptionPane.showMessageDialog(null, "Scegli un utente da modificare!", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						UserEdited ue;
 						try {
-							ue = new UserEdited(players.get(usernames[index]),editUser.this.i);
-							editUser.this.i.addToCl(ue, "ue");
-							editUser.this.i.switchTo("ue");
+							ue = new UserEdited(players.get(usernames[index]),EditUser.this.i);
+							EditUser.this.i.addToCl(ue, "ue");
+							EditUser.this.i.switchTo("ue");
 						} catch (FontFormatException | IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -156,9 +156,9 @@ public class editUser extends JLayeredPane{
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				UsersModifier m = new UsersModifier(editUser.this.i);
-				editUser.this.i.addToCl(m, "menu");
-				editUser.this.i.switchTo("menu");
+				UsersModifier m = new UsersModifier(EditUser.this.i);
+				EditUser.this.i.addToCl(m, "menu");
+				EditUser.this.i.switchTo("menu");
 				
 				}
 		});

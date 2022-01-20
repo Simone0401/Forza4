@@ -22,7 +22,7 @@ public class Winned  {
 	
 	Index i;
 	private JFrame frame;
-	private game g;
+	private Game g;
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 
@@ -43,7 +43,7 @@ public class Winned  {
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
-	public Winned(game g, String usr, Index i)throws FontFormatException, IOException {
+	public Winned(Game g, String usr, Index i)throws FontFormatException, IOException {
 		
 		
 		this.i = i;
