@@ -97,7 +97,7 @@ public class Stats extends JLayeredPane{
 		
 		
 		JButton visualizza = new JButton("");
-		visualizza.setIcon(new ImageIcon("Images/view-over.png"));
+		visualizza.setIcon(new ImageIcon("Images/view.png"));
 		visualizza.setRolloverIcon(new ImageIcon("Images/view-over.png"));
 		visualizza.setPressedIcon(new ImageIcon("Images/view-pressed.png"));
 		this.setLayer(visualizza, 2);

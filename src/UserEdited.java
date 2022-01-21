@@ -105,6 +105,9 @@ public class UserEdited extends JLayeredPane {
 			
 		this.setLayer(modifica, 2);
 		modifica.setIcon(new ImageIcon("Images/modifica.png"));
+		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
+		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
+		
 		modifica.setBounds(538, 377, 198, 61);
 		this.add(modifica);
 		modifica.setBorderPainted(false); 

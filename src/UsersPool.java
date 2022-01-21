@@ -142,7 +142,7 @@ public class UsersPool extends JLayeredPane{
 		
 		
 		JButton scegli = new JButton("");
-		scegli.setIcon(new ImageIcon("Images/gioca-over.png"));
+		scegli.setIcon(new ImageIcon("Images/gioca.png"));
 		this.setLayer(scegli, 2);
 		scegli.setBounds(481, 597, 304, 69);
 		scegli.setBorderPainted(false); 

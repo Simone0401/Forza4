@@ -122,7 +122,7 @@ public class LoadMatch extends JLayeredPane {
 		splitPane.setRightComponent(null);
 		
 		JButton gioca = new JButton("");
-		gioca.setIcon(new ImageIcon("Images/gioca-over.png"));
+		gioca.setIcon(new ImageIcon("Images/gioca.png"));
 		this.setLayer(gioca, 2);
 		gioca.setBounds(482, 589, 304, 69);
 		gioca.setBorderPainted(false); 

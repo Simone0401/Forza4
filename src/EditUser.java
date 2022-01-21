@@ -106,7 +106,7 @@ public class EditUser extends JLayeredPane{
 		
 		
 		JButton modifica = new JButton("");
-		modifica.setIcon(new ImageIcon("Images/modifica-over.png"));
+		modifica.setIcon(new ImageIcon("Images/modifica.png"));
 		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
 		this.setLayer(modifica, 2);

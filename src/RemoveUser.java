@@ -107,7 +107,7 @@ public class RemoveUser extends JLayeredPane{
 		
 		
 		JButton elimina = new JButton("");
-		elimina.setIcon(new ImageIcon("Images/deletebutton-over.png"));
+		elimina.setIcon(new ImageIcon("Images/deletebutton.png"));
 		elimina.setRolloverIcon(new ImageIcon("Images/deletebutton-over.png"));
 		elimina.setPressedIcon(new ImageIcon("Images/deletebutton-pressed.png"));
 		this.setLayer(elimina, 2);
