@@ -52,71 +52,71 @@ public class PlayerStatsViewer extends JLayeredPane {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("Images/blank.png"));
 		this.setLayer(lblNewLabel_1, 2);
-		lblNewLabel_1.setBounds(481, 178, 295, 60);
+		lblNewLabel_1.setBounds(490, 178, 295, 60);
 		this.add(lblNewLabel_1);
 		
 		JLabel plrlbl = new JLabel(this.p.getUsername());
 		this.setLayer(plrlbl, 4);
 		plrlbl.setFont(font.deriveFont(Font.PLAIN, 28));
 		plrlbl.setHorizontalAlignment(SwingConstants.CENTER);
-		plrlbl.setBounds(513, 193, 238, 31);
+		plrlbl.setBounds(520, 193, 238, 31);
 		this.add(plrlbl);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("Images/wins.png"));
 		this.setLayer(lblNewLabel_3, 3);
-		lblNewLabel_3.setBounds(481, 252, 295, 42);
+		lblNewLabel_3.setBounds(490, 252, 295, 42);
 		this.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
 		this.setLayer(lblNewLabel_3_1, 3);
 		lblNewLabel_3_1.setIcon(new ImageIcon("Images/perse.png"));
-		lblNewLabel_3_1.setBounds(481, 359, 295, 42);
+		lblNewLabel_3_1.setBounds(490, 359, 295, 42);
 		this.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_3_1_1 = new JLabel("");
 		lblNewLabel_3_1_1.setIcon(new ImageIcon("Images/tied.png"));
 		this.setLayer(lblNewLabel_3_1_1, 3);
-		lblNewLabel_3_1_1.setBounds(481, 454, 295, 42);
+		lblNewLabel_3_1_1.setBounds(490, 454, 295, 42);
 		this.add(lblNewLabel_3_1_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		this.setLayer(lblNewLabel_4, 4);
-		lblNewLabel_4.setBounds(481, 292, 295, 60);
+		lblNewLabel_4.setBounds(490, 292, 295, 60);
 		this.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("");
 		lblNewLabel_4_1.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		this.setLayer(lblNewLabel_4_1, 4);
-		lblNewLabel_4_1.setBounds(481, 398, 295, 60);
+		lblNewLabel_4_1.setBounds(490, 398, 295, 60);
 		this.add(lblNewLabel_4_1);
 		
 		JLabel lblNewLabel_4_2 = new JLabel("");
 		lblNewLabel_4_2.setIcon(new ImageIcon("Images/howmanymathces.png"));
 		this.setLayer(lblNewLabel_4_2, 4);
-		lblNewLabel_4_2.setBounds(481, 495, 295, 60);
+		lblNewLabel_4_2.setBounds(490, 495, 295, 60);
 		this.add(lblNewLabel_4_2);
 		
 		JLabel wnlbl = new JLabel(String.valueOf(this.p.getWon()));
 		wnlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		wnlbl.setFont(font.deriveFont(Font.PLAIN, 30));
 		this.setLayer(wnlbl, 5);
-		wnlbl.setBounds(604, 305, 48, 36);
+		wnlbl.setBounds(614, 305, 48, 36);
 		this.add(wnlbl);
 		
 		JLabel tdlbl = new JLabel(String.valueOf(this.p.getTied()));
 		this.setLayer(tdlbl, 5);
 		tdlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		tdlbl.setFont(font.deriveFont( Font.PLAIN, 30));
-		tdlbl.setBounds(604, 507, 48, 36);
+		tdlbl.setBounds(614, 507, 48, 36);
 		this.add(tdlbl);
 		
 		JLabel lostlbl = new JLabel(String.valueOf(this.p.getLost()));
 		this.setLayer(lostlbl, 5);
 		lostlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lostlbl.setFont(font.deriveFont(Font.PLAIN, 30));
-		lostlbl.setBounds(604, 412, 48, 36);
+		lostlbl.setBounds(614, 412, 48, 36);
 		this.add(lostlbl);
 		
 		
