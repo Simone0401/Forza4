@@ -1,8 +1,10 @@
 import java.awt.CardLayout;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Taskbar;
 import java.awt.Toolkit;
 import java.awt.event.WindowListener;
+import java.net.URL;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
@@ -36,8 +38,25 @@ public class Index {
 		MainPanel.add(menu,"menu");
 		
 		cl.show(MainPanel,"menu");
-		Image icon = Toolkit.getDefaultToolkit().getImage("Images/icon.png");    
-		frame.setIconImage(icon);  
+		
+		final Toolkit defaulToolkit = Toolkit.getDefaultToolkit();
+		final Image image = defaulToolkit.getImage("Images/icon.png");
+		
+		// necessaria da JDK 9
+		final Taskbar taskbar = Taskbar.getTaskbar();
+		
+		try {
+            // set icona per mac os (e altri sistemi operativi che supportano questo metodo)
+            taskbar.setIconImage(image);
+        } catch (final UnsupportedOperationException e) {
+            System.out.println("Il sistema operativo non supporta: 'taskbar.setIconImage'");
+        } catch (final SecurityException e) {
+            System.out.println("C'è stata un'eccezione di sicurezza in: 'taskbar.setIconImage'");
+        }
+		
+		// set icona per windows (e altri sistemi operativi che supportano questo metodo)   
+		frame.setIconImage(image);  
+		
 		frame.add(MainPanel);
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setLocationRelativeTo(null); 
