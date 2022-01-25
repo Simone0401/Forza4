@@ -46,7 +46,7 @@ public class Menu extends JLayeredPane {
 	 */
 	private void initialize() {
 		
-		this.setBounds(0, 0, 1274, 694);
+		this.setBounds(0, 0, 1280, 720);
 		
 		WindowAdapter close = new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -60,7 +60,7 @@ public class Menu extends JLayeredPane {
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		JButton loadMatch = new JButton("");

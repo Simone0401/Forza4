@@ -247,7 +247,7 @@ public class Game extends JLayeredPane {
 		});
 		
 
-		this.setBounds(0, 0, 1274, 694);
+		this.setBounds(0, 0, 1280, 720);
 
 		t1.setIcon(new ImageIcon("Images/ptriangle.png"));
 		this.setLayer(t1, 4);
@@ -266,7 +266,7 @@ public class Game extends JLayeredPane {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("Images/match_background.png"));
-		lblNewLabel.setBounds(0, 0, 1274, 694);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 
 		JLabel lblp1 = new JLabel(this.match.getP1().getUsername().toUpperCase());

@@ -50,7 +50,7 @@ public class UserEdited extends JLayeredPane {
 	private void initialize() throws FontFormatException, IOException {
 		
 		
-		this.setBounds(0, 0, 1274, 694);
+		this.setBounds(0, 0, 1280, 720);
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
@@ -60,7 +60,7 @@ public class UserEdited extends JLayeredPane {
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);

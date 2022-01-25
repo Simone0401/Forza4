@@ -65,7 +65,7 @@ public class RemoveUser extends JLayeredPane{
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		
-		this.setBounds(0, 0, 1264, 699);
+		this.setBounds(0, 0, 1280, 720);
 
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
@@ -75,7 +75,7 @@ public class RemoveUser extends JLayeredPane{
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		

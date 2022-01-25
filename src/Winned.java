@@ -58,6 +58,8 @@ public class Winned  {
 		layeredPane.setBounds(0, 0, 730, 380);
 		this.frame.getContentPane().add(layeredPane);
 		this.frame.setLocationRelativeTo(null);
+		this.frame.toFront();
+		this.frame.requestFocus();
 		
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
