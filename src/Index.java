@@ -45,9 +45,10 @@ public class Index {
 		
 		final Toolkit defaulToolkit = Toolkit.getDefaultToolkit();
 		final Image image = defaulToolkit.getImage("Images/icon.png");
-		
-		
+				
 		try {
+			// necessaria da JDK 9
+			final Taskbar taskbar = Taskbar.getTaskbar();
             // set icona per mac os (e altri sistemi operativi che supportano questo metodo)
 			final Taskbar taskbar = Taskbar.getTaskbar();
 
