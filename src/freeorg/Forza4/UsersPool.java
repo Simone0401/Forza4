@@ -67,8 +67,8 @@ public class UsersPool extends JLayeredPane{
 	/**
 	 * Metodo costruttore.
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public UsersPool(Index i) throws FontFormatException, IOException {
 		this.handler = new JSONHandler();
@@ -89,8 +89,8 @@ public class UsersPool extends JLayeredPane{
 	
 	/**
 	 * Initializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		

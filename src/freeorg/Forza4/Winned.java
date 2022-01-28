@@ -47,8 +47,8 @@ public class Winned  {
 	 * @param g Schermata di gioco.
 	 * @param usr Username del vincitore.
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws FontFormatException
-	 * @throws IOException
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
 	 */
 	public Winned(Game g, String usr, Index i)throws FontFormatException, IOException {
 		

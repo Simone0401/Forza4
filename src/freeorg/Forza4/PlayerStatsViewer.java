@@ -27,8 +27,8 @@ public class PlayerStatsViewer extends JLayeredPane {
 	 * Metodo Costruttore.
 	 * @param p Giocatore di cui si vogliono vedere le statistiche.
 	 * @param i Oggetto che serve per il cambio di schermate.
-	 * @throws FontFormatException
-	 * @throws IOException
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
 	 */
 	public PlayerStatsViewer(Player p,Index i) throws FontFormatException, IOException {
 		this.p = p;
@@ -38,8 +38,8 @@ public class PlayerStatsViewer extends JLayeredPane {
 	
 	/**
 	 * Inizializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		

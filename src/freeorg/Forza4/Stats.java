@@ -42,8 +42,8 @@ public class Stats extends JLayeredPane{
 	/**
 	 * Metodo Costruttore
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public Stats(Index i) throws FontFormatException, IOException {
 		this.i=i;
@@ -61,8 +61,8 @@ public class Stats extends JLayeredPane{
 
 	/**
 	 * Inizializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		
