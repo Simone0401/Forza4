@@ -27,6 +27,11 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Classe che implementa una schermata per la rimozione di un untente
+ * @author Ferri Francesco
+ *
+ */
 public class RemoveUser extends JLayeredPane{
 
 	Index i;
@@ -37,7 +42,8 @@ public class RemoveUser extends JLayeredPane{
 	
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -59,7 +65,7 @@ public class RemoveUser extends JLayeredPane{
 	
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -84,7 +90,7 @@ public class RemoveUser extends JLayeredPane{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
 		this.setLayer(splitPane, 2);
-		splitPane.setBounds(397, 255, 470, 307);
+		splitPane.setBounds(407, 255, 470, 307);
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
@@ -111,7 +117,7 @@ public class RemoveUser extends JLayeredPane{
 		elimina.setRolloverIcon(new ImageIcon("Images/deletebutton-over.png"));
 		elimina.setPressedIcon(new ImageIcon("Images/deletebutton-pressed.png"));
 		this.setLayer(elimina, 2);
-		elimina.setBounds(482, 589, 304, 69);
+		elimina.setBounds(487, 604, 304, 69);
 		elimina.setBorderPainted(false); 
 		elimina.setContentAreaFilled(false); 
 		elimina.setFocusPainted(false); 

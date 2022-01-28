@@ -1,6 +1,5 @@
 /**
- * Classe per rappresentare un giocatore
- * @version 1.00 11 Sept 2021
+ * Classe per rappresentare un giocatore.
  * @author Argento Simone
  *
  */
@@ -12,11 +11,11 @@ public class Player {
 	int lost;			// Storico partite perse
 	
 	/**
-	 * Costruttore per il giocatore
-	 * @param username nome del giocatore
-	 * @param won partite vinte
-	 * @param tied partite pareggiate
-	 * @param lost partite perse
+	 * Costruttore per il giocatore.
+	 * @param username Nome del giocatore.
+	 * @param won Partite vinte.
+	 * @param tied Partite pareggiate.
+	 * @param lost Partite perse.
 	 */
 	public Player(String username, int won, int tied, int lost) {
 		this.username = username;
@@ -26,8 +25,8 @@ public class Player {
 	}
 	
 	/**
-	 * Costruttore per il giocatore che non è mai stato creato
-	 * @param username nome del giocatore
+	 * Costruttore per il giocatore che non è mai stato creato.
+	 * @param username Nome del giocatore.
 	 * 
 	 */
 	public Player(String username) {
@@ -38,44 +37,44 @@ public class Player {
 	}
 	
 	/**
-	 * Metodo per ottenere l'username del giocatore
-	 * @return l'username del giocatore
+	 * Metodo per ottenere l'username del giocatore.
+	 * @return L'username del giocatore
 	 */
 	public String getUsername() {
 		return username;
 	}
 	
 	/**
-	 * Metodo che aggiunge una vittoria
+	 * Metodo che aggiunge una vittoria.
 	 */
 	public void addWon() {
 		this.won +=1;
 	}
 	
 	/**
-	 * Metodo che aggiunge una sconfitta
+	 * Metodo che aggiunge una sconfitta.
 	 */
 	public void addLost() {
 		this.lost +=1;
 	}
 	
 	/**
-	 * Metodo che aggiunge un pareggio
+	 * Metodo che aggiunge un pareggio.
 	 */
 	public void addTie() {
 		this.tied +=1;
 	}
 	
 	/**
-	 * Metodo per cambiare l'username del giocatore
-	 * @param newUsername nuovo username da usare
+	 * Metodo per cambiare l'username del giocatore.
+	 * @param newUsername Nuovo username da usare.
 	 */
 	public void changeUsername(String newUsername) {
 		this.setUsername(newUsername);
 	}
 	
 	/**
-	 * Metodo per settare l'username
+	 * Metodo per settare l'username.
 	 * @param username
 	 */
 	private void setUsername(String username) {
@@ -83,56 +82,56 @@ public class Player {
 	}
 	
 	/**
-	 * Metodo per ottenere le vittorie totali del giocatore
-	 * @return numero di partite vinte
+	 * Metodo per ottenere le vittorie totali del giocatore.
+	 * @return numero di partite vinte.
 	 */
 	public int getWon() {
 		return won;
 	}
 
 	/**
-	 * Metodo per settare il numero di partite vinte
-	 * @param won nuovo numero di partite vinte
+	 * Metodo per settare il numero di partite vinte.
+	 * @param won Nuovo numero di partite vinte.
 	 */
 	public void setWon(int won) {
 		this.won = won;
 	}
 
 	/**
-	 * Metodo per ottenere i pareggi totali del giocatore
-	 * @return numero di partite pareggiate
+	 * Metodo per ottenere i pareggi totali del giocatore.
+	 * @return numero di partite pareggiate.
 	 */
 	public int getTied() {
 		return tied;
 	}
 
 	/**
-	 * Metodo per settare il numero di partite pareggiate
-	 * @param tied nuovo numero di partite pareggiate
+	 * Metodo per settare il numero di partite pareggiate.
+	 * @param tied Nuovo numero di partite pareggiate.
 	 */
 	public void setTied(int tied) {
 		this.tied = tied;
 	}
 
 	/**
-	 * Metodo per ottenere le sconfitte totali del giocatore
-	 * @return numero di partite perse
+	 * Metodo per ottenere le sconfitte totali del giocatore.
+	 * @return numero di partite perse.
 	 */
 	public int getLost() {
 		return lost;
 	}
 
 	/**
-	 * Metodo per settare il numero di partite perse
-	 * @param lost nuovo numero di partite perse
+	 * Metodo per settare il numero di partite perse.
+	 * @param lost Nuovo numero di partite perse.
 	 */
 	public void setLost(int lost) {
 		this.lost = lost;
 	}
 	
 	/**
-	 * Metodo per ottenere il numero totale di partite giocate
-	 * @return numero di partite disputate
+	 * Metodo per ottenere il numero totale di partite giocate.
+	 * @return numero di partite disputate.
 	 */
 	public int getMatchesNumber() {
 		int matches;

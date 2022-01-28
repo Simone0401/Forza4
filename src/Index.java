@@ -13,7 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
-
+/**
+ * Classe che viene utilizzata per passare da una schermata all'altra grazie ad un CardLayout
+ * @author Ferri Francesco
+ *
+ */
 public class Index {
 	
 	JFrame frame = new JFrame("FORZA 4");
@@ -22,7 +26,7 @@ public class Index {
 	HashSet<String> open = new HashSet<String>();
 	
 	/**
-	 * Costruttore vuoto
+	 * Metodo costruttore
 	 */
 	public Index() {
 		
@@ -30,7 +34,7 @@ public class Index {
 	
 	/**
 	 * Inizializza il frame
-	 * @param menu
+	 * @param menu prima schermata che verra visualizzata
 	 */
 	private void initialize(Menu menu) {
 		MainPanel.setLayout(cl);
@@ -66,7 +70,7 @@ public class Index {
 	}
 	
 	/**
-	 * Metodo che rimuove tutti i window listener del frame
+	 * Metodo che rimuove tutti i window listener dal frame.
 	 */
 	public void removelisteners() {
 		WindowListener[] wls  = this.frame.getWindowListeners();
@@ -76,9 +80,9 @@ public class Index {
 	}
 	
 	/**
-	 * Metodo che dato un nuovo layeredpane e un id lo aggiunge al card layout
+	 * Metodo che dato un nuovo layeredpane e un id lo aggiunge al card layout.
 	 * @param p LayeredPane da aggiungere
-	 * @param id id del LayeredPane
+	 * @param id Id del LayeredPane
 	 */
 	public void addToCl(JLayeredPane p,String id) {
 		if(!this.open.contains(id) || id.equals("g")) {
@@ -88,13 +92,14 @@ public class Index {
 	}
 	
 	/**
-	 * Metodo che dato un id di un layeredPane mostra quella determinata schermata
-	 * @param id id del PayeredPane
+	 * Metodo che dato un id di un layeredPane mostra quella determinata schermata.
+	 * @param id Id del LayeredPane da mostrare
 	 */
 	
 	public void switchTo(String id) {
 		this.cl.show(MainPanel, id);
 	}
+	
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {

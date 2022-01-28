@@ -32,6 +32,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe che implementa la schermata di gioco.
+ * @author Ferri Francesco
+ *
+ */
 
 public class Game extends JLayeredPane {
 	
@@ -45,10 +50,10 @@ public class Game extends JLayeredPane {
 	private Handler handler = new JSONHandler();
 
 	/**
-	 * Metodo che controlla la vittoria o il pareggio
-	 * 
-	 * @param b oggetto InsertButton (il bottone a forma di colonna)
-	 * @param p il numero corrispondente al tunro
+	 * Metodo che controlla la vittoria o il pareggio.
+	 *
+	 * @param b Ultimo ColumnButton cliccato.
+	 * @param p Il numero corrispondente al turno.
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
@@ -87,9 +92,9 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che restituisce i giocatori della partita in corso
+	 * Metodo che restituisce i giocatori della partita in corso.
 	 * 
-	 * @return lista dei giocatori
+	 * @return Lista dei giocatori.
 	 */
 	public Player[] getplayers() {
 		Player[] giocatori = { this.match.getP1(), this.match.getP2() };
@@ -97,15 +102,15 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che imposta la variabile saved a false, che indica che ci sono
-	 * modifiche da salvare nella griglia
+	 * Metodo che imposta la variabile saved a false, ad indicare che ci sono
+	 * modifiche da salvare nella griglia.
 	 */
 	public void modified() {
 		this.saved = false;
 	}
 
 	/**
-	 * Metodo che imposta la variabile saved a true, che indica che non ci sono
+	 * Metodo che imposta la variabile saved a true, ad indicare che non ci sono
 	 * modifiche da salvare nella griglia
 	 */
 	public void save() {
@@ -113,10 +118,12 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Create the application.
-	 * 
-	 * @throws IOException
+	 * Metodo costruttore che crea una nuova partita.
+	 * @param p1 Primo giocatore.
+	 * @param p2 Secondo giocatore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws FontFormatException
+	 * @throws IOException
 	 */
 	public Game(Player p1, Player p2, Index i) throws FontFormatException, IOException {
 		this.i = i;
@@ -124,7 +131,14 @@ public class Game extends JLayeredPane {
 		this.initializeGrid();
 		initialize();
 	}
-
+	
+	/**
+	 * Metodo costruttore che crea un oggetto game da una partita salvata.
+	 * @param match Partita da caricare.
+	 * @param i Oggetto che consente il cambio di schermate.
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public Game(Match match, Index i) throws FontFormatException, IOException {
 		this.i = i;
 		this.match = match;
@@ -135,18 +149,16 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che verifica se ci sono modifiche da salvare alla griglia nel file
-	 * JSON
+	 * Metodo che verifica se ci sono modifiche da salvare.
 	 * 
-	 * @return true se la griglia è salvata, false altrimenti
+	 * @return true se la griglia è salvata, false altrimenti.
 	 */
 	private boolean isSaved() {
 		return this.saved;
 	}
 
 	/**
-	 * Metodo che imposta la griglia grafica come quella del match recuperato dal
-	 * file JSON
+	 * Metodo che carica la griglia dal match recuperato.
 	 */
 	private void restoreGrid() {
 		for (int i = 0; i < 6; i++) {
@@ -159,11 +171,11 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che crea la griglia grafica con tutti buchi vuoti.
+	 * Metodo che crea la griglia con tutti buchi vuoti.
 	 */
 	public void initializeGrid() {
-		int x = 350;
-		int y = 539;
+		int x = 355;
+		int y = 549;
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 7; j++) {
 				holes[i][j] = new JLabel("");
@@ -177,8 +189,7 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che fa mostra il giocatore che deve posizionare la pedina in base ai
-	 * turni.
+	 * Metodo che mostra il giocatore che deve posizionare la pedina in base ai turni.
 	 */
 	public void swapPlaying() {
 		if (this.match.getTurn() == 1) {
@@ -191,7 +202,7 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Metodo che resetta la griglia a fine partita
+	 * Metodo che resetta la griglia a fine partita.
 	 * 
 	 * @throws FontFormatException
 	 * @throws IOException
@@ -203,7 +214,7 @@ public class Game extends JLayeredPane {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 * 
 	 * @throws IOException
 	 * @throws FontFormatException
@@ -252,7 +263,7 @@ public class Game extends JLayeredPane {
 		t1.setIcon(new ImageIcon("Images/ptriangle.png"));
 		this.setLayer(t1, 4);
 		t1.setHorizontalAlignment(SwingConstants.CENTER);
-		t1.setBounds(125, 56, 60, 60);
+		t1.setBounds(125, 70, 60, 60);
 		this.add(t1);
 
 		t2.setIcon(new ImageIcon("Images/ytriangle.png"));
@@ -273,7 +284,7 @@ public class Game extends JLayeredPane {
 		lblp1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblp1.setFont(font.deriveFont(20f));
 		this.setLayer(lblp1, 1);
-		lblp1.setBounds(41, 121, 224, 36);
+		lblp1.setBounds(41, 131, 224, 36);
 		Color purple = new Color(108, 0, 255);
 		lblp1.setForeground(purple);
 		this.add(lblp1);

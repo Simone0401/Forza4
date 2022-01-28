@@ -6,7 +6,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-
+/**
+ * Classe che implementa i bottoni delle colonne della griglia. 
+ * @author Ferri Francesco
+ *
+ */
 public class InsertButton implements ActionListener {
 	private Match m;
 	private Color transyellow=new Color(1f,1f,0f,.5f );
@@ -16,7 +20,14 @@ public class InsertButton implements ActionListener {
 	private JLayeredPane layeredPane;
 	private Game g;
 	
-	
+	/**
+	 * Metodo Costruttore.
+	 * @param m Partita in corso.
+	 * @param column Numero corrispondente alla colonna.
+	 * @param holes Griglia dei buchi per le pedine.
+	 * @param layeredPane Layered Pane dove aggiungere il bottone.
+	 * @param g Schermata di gioco.
+	 */
 	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, Game g) {
 		this.column = column;
 		this.holes = holes;
@@ -35,11 +46,11 @@ public class InsertButton implements ActionListener {
 	}
 	
 	/**
-	 * Metodo che inizializza il bottone sulle colonne della griglia
+	 * Metodo che inizializza il bottone sulla colonna della griglia
 	 */
 	public void init() {
 		
-		int x = 350;
+		int x = 355;
 		
 		btnColumn0.addMouseListener(new MouseAdapter() {
 			@Override
@@ -60,25 +71,21 @@ public class InsertButton implements ActionListener {
 		btnColumn0.setContentAreaFilled(false);
 		btnColumn0.setBorderPainted(false);
 		layeredPane.setLayer(btnColumn0, 1);
-		btnColumn0.setBounds(x + column*82, 129, 80, 488);
+		btnColumn0.setBounds(x + column*82, 140, 80, 488);
 		layeredPane.add(btnColumn0);
 	}
 	
 	
 	
 	/**
-	 * Metodo che inserisce la pedina
-	 * @param p numero che descrive quale giocatore ha inserito la pedina
-	 * @return
+	 * Metodo che inserisce la pedina.
+	 * @param p numero che rappresenta quale giocatore ha inserito la pedina.
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
-	private boolean insert(int p) throws FontFormatException, IOException {
-		String wnr;
+	private void insert(int p) throws FontFormatException, IOException {
 		int row = this.m.getG().getRow(column);
 		boolean result = m.getG().insert(column, p);
-		boolean bwin;
-		boolean btie;
 		if (!result) {
 			JOptionPane.showMessageDialog(null, "Non puoi inserire la pedina qui!", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
@@ -89,13 +96,8 @@ public class InsertButton implements ActionListener {
 			g.swapPlaying();
 			this.g.modified();
 			System.out.println(row);
-			
 			this.g.checkwin(this , p);
-			
-			
 			}
-			
-		return result;
 	}
 	
 	/**

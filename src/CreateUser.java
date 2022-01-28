@@ -19,6 +19,11 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 
+/**
+ * Classe che implementa la schermata per la creazione di un nuovo utente
+ * @author Fracnesco Ferri
+ *
+ */
 public class CreateUser extends JLayeredPane{
 
 	private JTextField txtUsername;
@@ -27,7 +32,8 @@ public class CreateUser extends JLayeredPane{
 	private Handler handler = new JSONHandler();
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -39,7 +45,7 @@ public class CreateUser extends JLayeredPane{
 
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizialize il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -70,7 +76,7 @@ public class CreateUser extends JLayeredPane{
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(font.deriveFont(Font.PLAIN, 27));
 		this.setLayer(textField, 2);
-		textField.setBounds(475, 291, 326, 61);
+		textField.setBounds(485, 291, 326, 61);
 		this.add(textField);
 		textField.setColumns(10);
 		
@@ -95,7 +101,7 @@ public class CreateUser extends JLayeredPane{
 		    }
 		});
 		
-		JButton create = new JButton("New button");
+		JButton create = new JButton("");
 		create.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			String usr = textField.getText();
@@ -122,7 +128,7 @@ public class CreateUser extends JLayeredPane{
 		create.setIcon(new ImageIcon("Images/crea.png"));
 		create.setRolloverIcon(new ImageIcon("Images/crea-over.png"));
 		create.setPressedIcon(new ImageIcon("Images/crea-pressed.png"));
-		create.setBounds(538, 377, 198, 61);
+		create.setBounds(548, 377, 198, 61);
 		this.add(create);
 		create.setBorderPainted(false); 
 		create.setContentAreaFilled(false); 

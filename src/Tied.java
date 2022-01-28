@@ -15,6 +15,11 @@ import javax.swing.JLayeredPane;
 import javax.swing.JRootPane;
 import javax.swing.SwingConstants;
 
+/**
+ * Classe che implementa una finestra di dialogo che annucnia il pareggio.
+ * @author Ferri Francesco
+ *
+ */
 public class Tied {
 	
 	Index i;
@@ -24,14 +29,16 @@ public class Tied {
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 
 	/**
-	 * Metodo che chiude la finestra
+	 * Metodo che chiude la finestra.
 	 */
 	public void close() {
 		this.frame.dispose();
 	}
 	
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param g Schermata di gioco.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 */
 	public Tied(Game g, Index i)throws FontFormatException, IOException {
 		this.i = i;

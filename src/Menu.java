@@ -18,13 +18,20 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 
+/**
+ * Classe che implementa la schermata Menu 
+ * @author Ferri Francesco
+ *
+ */
 public class Menu extends JLayeredPane {
 
 	private Index i;
 
 
+
 	/**
-	 * Create the application.
+	 * Metodo costruttore
+	 * @param i Oggetto che consente il cambio di schermate.
 	 */
 	public Menu(Index i)  {
 		this.i= i;
@@ -32,17 +39,9 @@ public class Menu extends JLayeredPane {
 		
 	}
 	
-	/**
-	 * Metodo che viene chiamato dall'esterno per far partire la finestra
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
-	public void restart() throws FontFormatException, IOException {
-		this.initialize();
-	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 */
 	private void initialize() {
 		
@@ -68,7 +67,7 @@ public class Menu extends JLayeredPane {
 		loadMatch.setRolloverIcon(new ImageIcon("Images/loadMatch-over.png"));
 		loadMatch.setPressedIcon(new ImageIcon("Images/loadMatch-pressed.png"));
 		this.setLayer(loadMatch, 2);
-		loadMatch.setBounds(470, 287, 303, 69);
+		loadMatch.setBounds(490, 295, 303, 69);
 		this.add(loadMatch);
 		loadMatch.setBorderPainted(false); 
 		loadMatch.setContentAreaFilled(false); 
@@ -95,7 +94,7 @@ public class Menu extends JLayeredPane {
 		player.setRolloverIcon(new ImageIcon("Images/players-over.png"));
 		player.setPressedIcon(new ImageIcon("Images/players-pressed.png"));
 		this.setLayer(player, 2);
-		player.setBounds(470, 380, 303, 69);
+		player.setBounds(490, 385, 303, 69);
 		this.add(player);
 		player.setBorderPainted(false); 
 		player.setContentAreaFilled(false); 
@@ -115,7 +114,7 @@ public class Menu extends JLayeredPane {
 		stats.setRolloverIcon(new ImageIcon("Images/stats-over.png"));
 		stats.setPressedIcon(new ImageIcon("Images/stats-pressed.png"));
 		this.setLayer(stats, 2);
-		stats.setBounds(470, 472, 303, 69);
+		stats.setBounds(490, 475, 303, 69);
 		this.add(stats);
 		stats.setBorderPainted(false); 
 		stats.setContentAreaFilled(false); 
@@ -159,7 +158,7 @@ public class Menu extends JLayeredPane {
 		newMatch.setIcon(new ImageIcon("Images/newMatch.png"));
 		newMatch.setRolloverIcon(new ImageIcon("Images/newMatch-over.png"));
 		newMatch.setPressedIcon(new ImageIcon("Images/newMatch-pressed.png"));
-		newMatch.setBounds(470, 196, 303, 69);
+		newMatch.setBounds(490, 215, 303, 69);
 		this.add(newMatch);
 		newMatch.setBorderPainted(false); 
 		newMatch.setContentAreaFilled(false); 

@@ -24,7 +24,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
-
+/**
+ * Classe che implementa la schermata per la scelta della partita da caricare
+ * @author Ferri Francesco
+ *
+ */
 public class LoadMatch extends JLayeredPane {
 	
 	private HashMap <String,Match> matches = new HashMap <>(); 
@@ -36,7 +40,8 @@ public class LoadMatch extends JLayeredPane {
 
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -55,24 +60,11 @@ public class LoadMatch extends JLayeredPane {
 		initialize();
 	}
 	
-	/**
-	 * Metodo che viene chiamato dall'esterno per far partire la finestra
-	 * @throws FontFormatException
-	 * @throws IOException
-	 */
-	public void restart() throws FontFormatException, IOException  {
-		
-		this.initialize();
-		
-	}
-	
-	
-	
 	
 
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -82,8 +74,6 @@ public class LoadMatch extends JLayeredPane {
 		
 		
 		this.setBounds(0, 0, 1280, 720);
-		
-		
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -105,14 +95,14 @@ public class LoadMatch extends JLayeredPane {
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
 		this.setLayer(splitPane, 2);
-		splitPane.setBounds(397, 255, 470, 307);
+		splitPane.setBounds(407, 255, 470, 307);
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 		this.list = new JList(this.vs.toArray());
-		this.list.setBounds(400, 544, 470, -361);
+		this.list.setBounds(440, 544, 490, -361);
 		this.list.setFont(font.deriveFont(Font.PLAIN, 21));
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setVisibleRowCount(vs.size());
@@ -124,7 +114,7 @@ public class LoadMatch extends JLayeredPane {
 		JButton gioca = new JButton("");
 		gioca.setIcon(new ImageIcon("Images/gioca.png"));
 		this.setLayer(gioca, 2);
-		gioca.setBounds(482, 589, 304, 69);
+		gioca.setBounds(482, 609, 304, 69);
 		gioca.setBorderPainted(false); 
 		gioca.setContentAreaFilled(false); 
 		gioca.setFocusPainted(false); 

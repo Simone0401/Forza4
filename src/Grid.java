@@ -341,10 +341,11 @@ public class Grid {
 	}
 	
 	/**
-	 * Metodo per inserire una pedina nella colonna selezionata dal giocatore
-	 * La pedina è posizionata alla prima riga libera incontrata nella colonna corrispondente
-	 * @param column colonna dove inserire la pedina
-	 * @param player giocatore che ha inserito la pedina
+	 * Metodo per inserire una pedina nella colonna selezionata dal giocatore.
+	 * La pedina è posizionata alla prima riga libera incontrata nella colonna corrispondente.
+	 * @param column colonna dove inserire la pedina.
+	 * @param player giocatore che ha inserito la pedina.
+	 * @return true se l'inserimento è andato a buon fine, false altrimenti.
 	 */
 	public boolean insert(int column, int player) {
 		int row = this.available[column];
