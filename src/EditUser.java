@@ -27,6 +27,11 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Classe che implementa la schermata per la scelta dell'utente da modificare.
+ * @author Ferri Francesco
+ *
+ */
 public class EditUser extends JLayeredPane{
 
 	Index i;
@@ -37,7 +42,8 @@ public class EditUser extends JLayeredPane{
 	
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -59,13 +65,13 @@ public class EditUser extends JLayeredPane{
 
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
 	private void initialize() throws FontFormatException, IOException {
 
-		this.setBounds(0, 0, 1264, 699);
+		this.setBounds(0, 0, 1280, 720);
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
@@ -74,7 +80,7 @@ public class EditUser extends JLayeredPane{
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		
@@ -83,7 +89,7 @@ public class EditUser extends JLayeredPane{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
 		this.setLayer(splitPane, 2);
-		splitPane.setBounds(397, 255, 470, 307);
+		splitPane.setBounds(407, 255, 470, 307);
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
@@ -110,7 +116,7 @@ public class EditUser extends JLayeredPane{
 		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
 		this.setLayer(modifica, 2);
-		modifica.setBounds(482, 589, 304, 69);
+		modifica.setBounds(487, 604, 304, 69);
 		modifica.setBorderPainted(false); 
 		modifica.setContentAreaFilled(false); 
 		modifica.setFocusPainted(false); 

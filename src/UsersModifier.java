@@ -11,14 +11,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
-
+/**
+ * Classe che implementa la schermata di gestione degli utenti
+ * @author Administrator
+ *
+ */
 public class UsersModifier extends JLayeredPane{
 
 	Index i;
 
 	
 	/**
-	 * Create the application.
+	 * Metodo Costruttore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 */
 	public UsersModifier(Index i) {
 		this.i = i;
@@ -29,18 +34,18 @@ public class UsersModifier extends JLayeredPane{
 
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializza il frame.
 	 */
 	private void initialize() {
 		
 	
-		this.setBounds(0, 0, 1274, 694);
+		this.setBounds(0, 0, 1280, 720);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		JButton create = new JButton("");
@@ -48,7 +53,7 @@ public class UsersModifier extends JLayeredPane{
 		create.setRolloverIcon(new ImageIcon("Images/newUser-over.png"));
 		create.setPressedIcon(new ImageIcon("Images/newUser-pressed.png"));
 		this.setLayer(create, 2);
-		create.setBounds(470, 220, 303, 69);
+		create.setBounds(490, 230, 303, 69);
 		this.add(create);
 		create.setBorderPainted(false); 
 		create.setContentAreaFilled(false); 
@@ -75,7 +80,7 @@ public class UsersModifier extends JLayeredPane{
 		edit.setRolloverIcon(new ImageIcon("Images/usermodificatore-over.png"));
 		edit.setPressedIcon(new ImageIcon("Images/usermodificatore-pressed.png"));
 		this.setLayer(edit, 2);
-		edit.setBounds(470, 320, 303, 69);
+		edit.setBounds(490, 330, 303, 69);
 		this.add(edit);
 		edit.setBorderPainted(false); 
 		edit.setContentAreaFilled(false); 
@@ -103,7 +108,7 @@ public class UsersModifier extends JLayeredPane{
 		remove.setIcon(new ImageIcon("Images/removeUser.png"));
 		remove.setRolloverIcon(new ImageIcon("Images/removeUser-over.png"));
 		remove.setPressedIcon(new ImageIcon("Images/removeUser-pressed.png"));
-		remove.setBounds(470, 424, 303, 69);
+		remove.setBounds(490, 430, 303, 69);
 		this.add(remove);
 		remove.setBorderPainted(false); 
 		remove.setContentAreaFilled(false); 

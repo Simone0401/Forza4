@@ -18,6 +18,11 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
+/**
+ * Classe che implementa una finestra di dialogo che annuncia il vincitore.
+ * @author Ferri Francesco
+ *
+ */
 public class Winned  {
 	
 	Index i;
@@ -30,16 +35,17 @@ public class Winned  {
 	
 
 	/**
-	 * metodo che chiude la finestra
+	 * Metodo che chiude la finestra.
 	 */
 	public void close() {
 		this.frame.dispose();
 	}
 	
 	/**
-	 * Create the application
-	 * @param g 
-	 * @param usr
+	 * Metodo costruttore.
+	 * @param g Schermata di gioco.
+	 * @param usr Username del vincitore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
@@ -58,6 +64,8 @@ public class Winned  {
 		layeredPane.setBounds(0, 0, 730, 380);
 		this.frame.getContentPane().add(layeredPane);
 		this.frame.setLocationRelativeTo(null);
+		this.frame.toFront();
+		this.frame.requestFocus();
 		
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
@@ -83,6 +91,8 @@ public class Winned  {
 		btnExit.setFocusPainted(false); 
 		btnExit.setOpaque(false);
 		btnExit.setIcon(new ImageIcon("Images/exitButton.png"));
+		btnExit.setRolloverIcon(new ImageIcon("Images/exitButton-over.png"));
+		btnExit.setPressedIcon(new ImageIcon("Images/exitButton-pressed.png"));
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnExit.addActionListener(new ActionListener() {
@@ -104,6 +114,8 @@ public class Winned  {
 		gridview.setFocusPainted(false); 
 		gridview.setOpaque(false);
 		gridview.setIcon(new ImageIcon("Images/viewButton.png"));
+		gridview.setRolloverIcon(new ImageIcon("Images/viewButton-over.png"));
+		gridview.setPressedIcon(new ImageIcon("Images/viewButton-pressed.png"));
 		gridview.setForeground(Color.BLACK);
 		gridview.setFont(font.deriveFont(Font.PLAIN, 11));
 		gridview.addActionListener(new ActionListener() {
@@ -122,6 +134,8 @@ public class Winned  {
 		btnAgain.setFocusPainted(false); 
 		btnAgain.setOpaque(false);
 		btnAgain.setIcon(new ImageIcon("Images/againButton.png"));
+		btnAgain.setRolloverIcon(new ImageIcon("Images/againButton-over.png"));
+		btnAgain.setPressedIcon(new ImageIcon("Images/againButton-pressed.png"));
 		btnAgain.setForeground(Color.BLACK);
 		btnAgain.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnAgain.addActionListener(new ActionListener() {

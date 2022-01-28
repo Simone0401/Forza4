@@ -26,6 +26,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
+/**
+ * Classe che implementa la schermata di scelta dei giocatori per iniziare una partita
+ * @author Ferri Francesco
+ *
+ */
 public class UsersPool extends JLayeredPane{
 
 	private HashMap <String,Player> players = new HashMap <>(); 
@@ -59,7 +64,8 @@ public class UsersPool extends JLayeredPane{
 	
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -81,7 +87,7 @@ public class UsersPool extends JLayeredPane{
 
 	
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -90,14 +96,14 @@ public class UsersPool extends JLayeredPane{
 		
 		
 
-		this.setBounds(0, 0, 1264, 699);		
+		this.setBounds(0, 0, 1280, 720);		
 		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		
@@ -106,7 +112,7 @@ public class UsersPool extends JLayeredPane{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(0.5);
 		this.setLayer(splitPane, 2);
-		splitPane.setBounds(397, 255, 470, 307);
+		splitPane.setBounds(407, 255, 470, 307);
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
@@ -144,7 +150,7 @@ public class UsersPool extends JLayeredPane{
 		JButton scegli = new JButton("");
 		scegli.setIcon(new ImageIcon("Images/gioca.png"));
 		this.setLayer(scegli, 2);
-		scegli.setBounds(481, 597, 304, 69);
+		scegli.setBounds(491, 607, 304, 69);
 		scegli.setBorderPainted(false); 
 		scegli.setContentAreaFilled(false); 
 		scegli.setFocusPainted(false); 

@@ -19,7 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
-
+/**
+ * Classe che implementa la schermata per la modifica di un utente
+ * @author Administrator
+ *
+ */
 public class UserEdited extends JLayeredPane {
 
 	Index i;
@@ -30,7 +34,9 @@ public class UserEdited extends JLayeredPane {
 	
 
 	/**
-	 * Create the application.
+	 * Metodo costruttore.
+	 * @param p Giocatore da modificare.
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -43,14 +49,14 @@ public class UserEdited extends JLayeredPane {
 	
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		
 		
-		this.setBounds(0, 0, 1274, 694);
+		this.setBounds(0, 0, 1280, 720);
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
@@ -60,7 +66,7 @@ public class UserEdited extends JLayeredPane {
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("",SwingConstants.CENTER);
@@ -75,7 +81,7 @@ public class UserEdited extends JLayeredPane {
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(font.deriveFont(Font.PLAIN, 27));
 		this.setLayer(textField, 2);
-		textField.setBounds(475, 291, 326, 61);
+		textField.setBounds(485, 301, 326, 61);
 		this.add(textField);
 		textField.setColumns(10);
 		
@@ -108,7 +114,7 @@ public class UserEdited extends JLayeredPane {
 		modifica.setRolloverIcon(new ImageIcon("Images/modifica-over.png"));
 		modifica.setPressedIcon(new ImageIcon("Images/modifica-pressed.png"));
 		
-		modifica.setBounds(538, 377, 198, 61);
+		modifica.setBounds(543, 392, 198, 61);
 		this.add(modifica);
 		modifica.setBorderPainted(false); 
 		modifica.setContentAreaFilled(false); 

@@ -23,7 +23,11 @@ import javax.swing.SwingConstants;
 
 import org.json.simple.JSONObject;
 import javax.swing.JScrollPane;
-
+/**
+ * Classe che implementa la schermata per scegliere di quale utente vogliono essere viste le statistiche.
+ * @author Ferri Francesco
+ *
+ */
 public class Stats extends JLayeredPane{
 
 	private JFrame frame;
@@ -35,7 +39,8 @@ public class Stats extends JLayeredPane{
 	
 
 	/**
-	 * Create the application.
+	 * Metodo Costruttore
+	 * @param i Oggetto che consente il cambio di schermate.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -54,7 +59,7 @@ public class Stats extends JLayeredPane{
 	
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inizializza il frame.
 	 * @throws IOException 
 	 * @throws FontFormatException 
 	 */
@@ -62,7 +67,7 @@ public class Stats extends JLayeredPane{
 		
 		
 		
-		this.setBounds(0, 0, 1264, 699);
+		this.setBounds(0, 0, 1280,720);
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
@@ -72,7 +77,7 @@ public class Stats extends JLayeredPane{
 		lblNewLabel.setIcon(new ImageIcon("Images/menuPattern.png"));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayer(lblNewLabel, 1);
-		lblNewLabel.setBounds(0, 0, 1264, 684);
+		lblNewLabel.setBounds(0, 0, 1280, 720);
 		this.add(lblNewLabel);
 		
 		
@@ -81,7 +86,7 @@ public class Stats extends JLayeredPane{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1);
 		this.setLayer(splitPane, 2);
-		splitPane.setBounds(397, 255, 470, 307);
+		splitPane.setBounds(407, 255, 470, 307);
 		this.add(splitPane);
 		splitPane.setEnabled( false );
 		
@@ -101,7 +106,7 @@ public class Stats extends JLayeredPane{
 		visualizza.setRolloverIcon(new ImageIcon("Images/view-over.png"));
 		visualizza.setPressedIcon(new ImageIcon("Images/view-pressed.png"));
 		this.setLayer(visualizza, 2);
-		visualizza.setBounds(482, 589, 304, 69);
+		visualizza.setBounds(487, 604, 304, 69);
 		visualizza.setBorderPainted(false); 
 		visualizza.setContentAreaFilled(false); 
 		visualizza.setFocusPainted(false); 
