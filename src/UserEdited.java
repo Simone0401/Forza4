@@ -37,8 +37,8 @@ public class UserEdited extends JLayeredPane {
 	 * Metodo costruttore.
 	 * @param p Giocatore da modificare.
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public UserEdited(Player p, Index i) throws FontFormatException, IOException {
 		this.i = i;
@@ -50,8 +50,8 @@ public class UserEdited extends JLayeredPane {
 
 	/**
 	 * Initializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		

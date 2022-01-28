@@ -34,8 +34,8 @@ public class CreateUser extends JLayeredPane{
 	/**
 	 * Metodo costruttore.
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public CreateUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
@@ -46,10 +46,10 @@ public class CreateUser extends JLayeredPane{
 
 	/**
 	 * Inizialize il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
-	private void initialize() throws FontFormatException, IOException {
+	private void initialize() throws FontFormatException, IOException  {
 		
 		this.setBounds(0, 0, 1280, 720);
 		

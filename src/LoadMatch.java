@@ -42,8 +42,8 @@ public class LoadMatch extends JLayeredPane {
 	/**
 	 * Metodo costruttore
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public LoadMatch(Index i) throws FontFormatException, IOException {
 		this.i = i;
@@ -65,8 +65,8 @@ public class LoadMatch extends JLayeredPane {
 
 	/**
 	 * Inizializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		

@@ -44,8 +44,8 @@ public class RemoveUser extends JLayeredPane{
 	/**
 	 * Metodo costruttore.
 	 * @param i Oggetto che consente il cambio di schermate.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public RemoveUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
@@ -66,8 +66,8 @@ public class RemoveUser extends JLayeredPane{
 
 	/**
 	 * Inizializza il frame.
-	 * @throws IOException 
-	 * @throws FontFormatException 
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	private void initialize() throws FontFormatException, IOException {
 		

@@ -34,7 +34,7 @@ public class UsersModifier extends JLayeredPane{
 
 
 	/**
-	 * Initializza il frame.
+	 * Inizializza il frame.
 	 */
 	private void initialize() {
 		

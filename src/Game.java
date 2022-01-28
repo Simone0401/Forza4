@@ -54,8 +54,8 @@ public class Game extends JLayeredPane {
 	 *
 	 * @param b Ultimo ColumnButton cliccato.
 	 * @param p Il numero corrispondente al turno.
-	 * @throws FontFormatException
-	 * @throws IOException
+	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
+	 * @throws IOException per gestire l'utilizzo del font personalizzato.
 	 */
 
 	public void checkwin(InsertButton b, int p) throws FontFormatException, IOException {
