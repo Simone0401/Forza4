@@ -216,7 +216,6 @@ public class JSONHandler extends Handler {
 		      FileWriter myWriter = new FileWriter(playersFile);
 		      myWriter.write(object.toJSONString());
 		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
 		      
 		    } catch (IOException e) {
 		      System.out.println("An error occurred.");
@@ -381,7 +380,6 @@ public class JSONHandler extends Handler {
 		      FileWriter myWriter = new FileWriter(matchesFile);
 		      myWriter.write(object.toJSONString());
 		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
 		      
 		    } catch (IOException e) {
 		      System.out.println("An error occurred.");
