@@ -219,6 +219,8 @@ public class UsersPool extends JLayeredPane{
 		backbutton.setOpaque(false);
 		backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Menu m = new Menu(UsersPool.this.i);
+				UsersPool.this.i.addToCl(m, "menu");
 				UsersPool.this.i.switchTo("menu");
 				
 			}
