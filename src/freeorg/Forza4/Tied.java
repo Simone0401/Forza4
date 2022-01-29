@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -24,7 +25,7 @@ import javax.swing.SwingConstants;
 public class Tied {
 	
 	Index i;
-	private JFrame frame;
+	private JDialog dialog;
 	private Game g;
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
@@ -33,7 +34,7 @@ public class Tied {
 	 * Metodo che chiude la finestra.
 	 */
 	public void close() {
-		this.frame.dispose();
+		this.dialog.dispose();
 	}
 	
 	/**
@@ -43,17 +44,18 @@ public class Tied {
 	 */
 	public Tied(Game g, Index i)throws FontFormatException, IOException {
 		this.i = i;
-		this.frame = new JFrame("FORZA 4");
-		this.frame.setUndecorated(true);
-		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-		this.frame.setBounds(100, 100, 730, 380);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.getContentPane().setLayout(null);
-		this.frame.setResizable(false);
+		
+		this.dialog = new JDialog(this.i.frame,"VITTORIA",true);
+		this.dialog.setUndecorated(true);
+		this.dialog.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		this.dialog.setBounds(100, 100, 730, 380);
+		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.dialog.getContentPane().setLayout(null);
+		this.dialog.setResizable(false);
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 730, 380);
-		this.frame.getContentPane().add(layeredPane);
-		this.frame.setLocationRelativeTo(null);
+		this.dialog.getContentPane().add(layeredPane);
+		this.dialog.setLocationRelativeTo(null);
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
 		Font font = Font.createFont(Font.TRUETYPE_FONT, font_file); 
@@ -79,6 +81,8 @@ public class Tied {
 		btnExit.setFocusPainted(false); 
 		btnExit.setOpaque(false);
 		btnExit.setIcon(new ImageIcon("Images/exitButton.png"));
+		btnExit.setRolloverIcon(new ImageIcon("Images/exitButton-over.png"));
+		btnExit.setPressedIcon(new ImageIcon("Images/exitButton-pressed.png"));
 		btnExit.setForeground(Color.BLACK);
 		btnExit.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnExit.addActionListener(new ActionListener() {
@@ -100,6 +104,8 @@ public class Tied {
 		gridview.setFocusPainted(false); 
 		gridview.setOpaque(false);
 		gridview.setIcon(new ImageIcon("Images/viewButton.png"));
+		gridview.setRolloverIcon(new ImageIcon("Images/viewButton-over.png"));
+		gridview.setPressedIcon(new ImageIcon("Images/viewButton-pressed.png"));
 		gridview.setForeground(Color.BLACK);
 		gridview.setFont(font.deriveFont(Font.PLAIN, 11));
 		gridview.addActionListener(new ActionListener() {
@@ -117,6 +123,8 @@ public class Tied {
 		btnAgain.setFocusPainted(false); 
 		btnAgain.setOpaque(false);
 		btnAgain.setIcon(new ImageIcon("Images/againButton.png"));
+		btnAgain.setRolloverIcon(new ImageIcon("Images/againButton-over.png"));
+		btnAgain.setPressedIcon(new ImageIcon("Images/againButton-pressed.png"));
 		btnAgain.setForeground(Color.BLACK);
 		btnAgain.setFont(font.deriveFont(Font.PLAIN, 11));
 		btnAgain.addActionListener(new ActionListener() {
@@ -133,7 +141,7 @@ public class Tied {
 		layeredPane.setLayer(btnAgain, 3);
 		btnAgain.setBounds(481, 237, 183, 73);
 		layeredPane.add(btnAgain);
-		this.frame.setVisible(true);
+		this.dialog.setVisible(true);
 	}
 	
 

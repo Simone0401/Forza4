@@ -12,8 +12,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +30,7 @@ import java.awt.event.ActionEvent;
 public class Winned  {
 	
 	Index i;
-	private JFrame frame;
+	private JDialog dialog;
 	private Game g;
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
@@ -39,7 +42,7 @@ public class Winned  {
 	 * Metodo che chiude la finestra.
 	 */
 	public void close() {
-		this.frame.dispose();
+		this.dialog.dispose();
 	}
 	
 	/**
@@ -54,19 +57,25 @@ public class Winned  {
 		
 		
 		this.i = i;
-		this.frame = new JFrame("FORZA 4");
-		this.frame.setUndecorated(true);
-		this.frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-		this.frame.setBounds(100, 100, 730, 380);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.getContentPane().setLayout(null);
-		this.frame.setResizable(false);
+		
+		
+		
+		
+		this.dialog = new JDialog(this.i.frame,"VITTORIA",true);
+		
+		this.dialog.setUndecorated(true);
+		this.dialog.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		this.dialog.setBounds(100, 100, 730, 380);
+		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.dialog.getContentPane().setLayout(null);
+		this.dialog.setResizable(false);
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 730, 380);
-		this.frame.getContentPane().add(layeredPane);
-		this.frame.setLocationRelativeTo(null);
-		this.frame.toFront();
-		this.frame.requestFocus();
+		this.dialog.getContentPane().add(layeredPane);
+		this.dialog.setLocationRelativeTo(null);
+		this.dialog.toFront();
+		this.dialog.requestFocus();
+		
 		
 		
 		File font_file = new File("Font/Kid_Games.ttf"); 
@@ -153,7 +162,7 @@ public class Winned  {
 		layeredPane.setLayer(btnAgain, 3);
 		btnAgain.setBounds(481, 237, 183, 73);
 		layeredPane.add(btnAgain);
-		this.frame.setVisible(true);
+		this.dialog.setVisible(true);
 	}
 	
 
