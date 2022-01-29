@@ -96,7 +96,6 @@ public class InsertButton implements ActionListener {
 			m.changeT();
 			g.swapPlaying();
 			this.g.modified();
-			System.out.println(row);
 			this.g.checkwin(this , p);
 			}
 	}

@@ -68,7 +68,7 @@ public class Menu extends JLayeredPane {
 		loadMatch.setRolloverIcon(new ImageIcon("Images/loadMatch-over.png"));
 		loadMatch.setPressedIcon(new ImageIcon("Images/loadMatch-pressed.png"));
 		this.setLayer(loadMatch, 2);
-		loadMatch.setBounds(490, 295, 303, 69);
+		loadMatch.setBounds(490, 305, 303, 69);
 		this.add(loadMatch);
 		loadMatch.setBorderPainted(false); 
 		loadMatch.setContentAreaFilled(false); 
@@ -95,7 +95,7 @@ public class Menu extends JLayeredPane {
 		player.setRolloverIcon(new ImageIcon("Images/players-over.png"));
 		player.setPressedIcon(new ImageIcon("Images/players-pressed.png"));
 		this.setLayer(player, 2);
-		player.setBounds(490, 385, 303, 69);
+		player.setBounds(490, 395, 303, 69);
 		this.add(player);
 		player.setBorderPainted(false); 
 		player.setContentAreaFilled(false); 
@@ -115,7 +115,7 @@ public class Menu extends JLayeredPane {
 		stats.setRolloverIcon(new ImageIcon("Images/stats-over.png"));
 		stats.setPressedIcon(new ImageIcon("Images/stats-pressed.png"));
 		this.setLayer(stats, 2);
-		stats.setBounds(490, 475, 303, 69);
+		stats.setBounds(490, 485, 303, 69);
 		this.add(stats);
 		stats.setBorderPainted(false); 
 		stats.setContentAreaFilled(false); 
