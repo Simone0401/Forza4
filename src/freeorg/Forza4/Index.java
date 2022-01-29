@@ -35,7 +35,7 @@ public class Index {
 	
 	/**
 	 * Inizializza il frame
-	 * @param menu prima schermata che verra visualizzata
+	 * @param menu prima schermata che verra visualizzata.
 	 */
 	private void initialize(Menu menu) {
 		MainPanel.setLayout(cl);
