@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="../Forza4/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="../Forza4/lib/json-simple-1.1.1.jar" sourcepath="../Forza4/lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

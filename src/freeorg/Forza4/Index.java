@@ -51,6 +51,7 @@ public class Index {
 			
 			// necessaria da JDK 9
             // set icona per mac os (e altri sistemi operativi che supportano questo metodo)
+			final Taskbar taskbar = Taskbar.getTaskbar();
             taskbar.setIconImage(image);
             
         } catch (final UnsupportedOperationException e) {
