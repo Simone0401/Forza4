@@ -14,12 +14,13 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 /**
  * Classe che implementa la schermata di gestione degli utenti
- * @author Administrator
+ * @version 1.10 18 Jan 2022
+ * @author Ferri Francesco
  *
  */
 public class UsersModifier extends JLayeredPane{
 
-	Index i;
+	private Index i; //Oggetto che consente il cambio di schermate.
 
 	
 	/**

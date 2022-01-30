@@ -14,13 +14,14 @@ import java.io.File;
 import java.io.IOException;
 /**
  * Classe che implementa la schermata che mostra le statistiche dei giocatori
+ * @version 1.10 14 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class PlayerStatsViewer extends JLayeredPane {
 
-	private Index i;
-	private Player p;
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Player p; // Giocatore di cui si vogliono vedere le statistiche.
 
 	
 	/**

@@ -22,15 +22,15 @@ import javax.swing.JButton;
 
 /**
  * Classe che implementa la schermata per la creazione di un nuovo utente
+ * @version 1.10 10 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class CreateUser extends JLayeredPane{
 
-	private JTextField txtUsername;
-	private JTextField textField;
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private JTextField textField; // Casella di testo per inserire l'username del nuovo giocatore.
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler();  //Oggetto per la gestione della memoria
 
 	/**
 	 * Metodo costruttore.

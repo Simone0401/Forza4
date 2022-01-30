@@ -24,14 +24,15 @@ import java.awt.event.ActionEvent;
 
 /**
  * Classe che implementa una finestra di dialogo che annuncia il vincitore.
+ * @version 1.10 8 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class Winned  {
 	
-	Index i;
-	private JDialog dialog;
-	private Game g;
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private JDialog dialog; //Oggetto JDialog per la schermata.
+	private Game g; //Schermata di gioco
 	File font_file = new File("Font/Kid_Games.ttf");
 	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 

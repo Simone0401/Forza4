@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 /**
  * Classe che implementa una finestra di dialogo che annucnia il pareggio.
+ * @version 1.10 6 Jan 2022
  * @author Ferri Francesco
  *
  */

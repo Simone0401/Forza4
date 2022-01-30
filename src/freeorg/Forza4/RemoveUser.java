@@ -30,16 +30,17 @@ import org.json.simple.JSONObject;
 
 /**
  * Classe che implementa una schermata per la rimozione di un untente
+ * @version 1.10 7 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class RemoveUser extends JLayeredPane{
 
-	Index i;
-	private HashMap <String,Player> players = new HashMap <>(); 
-	private JList list;
-	private Object[] usernames;
-	private Handler handler = new JSONHandler();
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private HashMap <String,Player> players = new HashMap <>(); //dizionario contente gli username dei giocatori
+	private JList list; //JList contente gli username dei giocatori
+	private Object[] usernames; //list contenente gli username dei giocatori
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 	
 
 	/**

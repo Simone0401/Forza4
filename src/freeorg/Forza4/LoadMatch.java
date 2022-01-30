@@ -27,17 +27,18 @@ import javax.swing.SwingConstants;
 import org.json.simple.JSONObject;
 /**
  * Classe che implementa la schermata per la scelta della partita da caricare
+ * @version 1.10 11 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class LoadMatch extends JLayeredPane {
 	
-	private HashMap <String,Match> matches = new HashMap <>(); 
-	private JList list;
-	private Object[] partite;
-	private ArrayList<Object> vs = new ArrayList<>();
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private HashMap <String,Match> matches = new HashMap <>(); //Dizionario contenente i giocatori
+	private JList list; //JList contente i nomi delle partite
+	private Object[] partite; //lista di partite
+	private ArrayList<Object> vs = new ArrayList<>(); //arraylist dei nomi delle partite
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 
 
 	/**

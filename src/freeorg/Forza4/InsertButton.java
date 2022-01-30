@@ -9,17 +9,18 @@ import java.io.IOException;
 
 /**
  * Classe che implementa i bottoni delle colonne della griglia. 
+ * @version 1.10 17 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class InsertButton implements ActionListener {
-	private Match m;
-	private Color transyellow=new Color(1f,1f,0f,.5f );
-	private JButton btnColumn0 = new JButton("");
-	private int column;
-	private JLabel [][] holes;
-	private JLayeredPane layeredPane;
-	private Game g;
+	private Match m; //Partita in corso.
+	private Color transyellow=new Color(1f,1f,0f,.5f ); //Colore del bottone
+	private JButton btnColumn0 = new JButton(""); //Oggetto Jbutton
+	private int column; //Numero corrispondente alla colonna
+	private JLabel [][] holes; //Griglia dei buchi per le pedine.
+	private JLayeredPane layeredPane; //Layered Pane dove aggiungere il bottone.
+	private Game g; //Schermata di gioco.
 	
 	/**
 	 * Metodo Costruttore.

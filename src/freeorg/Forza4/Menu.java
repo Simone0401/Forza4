@@ -21,12 +21,13 @@ import java.awt.event.ActionEvent;
 
 /**
  * Classe che implementa la schermata Menu 
+ * @version 1.10 10 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class Menu extends JLayeredPane {
 
-	private Index i;
+	private Index i; //Oggetto che consente il cambio di schermate.
 
 
 

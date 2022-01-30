@@ -30,16 +30,17 @@ import org.json.simple.JSONObject;
 
 /**
  * Classe che implementa la schermata per la scelta dell'utente da modificare.
+ * @version 1.10 16 Jan 2022
  * @author Ferri Francesco
  *
  */
 public class EditUser extends JLayeredPane{
 
-	Index i;
-	private HashMap <String,Player> players = new HashMap <>(); 
-	private JList list;
-	private Object[] usernames;
-	private Handler handler = new JSONHandler();
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private HashMap <String,Player> players = new HashMap <>();  //Dizionario contenente i giocatori
+	private JList list; //JList contenente i giocatori
+	private Object[] usernames;//lista contenente i giocatori
+	private Handler handler = new JSONHandler();//Oggetto per la gestione della memoria
 	
 
 	/**
