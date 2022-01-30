@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 
 /**
  * Classe che implementa una finestra di dialogo che annuncia il vincitore.
+ * @version 1.10 8 Jan 2022
  * @author Ferri Francesco
  *
  */

@@ -1,6 +1,7 @@
 package freeorg.Forza4;
 /**
  * Classe per rappresentare un giocatore.
+ * @version 1.10 8 Jan 2022
  * @author Argento Simone
  *
  */

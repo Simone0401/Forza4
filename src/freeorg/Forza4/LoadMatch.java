@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import org.json.simple.JSONObject;
 /**
  * Classe che implementa la schermata per la scelta della partita da caricare
+ * @version 1.10 11 Jan 2022
  * @author Ferri Francesco
  *
  */

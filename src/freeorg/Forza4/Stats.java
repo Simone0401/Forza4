@@ -26,6 +26,7 @@ import org.json.simple.JSONObject;
 import javax.swing.JScrollPane;
 /**
  * Classe che implementa la schermata per scegliere di quale utente vogliono essere viste le statistiche.
+ * @version 1.10 11 Jan 2022
  * @author Ferri Francesco
  *
  */

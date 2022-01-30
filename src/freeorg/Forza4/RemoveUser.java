@@ -30,6 +30,7 @@ import org.json.simple.JSONObject;
 
 /**
  * Classe che implementa una schermata per la rimozione di un untente
+ * @version 1.10 7 Jan 2022
  * @author Ferri Francesco
  *
  */

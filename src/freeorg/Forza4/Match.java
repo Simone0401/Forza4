@@ -4,7 +4,8 @@ import java.util.Random;
 
 /**
  * Classe rappresenta la partita in corso. Conosce lo stato della griglia di gioco, i due giocatori e il turno di gioco.
- * @author Ferri Francesco
+ * @version 1.10 10 Jan 2022
+ * @author Argento Simone
  *
  */
 public class Match{

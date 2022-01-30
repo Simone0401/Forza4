@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Classe che viene utilizzata per passare da una schermata all'altra grazie ad un CardLayout
+ * @version 1.20 13 Jan 2022
  * @author Ferri Francesco
  *
  */

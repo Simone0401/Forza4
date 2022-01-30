@@ -29,6 +29,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  * Classe che implementa la schermata di scelta dei giocatori per iniziare una partita
+ * @version 1.10 15 Jan 2022
  * @author Ferri Francesco
  *
  */

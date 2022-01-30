@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Classe che implementa la schermata di gioco.
+ * @version 1.10 9 Jan 2022
  * @author Ferri Francesco
  *
  */

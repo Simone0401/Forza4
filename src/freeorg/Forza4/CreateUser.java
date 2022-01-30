@@ -22,6 +22,7 @@ import javax.swing.JButton;
 
 /**
  * Classe che implementa la schermata per la creazione di un nuovo utente
+ * @version 1.10 10 Jan 2022
  * @author Ferri Francesco
  *
  */

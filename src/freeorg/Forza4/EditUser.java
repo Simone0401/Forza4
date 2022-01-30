@@ -30,6 +30,7 @@ import org.json.simple.JSONObject;
 
 /**
  * Classe che implementa la schermata per la scelta dell'utente da modificare.
+ * @version 1.10 16 Jan 2022
  * @author Ferri Francesco
  *
  */

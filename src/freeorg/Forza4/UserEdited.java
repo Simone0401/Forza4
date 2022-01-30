@@ -22,7 +22,8 @@ import javax.swing.SwingConstants;
 import org.json.simple.JSONObject;
 /**
  * Classe che implementa la schermata per la modifica di un utente
- * @author Administrator
+ * @version 1.10 13 Jan 2022
+ * @author Ferri Francesco
  *
  */
 public class UserEdited extends JLayeredPane {

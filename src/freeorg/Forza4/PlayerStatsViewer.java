@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 /**
  * Classe che implementa la schermata che mostra le statistiche dei giocatori
+ * @version 1.10 14 Jan 2022
  * @author Ferri Francesco
  *
  */
