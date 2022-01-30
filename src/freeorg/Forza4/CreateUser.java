@@ -30,7 +30,7 @@ public class CreateUser extends JLayeredPane{
 
 	private JTextField textField; // Casella di testo per inserire l'username del nuovo giocatore.
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private Handler handler = new JSONHandler();  //Oggetto per la gestione della memoria
+	private Handler handler ;//Oggetto per la gestione della memoria
 
 	/**
 	 * Metodo costruttore.
@@ -40,6 +40,7 @@ public class CreateUser extends JLayeredPane{
 	 */
 	public CreateUser(Index i) throws FontFormatException, IOException {
 		this.i = i;
+		this.handler = new JSONHandler();
 		initialize();
 	}
 	

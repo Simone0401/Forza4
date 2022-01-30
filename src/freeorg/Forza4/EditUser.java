@@ -37,10 +37,10 @@ import org.json.simple.JSONObject;
 public class EditUser extends JLayeredPane{
 
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private HashMap <String,Player> players = new HashMap <>();  //Dizionario contenente i giocatori
+	private HashMap <String,Player> players ;  //Dizionario contenente i giocatori
 	private JList list; //JList contenente i giocatori
 	private Object[] usernames;//lista contenente i giocatori
-	private Handler handler = new JSONHandler();//Oggetto per la gestione della memoria
+	private Handler handler;//Oggetto per la gestione della memoria
 	
 
 	/**
@@ -50,7 +50,9 @@ public class EditUser extends JLayeredPane{
 	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public EditUser(Index i) throws FontFormatException, IOException {
+		this.handler = new JSONHandler();
 		this.i = i;
+		this.players = new HashMap <>();
 		Map<String, Player> users = this.handler.getPlayers();
 		
 		for( String username : users.keySet()) {

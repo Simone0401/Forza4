@@ -33,12 +33,12 @@ import org.json.simple.JSONObject;
  */
 public class LoadMatch extends JLayeredPane {
 	
-	private HashMap <String,Match> matches = new HashMap <>(); //Dizionario contenente i giocatori
+	private HashMap <String,Match> matches; //Dizionario contenente i giocatori
 	private JList list; //JList contente i nomi delle partite
 	private Object[] partite; //lista di partite
-	private ArrayList<Object> vs = new ArrayList<>(); //arraylist dei nomi delle partite
+	private ArrayList<Object> vs ; //arraylist dei nomi delle partite
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
+	private Handler handler ; //Oggetto per la gestione della memoria
 
 
 	/**
@@ -49,8 +49,9 @@ public class LoadMatch extends JLayeredPane {
 	 */
 	public LoadMatch(Index i) throws FontFormatException, IOException {
 		this.i = i;
-		Player p;
-		
+		this.matches = new HashMap <>();
+		this.vs = new ArrayList<>();
+		this.handler = new JSONHandler();
 		Map<String, Match> matchs = this.handler.getMatches();
 		for(String mn : matchs.keySet()) {
 			

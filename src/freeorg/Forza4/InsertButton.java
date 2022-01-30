@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class InsertButton implements ActionListener {
 	private Match m; //Partita in corso.
-	private Color transyellow=new Color(1f,1f,0f,.5f ); //Colore del bottone
-	private JButton btnColumn0 = new JButton(""); //Oggetto Jbutton
+	private Color transyellow; //Colore del bottone
+	private JButton btnColumn0; //Oggetto Jbutton
 	private int column; //Numero corrispondente alla colonna
 	private JLabel [][] holes; //Griglia dei buchi per le pedine.
 	private JLayeredPane layeredPane; //Layered Pane dove aggiungere il bottone.
@@ -32,6 +32,8 @@ public class InsertButton implements ActionListener {
 	 */
 	public InsertButton( Match m, int column, JLabel [][] holes, JLayeredPane layeredPane, Game g) {
 		this.column = column;
+		this.transyellow=new Color(1f,1f,0f,.5f );
+		this.btnColumn0 = new JButton("");
 		this.holes = holes;
 		this.m = m;
 		this.layeredPane = layeredPane;

@@ -32,11 +32,11 @@ import javax.swing.JScrollPane;
  */
 public class Stats extends JLayeredPane{
 
-	private HashMap <String,Player> players = new HashMap <>(); //dizionario contente gli username dei giocatori
+	private HashMap <String,Player> players; //dizionario contente gli username dei giocatori
 	private JList list; // JList contente gli username dei giocatori
 	private Object[] usernames; //lista contente gli username dei giocatori
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
+	private Handler handler ; //Oggetto per la gestione della memoria
 	
 
 	/**
@@ -46,6 +46,8 @@ public class Stats extends JLayeredPane{
 	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public Stats(Index i) throws FontFormatException, IOException {
+		this.players = new HashMap <>();
+		this.handler = new JSONHandler();
 		this.i=i;
 		Map<String, Player> users = this.handler.getPlayers();
 		for( String username : users.keySet()) {

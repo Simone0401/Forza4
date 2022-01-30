@@ -35,7 +35,7 @@ import javax.swing.ListSelectionModel;
  */
 public class UsersPool extends JLayeredPane{
 
-	private HashMap <String,Player> players = new HashMap <>(); //Dizionario contenente i giocatori
+	private HashMap <String,Player> players ; //Dizionario contenente i giocatori
 	private JList list; // jlist contenente gli username dei giocatori sx
 	private JList list2; // jlist contenente gli username dei giocatori dx
 	private Object[] usernames; // lista contente gli username
@@ -72,6 +72,7 @@ public class UsersPool extends JLayeredPane{
 	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public UsersPool(Index i) throws FontFormatException, IOException {
+		this. players = new HashMap <>();
 		this.handler = new JSONHandler();
 		this.i = i;
 		Player p;

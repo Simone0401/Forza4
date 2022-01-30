@@ -31,7 +31,7 @@ public class UserEdited extends JLayeredPane {
 	private Index i; //Oggetto che consente il cambio di schermate.
 	private JTextField textField; // Casella di testo per inserire il nuovo username.
 	private Player p; //Giocatore da modificare.
-	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
+	private Handler handler; //Oggetto per la gestione della memoria
 	
 
 	/**
@@ -43,6 +43,7 @@ public class UserEdited extends JLayeredPane {
 	 */
 	public UserEdited(Player p, Index i) throws FontFormatException, IOException {
 		this.i = i;
+		this.handler = new JSONHandler();
 		this.p = p;
 		initialize();
 	}

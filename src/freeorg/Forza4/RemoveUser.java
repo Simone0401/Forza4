@@ -37,10 +37,10 @@ import org.json.simple.JSONObject;
 public class RemoveUser extends JLayeredPane{
 
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private HashMap <String,Player> players = new HashMap <>(); //dizionario contente gli username dei giocatori
+	private HashMap <String,Player> players ; //dizionario contente gli username dei giocatori
 	private JList list; //JList contente gli username dei giocatori
 	private Object[] usernames; //list contenente gli username dei giocatori
-	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
+	private Handler handler ; //Oggetto per la gestione della memoria
 	
 
 	/**
@@ -50,6 +50,8 @@ public class RemoveUser extends JLayeredPane{
 	 * @throws FontFormatException per gestire l'utilizzo del font personalizzato.
 	 */
 	public RemoveUser(Index i) throws FontFormatException, IOException {
+		this.players = new HashMap <>();
+		this.handler = new JSONHandler();
 		this.i = i;
 		Player p;
 		Map<String, Player> users = this.handler.getPlayers();

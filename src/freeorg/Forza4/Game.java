@@ -42,14 +42,14 @@ import java.awt.event.ActionListener;
 
 public class Game extends JLayeredPane {
 	
-	int x = 0;
+	int x ;
 	private Match match; //partita in corso.
-	private JLabel[][] holes = new JLabel[6][7]; //matrice di JLabel per la rappresentazione della griglia.
-	private boolean saved = true; //variabile che tiene conto di modifiche da salvare.
-	JLabel t1 = new JLabel("");
-	JLabel t2 = new JLabel("");
+	private JLabel[][] holes; //matrice di JLabel per la rappresentazione della griglia.
+	private boolean saved ; //variabile che tiene conto di modifiche da salvare.
+	JLabel t1 ;
+	JLabel t2 ;
 	private Index i; //Oggetto che consente il cambio di schermate.
-	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
+	private Handler handler; //Oggetto per la gestione della memoria
 
 	/**
 	 * Metodo che controlla la vittoria o il pareggio.
@@ -129,6 +129,12 @@ public class Game extends JLayeredPane {
 	 */
 	public Game(Player p1, Player p2, Index i) throws FontFormatException, IOException {
 		this.i = i;
+		this.x = 0;
+		this.save();
+		this.handler = new JSONHandler();
+		this.t1 = new JLabel("");
+		this.t2 = new JLabel("");
+		this.holes = new JLabel[6][7];
 		this.match = new Match(p1, p2);
 		this.initializeGrid();
 		initialize();
@@ -143,7 +149,13 @@ public class Game extends JLayeredPane {
 	 */
 	public Game(Match match, Index i) throws FontFormatException, IOException {
 		this.i = i;
+		this.x = 0;
 		this.match = match;
+		this.t1 = new JLabel("");
+		this.t2 = new JLabel("");
+		this.holes = new JLabel[6][7];
+		this.handler = new JSONHandler();
+		this.save();
 		this.initializeGrid();
 		this.restoreGrid();
 		this.save();
