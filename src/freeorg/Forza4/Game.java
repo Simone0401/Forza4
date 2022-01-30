@@ -42,12 +42,11 @@ import java.awt.event.ActionListener;
 
 public class Game extends JLayeredPane {
 	
-	int x ;
 	private Match match; //partita in corso.
 	private JLabel[][] holes; //matrice di JLabel per la rappresentazione della griglia.
 	private boolean saved ; //variabile che tiene conto di modifiche da salvare.
-	JLabel t1 ;
-	JLabel t2 ;
+	JLabel t1 ; //label contente l'username del player 1
+	JLabel t2 ; //label contente l'username del player 2
 	private Index i; //Oggetto che consente il cambio di schermate.
 	private Handler handler; //Oggetto per la gestione della memoria
 
@@ -129,7 +128,6 @@ public class Game extends JLayeredPane {
 	 */
 	public Game(Player p1, Player p2, Index i) throws FontFormatException, IOException {
 		this.i = i;
-		this.x = 0;
 		this.save();
 		this.handler = new JSONHandler();
 		this.t1 = new JLabel("");
@@ -149,7 +147,6 @@ public class Game extends JLayeredPane {
 	 */
 	public Game(Match match, Index i) throws FontFormatException, IOException {
 		this.i = i;
-		this.x = 0;
 		this.match = match;
 		this.t1 = new JLabel("");
 		this.t2 = new JLabel("");

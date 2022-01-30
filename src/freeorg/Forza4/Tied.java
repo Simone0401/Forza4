@@ -25,11 +25,11 @@ import javax.swing.SwingConstants;
  */
 public class Tied {
 	
-	Index i;
-	private JDialog dialog;
-	private Game g;
-	File font_file = new File("Font/Kid_Games.ttf");
-	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private JDialog dialog; //Jdialog 
+	private Game g; //Schermata di gioco.
+	File font_file; //file contenente il font
+	Font font ; //font da utilizzare
 
 	/**
 	 * Metodo che chiude la finestra.
@@ -45,6 +45,8 @@ public class Tied {
 	 */
 	public Tied(Game g, Index i)throws FontFormatException, IOException {
 		this.i = i;
+		this.font_file = new File("Font/Kid_Games.ttf");
+		this.font = Font.createFont(Font.TRUETYPE_FONT, font_file);
 		
 		this.dialog = new JDialog(this.i.frame,"VITTORIA",true);
 		this.dialog.setUndecorated(true);

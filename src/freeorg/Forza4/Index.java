@@ -22,16 +22,19 @@ import javax.swing.SwingUtilities;
  */
 public class Index {
 	
-	JFrame frame = new JFrame("FORZA 4");
-	JPanel MainPanel = new JPanel();
-	CardLayout cl = new CardLayout();
-	HashSet<String> open = new HashSet<String>();
+	JFrame frame ; //frame che conterra tutte le schermate
+	JPanel MainPanel ; //Jpanel
+	CardLayout cl ; //cardlayout per il cambio schermata
+	HashSet<String> open ; //set contenente gli id delle schermate
 	
 	/**
 	 * Metodo costruttore
 	 */
 	public Index() {
-		
+		this.frame = new JFrame("FORZA 4"); 
+		this.MainPanel = new JPanel();
+		this.cl = new CardLayout();
+		this.open = new HashSet<String>();
 	}
 	
 	/**

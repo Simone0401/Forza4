@@ -39,8 +39,8 @@ public class EditUser extends JLayeredPane{
 	private Index i; //Oggetto che consente il cambio di schermate.
 	private HashMap <String,Player> players ;  //Dizionario contenente i giocatori
 	private JList list; //JList contenente i giocatori
-	private Object[] usernames;//lista contenente i giocatori
-	private Handler handler;//Oggetto per la gestione della memoria
+	private Object[] usernames; //lista contenente i giocatori
+	private Handler handler; //Oggetto per la gestione della memoria
 	
 
 	/**

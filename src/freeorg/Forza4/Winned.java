@@ -33,8 +33,9 @@ public class Winned  {
 	private Index i; //Oggetto che consente il cambio di schermate.
 	private JDialog dialog; //Oggetto JDialog per la schermata.
 	private Game g; //Schermata di gioco
-	File font_file = new File("Font/Kid_Games.ttf");
-	Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+	File font_file ; //file contenente il font
+	Font font ; //font da utilizzare
+
 
 	
 	
@@ -56,7 +57,9 @@ public class Winned  {
 	 */
 	public Winned(Game g, String usr, Index i)throws FontFormatException, IOException {
 		
-		
+		this.font_file = new File("Font/Kid_Games.ttf");
+		this.font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+
 		this.i = i;
 		
 		
