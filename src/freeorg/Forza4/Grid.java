@@ -1,14 +1,14 @@
 package freeorg.Forza4;
 /**
- * La classe Grid rappresenta la griglia di gioco composta da 6 righe e 7 colonne
+ * La classe Grid rappresenta e gestisce la griglia di gioco composta da 6 righe e 7 colonne
  * @version 1.00 08 Sept 2021
  * @author Ferri Francesco, Argento Simone
  *
  */
 public class Grid {
 	
-	private int [][] matrix;
-	private int [] available;
+	private int [][] matrix;	// Matrice di gioco come matrice di interi
+	private int [] available;	// Ogni cella del vettore indica una colonna, per ogni colonna si ha il numero di righe vuote
 	
 	/**
 	 * Costruttore della griglia di gioco

@@ -1,6 +1,6 @@
 package freeorg.Forza4;
 /**
- * Classe per rappresentare un giocatore.
+ * Classe che implementa un giocatore.
  * @author Argento Simone
  *
  */
