@@ -16,6 +16,7 @@ La libreria JSON contenuta all'interno della cartella "_lib_/" viene utilizzata 
 Il file da compilare e far partire per primo in Eclipse è **_Index.java_**.
 Il programma è eseguibile in maniera più veloce facendo doppio click sul file "**_Forza4.jar_**.
 
+Per visualizzare la relazione del progetto, il manuale della GUI e il diagramma UML è necessario entrare nella cartella "_doc/_". Al suo interno saranno presenti rispettivamente i file "_Relazione.pdf_, _Manuale_GUI.pdf_, _Class_Diagram.png_".
 Per visualizzare la Javadoc in maniera corretta è necessario aprire il file "_Forza4\doc\java-doc\index.html_".
 
 Versioni di Java necessarie:
