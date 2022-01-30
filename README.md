@@ -5,7 +5,8 @@ I file e le cartelle contenuti all'interno di questo progetto sono tutti necessa
 
 !!! Fare molta attenzione a non modificare il nome delle cartelle.
 
-La libreria JSON contenuta all'interno della cartella "lib/" viene utilizzata attraverso un path relativo e non dovrebbe dare nessun tipo di problema in fase di compilazione. Se si riscontrassero degli errori, la procedura da eseguire su Eclipse è la seguente:
+La libreria JSON contenuta all'interno della cartella "lib/" viene utilizzata attraverso un path relativo e non dovrebbe dare nessun tipo di problema in fase di compilazione.
+Se si riscontrassero degli errori, la procedura da eseguire su Eclipse è la seguente:
 
     importare il progetto;
     fare tasto destro sul nome del progetto;
