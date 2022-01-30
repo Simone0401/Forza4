@@ -20,8 +20,8 @@ import java.io.IOException;
  */
 public class PlayerStatsViewer extends JLayeredPane {
 
-	private Index i;
-	private Player p;
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Player p; // Giocatore di cui si vogliono vedere le statistiche.
 
 	
 	/**

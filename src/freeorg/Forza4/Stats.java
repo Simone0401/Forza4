@@ -32,12 +32,11 @@ import javax.swing.JScrollPane;
  */
 public class Stats extends JLayeredPane{
 
-	private JFrame frame;
-	private HashMap <String,Player> players = new HashMap <>(); 
-	private JList list;
-	private Object[] usernames;
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private HashMap <String,Player> players = new HashMap <>(); //dizionario contente gli username dei giocatori
+	private JList list; // JList contente gli username dei giocatori
+	private Object[] usernames; //lista contente gli username dei giocatori
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 	
 
 	/**

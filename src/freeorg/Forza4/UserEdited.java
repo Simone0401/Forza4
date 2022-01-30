@@ -28,11 +28,10 @@ import org.json.simple.JSONObject;
  */
 public class UserEdited extends JLayeredPane {
 
-	Index i;
-	private JTextField txtUsername;
-	private JTextField textField;
-	private Player p;
-	private Handler handler = new JSONHandler();
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private JTextField textField; // Casella di testo per inserire il nuovo username.
+	private Player p; //Giocatore da modificare.
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 	
 
 	/**

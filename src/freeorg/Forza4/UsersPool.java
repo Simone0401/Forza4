@@ -35,14 +35,14 @@ import javax.swing.ListSelectionModel;
  */
 public class UsersPool extends JLayeredPane{
 
-	private HashMap <String,Player> players = new HashMap <>(); 
-	private JList list;
-	private JList list2;
-	private Object[] usernames;
+	private HashMap <String,Player> players = new HashMap <>(); //Dizionario contenente i giocatori
+	private JList list; // jlist contenente gli username dei giocatori sx
+	private JList list2; // jlist contenente gli username dei giocatori dx
+	private Object[] usernames; // lista contente gli username
 
-	private Index i;
+	private Index i; // Oggetto che consente il cambio di schermate.
 	
-	private Handler handler;
+	private Handler handler; //Oggetto per la gestione della memoria
 	
 	public void oldMatchReload(String selezione) throws FontFormatException, IOException {
 		if(JOptionPane.showConfirmDialog(UsersPool.this.i.frame, "C'è una partita in sospeso fra di voi,volete riprenderla ?") == JOptionPane.YES_OPTION){

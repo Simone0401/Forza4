@@ -36,11 +36,11 @@ import org.json.simple.JSONObject;
  */
 public class EditUser extends JLayeredPane{
 
-	Index i;
-	private HashMap <String,Player> players = new HashMap <>(); 
-	private JList list;
-	private Object[] usernames;
-	private Handler handler = new JSONHandler();
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private HashMap <String,Player> players = new HashMap <>();  //Dizionario contenente i giocatori
+	private JList list; //JList contenente i giocatori
+	private Object[] usernames;//lista contenente i giocatori
+	private Handler handler = new JSONHandler();//Oggetto per la gestione della memoria
 	
 
 	/**

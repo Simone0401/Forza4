@@ -43,13 +43,13 @@ import java.awt.event.ActionListener;
 public class Game extends JLayeredPane {
 	
 	int x = 0;
-	private Match match;
-	private JLabel[][] holes = new JLabel[6][7];
-	private boolean saved = true;
+	private Match match; //partita in corso.
+	private JLabel[][] holes = new JLabel[6][7]; //matrice di JLabel per la rappresentazione della griglia.
+	private boolean saved = true; //variabile che tiene conto di modifiche da salvare.
 	JLabel t1 = new JLabel("");
 	JLabel t2 = new JLabel("");
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 
 	/**
 	 * Metodo che controlla la vittoria o il pareggio.

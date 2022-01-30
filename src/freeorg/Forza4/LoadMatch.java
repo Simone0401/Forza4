@@ -33,12 +33,12 @@ import org.json.simple.JSONObject;
  */
 public class LoadMatch extends JLayeredPane {
 	
-	private HashMap <String,Match> matches = new HashMap <>(); 
-	private JList list;
-	private Object[] partite;
-	private ArrayList<Object> vs = new ArrayList<>();
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private HashMap <String,Match> matches = new HashMap <>(); //Dizionario contenente i giocatori
+	private JList list; //JList contente i nomi delle partite
+	private Object[] partite; //lista di partite
+	private ArrayList<Object> vs = new ArrayList<>(); //arraylist dei nomi delle partite
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler(); //Oggetto per la gestione della memoria
 
 
 	/**

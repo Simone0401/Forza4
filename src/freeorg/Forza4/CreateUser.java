@@ -28,10 +28,9 @@ import javax.swing.JButton;
  */
 public class CreateUser extends JLayeredPane{
 
-	private JTextField txtUsername;
-	private JTextField textField;
-	private Index i;
-	private Handler handler = new JSONHandler();
+	private JTextField textField; // Casella di testo per inserire l'username del nuovo giocatore.
+	private Index i; //Oggetto che consente il cambio di schermate.
+	private Handler handler = new JSONHandler();  //Oggetto per la gestione della memoria
 
 	/**
 	 * Metodo costruttore.

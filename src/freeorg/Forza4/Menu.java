@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
  */
 public class Menu extends JLayeredPane {
 
-	private Index i;
+	private Index i; //Oggetto che consente il cambio di schermate.
 
 
 

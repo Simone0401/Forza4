@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
  */
 public class UsersModifier extends JLayeredPane{
 
-	Index i;
+	private Index i; //Oggetto che consente il cambio di schermate.
 
 	
 	/**
